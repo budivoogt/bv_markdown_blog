@@ -1,4 +1,15 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<script lang="ts">
+	export let data
 
-<h2>What a story</h2>
+	const { posts } = data
+</script>
+
+<h1 class="my-4 text-3xl">Posts:</h1>
+<ul>
+	{#each posts as post}
+		<li class="my-2">
+			<h1 class="font-bold">{post.title}</h1>
+			<p class="italic">{post.description}</p>
+		</li>
+	{/each}
+</ul>

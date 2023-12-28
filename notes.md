@@ -10,12 +10,18 @@ src/
 │ ├─ about/
 │ ├─ coding/
 │ ├─ blog/
+│ ├─ admin/
 
 # Page content
 
 ## Homepage
 
-This should have a photograph, short blurb about me and the 3 most recent posts.
+This should have:
+
+-   photo of me
+-   brief bio of me
+-   newsletter form
+-   most recent posts
 
 ## About
 
@@ -24,6 +30,16 @@ Maybe this page isn't necessary at all.
 However I should build it and then I can always decide to add it as crawlable.
 
 Should have a photograph of me, long-form about story and _potentially_ a contact field.
+
+## Coding
+
+-   Brief description of my coding journey and goals. Reference my GitHub.
+
+-   Visually appealing list of my projects with links to the GitHub Repo's and/or Vercel deployments.
+
+## Blog
+
+List of all blog posts, sorted chronologically.
 
 ## Footer
 
@@ -44,6 +60,10 @@ Therefore I'll need:
 -   [] Alternative description for every image.
 -   [] Server-side rendering of all the content, especially when drawn from a database.
 
+## Admin panel
+
+I must easily be able to edit posts, which are pulled from the database. Therefore I'll need a place to create, update, remove and delete posts. I could permit this on the `/blog` page, or alternatively create an admin panel where I can log in/out and CRUD posts and portfolio projects. That would be the most educational challenge. I can then re-use this architecture for the Striking Markets site.
+
 # Technical deliberations
 
 ## Integrating Markdown
@@ -56,7 +76,7 @@ I've understood SQLite is the easiest since it's just a local file. It struggles
 
 I don't need a database however, since the posts can be written as Markdown files and stored on the server. But it would present an opportunity to experiment with a third party managed service, like Neon (Postgres) or Turso (SQLite). Ben Davis spoke highly of SQLite and Turso, so I'm eager to give that a shot. It will make my sites dependent on Turso going forward however.
 
-If I use local markdown files, I can build components based on the markdown file's content. If I use a database, I can store the post title, content, date, author as separate columns. That has its benefits, which I could mimic in a local database too. I'll use **SQLite**.
+If I use local markdown files, I can build components based on the markdown file's content. If I use a database, I can store the post title, content, date, author as separate columns. That has its benefits, which I could mimic in a local database too. I'll use **SQLite**. I'm also going to use Turso for educational purposes.
 
 ## What ORM to use?
 
