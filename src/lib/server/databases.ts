@@ -23,3 +23,17 @@ export function tursoClient(): LibSQLDatabase<typeof schema> {
 		{ schema }
 	)
 }
+
+// export function localClient(): LibSQLDatabase<typeof schema> {
+// 	const url = import.meta.env.LOCAL_DATABASE_URL?.trim()
+// 	if (!url) {
+// 		throw new Error("LOCAL_DATABASE_URL is undefined")
+// 	}
+
+// 	return drizzle(
+// 		createClient({
+// 			url
+// 		}),
+// 		{ schema }
+// 	)
+// }

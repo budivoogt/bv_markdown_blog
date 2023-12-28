@@ -1,6 +1,8 @@
 CREATE TABLE `posts` (
 	`id` integer PRIMARY KEY AUTOINCREMENT NOT NULL,
 	`title` text NOT NULL,
+	`description` text NOT NULL,
+	`tags` text,
 	`body` text NOT NULL,
 	`created_at` integer DEFAULT (strftime('%s','now')),
 	`author_id` integer,

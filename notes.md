@@ -81,3 +81,7 @@ If I use local markdown files, I can build components based on the markdown file
 ## What ORM to use?
 
 I've tried Prisma in the Lucia Auth project that I've built. I will now use **Drizzle**, which has a more SQL-esque query builder, but also abstracted object-oriented queries like Prisma. This is a new feature. I want to experience the set-up and query process.
+
+# Local and public database
+
+What 

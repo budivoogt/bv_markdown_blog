@@ -1,4 +1,4 @@
-import { tursoClient } from "$lib/server/turso"
+import { tursoClient } from "$lib/server/databases"
 import type { PageServerLoad } from "./$types"
 
 export const load: PageServerLoad = async () => {

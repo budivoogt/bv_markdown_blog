@@ -2,7 +2,6 @@ import * as dotenv from "dotenv"
 import type { Config } from "drizzle-kit"
 dotenv.config()
 
-//WIPPPP
 export default {
 	schema: "./drizzle/schema.ts",
 	out: "./drizzle/migrations",
