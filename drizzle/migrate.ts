@@ -1,5 +1,4 @@
 import { createClient } from "@libsql/client"
-import "dotenv/config"
 import { drizzle } from "drizzle-orm/libsql/driver"
 import { migrate } from "drizzle-orm/libsql/migrator"
 

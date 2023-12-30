@@ -1,5 +1,6 @@
 import * as dotenv from "dotenv"
 import type { Config } from "drizzle-kit"
+// There doesn't seem to be a way to use SvelteKit's $env variables to access the .env vars. Using dotenv instead.
 dotenv.config()
 
 export default {

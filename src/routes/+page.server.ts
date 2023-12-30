@@ -1,8 +1,8 @@
-import { tursoClient } from "$lib/server/databases"
+import { localClient } from "$lib/server/databases"
 import type { PageServerLoad } from "./$types"
 
 export const load: PageServerLoad = async () => {
-	const db = tursoClient()
+	const db = localClient()
 
 	const posts = await db.query.posts.findMany()
 
