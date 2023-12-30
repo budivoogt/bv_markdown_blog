@@ -1,4 +1,8 @@
-import { LOCAL_DATABASE_URL, VITE_TURSO_DB_AUTH_TOKEN, VITE_TURSO_DB_URL } from "$env/static/private"
+import {
+	LOCAL_DATABASE_URL,
+	VITE_TURSO_DB_AUTH_TOKEN,
+	VITE_TURSO_DB_URL
+} from "$env/static/private"
 import { createClient } from "@libsql/client/http"
 import { drizzle, type LibSQLDatabase } from "drizzle-orm/libsql"
 import * as schema from "../../../drizzle/schema"

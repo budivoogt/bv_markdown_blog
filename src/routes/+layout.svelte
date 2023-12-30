@@ -5,5 +5,7 @@
 
 <div class="m-4">
 	<Navbar />
-	<slot />
+	<div class="mt-8">
+		<slot />
+	</div>
 </div>

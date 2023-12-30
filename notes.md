@@ -82,6 +82,12 @@ If I use local markdown files, I can build components based on the markdown file
 
 I've tried Prisma in the Lucia Auth project that I've built. I will now use **Drizzle**, which has a more SQL-esque query builder, but also abstracted object-oriented queries like Prisma. This is a new feature. I want to experience the set-up and query process.
 
-# Local and public database
+# Learnings
 
-What 
+## $env variables
+
+SvelteKit has built-in $env variables. For Vercel deployments and therefore for dev environments, I should import the specific variables defined in `.env` and import them like so: `import { VARIABLE_NAME } from "$env/static/private`. Always prefer static over dynamic vars. Vercel replaces the local variables with the ones you provide for the project, inserting them upon build.
+
+## $page.data and endpoints
+
+Pages have access to data loaded to that page by `+page.ts` and any parent layout data. If there's also `+page.server.ts` providing data, you can destructure `{data}` in the `PageLoad` function and spread it, returning both the server and the page data.

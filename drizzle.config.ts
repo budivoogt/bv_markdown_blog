@@ -8,8 +8,11 @@ export default {
 	out: "./drizzle/migrations",
 	driver: "turso",
 	dbCredentials: {
+		// Local libsql database for dev
 		url: process.env.LOCAL_DATABASE_URL as string,
 		authToken: process.env.LOCAL_DATABASE_AUTH_TOKEN as string
+
+		// public libsql (Turso) db for prod
 		// url: process.env.VITE_TURSO_DB_URL as string,
 		// authToken: process.env.VITE_TURSO_DB_AUTH_TOKEN as string
 	},
