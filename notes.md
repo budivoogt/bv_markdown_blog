@@ -82,6 +82,13 @@ If I use local markdown files, I can build components based on the markdown file
 
 I've tried Prisma in the Lucia Auth project that I've built. I will now use **Drizzle**, which has a more SQL-esque query builder, but also abstracted object-oriented queries like Prisma. This is a new feature. I want to experience the set-up and query process.
 
+# Features
+
+-   [] Update global font
+-   [] Add semantic HTML
+-   [] Add metadata tags
+-   [] Create 404 routing for invalid slugs
+
 # Learnings
 
 ## $env variables
@@ -91,3 +98,5 @@ SvelteKit has built-in $env variables. For Vercel deployments and therefore for 
 ## $page.data and endpoints
 
 Pages have access to data loaded to that page by `+page.ts` and any parent layout data. If there's also `+page.server.ts` providing data, you can destructure `{data}` in the `PageLoad` function and spread it, returning both the server and the page data.
+
+I can return parent data from child load functions by destructuring `parent` and calling `await parent()`. It's a bit unclear to me what data is procured, but I think a /child/layout.ts accesses
