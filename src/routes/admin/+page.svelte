@@ -3,6 +3,8 @@
 	import { page } from "$app/stores"
 
 	export let data
+
+	// MAKE SURE THIS ROUTE AND CHILDREN ARE PROTECTED!
 </script>
 
 <h1 class="my-4 text-3xl">Admin</h1>

@@ -59,6 +59,7 @@ Therefore I'll need:
 -   [] Metadata title, description for every page.
 -   [] Alternative description for every image.
 -   [] Server-side rendering of all the content, especially when drawn from a database.
+-   [] Protect routes for everything under /admin.
 
 ## Admin panel
 

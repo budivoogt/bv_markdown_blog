@@ -26,10 +26,6 @@ export const posts = sqliteTable("posts", {
 	authorId: integer("author_id").references(() => users.id) // authorId is linked to userId and this database constraint is checked on every insert/update/delete action
 })
 
-export type Post = typeof posts
-export type SelectPost = typeof posts.$inferSelect
-export type InsertPost = typeof posts.$inferInsert
-
 // A post only has one author
 export const postsRelations = relations(posts, ({ one }) => ({
 	author: one(users, {
