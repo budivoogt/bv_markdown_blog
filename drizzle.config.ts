@@ -1,20 +1,18 @@
-import * as dotenv from "dotenv"
+// Can't use $env, SvelteKit's way of accessing env vars. Instead need to use dotenv.
+import "dotenv/config"
 import type { Config } from "drizzle-kit"
-// There doesn't seem to be a way to use SvelteKit's $env variables to access the .env vars. Using dotenv instead.
-dotenv.config()
+
+if (!process.env.DATABASE_URL) {
+	console.error("Can't find db url")
+}
 
 export default {
 	schema: "./drizzle/schema.ts",
-	out: "./drizzle/migrations",
-	driver: "turso",
+	out: "./supabase/migrations",
+	driver: "pg",
 	dbCredentials: {
-		// Local libsql database for dev
-		url: process.env.LOCAL_DATABASE_URL as string,
-		authToken: process.env.LOCAL_DATABASE_AUTH_TOKEN as string
-
-		// public libsql (Turso) db for prod
-		// url: process.env.VITE_TURSO_DB_URL as string,
-		// authToken: process.env.VITE_TURSO_DB_AUTH_TOKEN as string
+		// Local Supabase database for dev
+		connectionString: process.env.DATABASE_URL || ("" as string)
 	},
 	// Print all statements
 	verbose: true,

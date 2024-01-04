@@ -1,10 +1,10 @@
-import { localClient } from "$lib/server/databases"
+import db from "$lib/server/database"
 import type { LayoutServerLoad } from "./$types"
 
 export const load: LayoutServerLoad = async () => {
-	const db = localClient()
+	const database = db()
 
-	const posts = await db.query.posts.findMany()
+	const posts = await database.query.posts.findMany()
 
 	if (posts) {
 		return { rootLayoutServerLoad: "FYI", posts }

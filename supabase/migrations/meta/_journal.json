@@ -1,26 +1,26 @@
 {
   "version": "5",
-  "dialect": "sqlite",
+  "dialect": "pg",
   "entries": [
     {
       "idx": 0,
       "version": "5",
-      "when": 1703792344075,
-      "tag": "0000_spooky_hedge_knight",
+      "when": 1704395241725,
+      "tag": "0000_left_thunderball",
       "breakpoints": true
     },
     {
       "idx": 1,
       "version": "5",
-      "when": 1703794648640,
-      "tag": "0001_panoramic_marvel_apes",
+      "when": 1704395766171,
+      "tag": "0001_normal_hairball",
       "breakpoints": true
     },
     {
       "idx": 2,
       "version": "5",
-      "when": 1704009518460,
-      "tag": "0002_sweet_charles_xavier",
+      "when": 1704395778133,
+      "tag": "0002_majestic_marauders",
       "breakpoints": true
     }
   ]

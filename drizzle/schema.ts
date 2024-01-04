@@ -1,12 +1,12 @@
-import { relations, sql } from "drizzle-orm"
-import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core"
+import { relations } from "drizzle-orm"
+import { boolean, integer, pgTable, serial, text, timestamp } from "drizzle-orm/pg-core"
 
-export const users = sqliteTable("users", {
-	id: integer("id").primaryKey({ autoIncrement: true }),
+export const users = pgTable("users", {
+	id: serial("id").primaryKey(),
 	firstName: text("first_name"),
 	lastName: text("last_name)"),
 	email: text("email"),
-	emailVerified: integer("email_verified", { mode: "boolean" }).default(false)
+	emailVerified: boolean("email_verified").default(false)
 })
 
 // One user can write many posts
@@ -14,15 +14,15 @@ export const userRelations = relations(users, ({ many }) => ({
 	posts: many(posts)
 }))
 
-export const posts = sqliteTable("posts", {
-	id: integer("id").primaryKey({ autoIncrement: true }),
+export const posts = pgTable("posts", {
+	id: serial("id").primaryKey(),
 	title: text("title").notNull(),
 	description: text("description").notNull(),
 	body: text("body").notNull(),
 	slug: text("slug").unique().notNull(),
 	tags: text("tags"),
-	createdAt: integer("created_at", { mode: "timestamp" }).default(sql`(strftime('%s','now'))`),
-	updatedAt: integer("updated_at", { mode: "timestamp" }).default(sql`(strftime('%s','now'))`),
+	createdAt: timestamp("created_at").defaultNow(),
+	updatedAt: timestamp("updated_at").defaultNow(),
 	authorId: integer("author_id").references(() => users.id) // authorId is linked to userId and this database constraint is checked on every insert/update/delete action
 })
 

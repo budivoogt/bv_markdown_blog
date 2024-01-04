@@ -1,18 +1,10 @@
-import { createClient } from "@libsql/client"
-import { drizzle } from "drizzle-orm/libsql/driver"
-import { migrate } from "drizzle-orm/libsql/migrator"
-
-export const client = createClient({
-	url: process.env.VITE_TURSO_DB_URL as string,
-	authToken: process.env.VITE_TURSO_DB_AUTH_TOKEN as string
-})
-
-export const db = drizzle(client)
+import { migrate } from "drizzle-orm/postgres-js/migrator"
+import db from "../src/lib/server/database"
 
 async function main() {
 	try {
-		await migrate(db, {
-			migrationsFolder: "drizzle/migrations"
+		await migrate(db(), {
+			migrationsFolder: "supabase/migrations"
 		})
 		console.log("Tables migrated")
 		process.exit(0)
