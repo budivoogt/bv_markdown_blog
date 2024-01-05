@@ -2,6 +2,8 @@ import { posts, users } from "../../../drizzle/schema"
 import db from "./database"
 import { postSeeds, userSeeds } from "./seedData"
 
+// Adding unnecessary comment
+
 async function seedDatabase() {
 	const database = db()
 
