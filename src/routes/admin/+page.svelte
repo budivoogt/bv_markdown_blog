@@ -1,8 +1,10 @@
 <script lang="ts">
 	import { enhance } from "$app/forms"
 	import { page } from "$app/stores"
+	import type { PageData } from "./$types"
 
-	export let data
+	export let data: PageData
+	export let form
 
 	// MAKE SURE THIS ROUTE AND CHILDREN ARE PROTECTED!
 </script>
@@ -21,17 +23,10 @@
 
 <h1 class="my-8 text-2xl">Welcome, {$page.data}</h1>
 
-<form method="POST" action="?/login" class="flex flex-col items-start gap-1" use:enhance>
-	<label for="email" class="flex flex-col"
-		>Email
-		<input name="email" type="email" placeholder="your@email.com" />
-	</label>
-	<label for="password" class="flex flex-col"
-		>Password
-		<input name="password" type="password" placeholder="your@email.com" />
-	</label>
-	<div class="flex flex-col items-baseline">
-		<button>Login</button>
-		<button formaction="?/signup">Create account</button>
-	</div>
+<form method="POST" action="../auth?/signin" class="flex flex-col items-start gap-1" use:enhance>
+	<button name="provider" value="github">Login with Github</button>
 </form>
+
+{#if form?.message}
+	<p>{form.message}</p>
+{/if}

@@ -34,8 +34,11 @@ async function seedDatabase() {
 
 		console.log("Database seeded!")
 	} catch (error) {
-		throw console.error("Erro occurred seeding", error)
+		console.error("Error occurred seeding", error)
+		throw new Error()
 	}
 }
 
-seedDatabase()
+seedDatabase().catch(() => {
+	process.exit(1)
+})
