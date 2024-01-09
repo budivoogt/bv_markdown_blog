@@ -7,7 +7,12 @@
 		<a href="/blog">Blog</a>
 		<a href="/coding">Coding</a>
 		<a href="/about">About</a>
-		<a href="/admin">Admin</a>
+	</div>
+	<div class="flex flex-row gap-x-2">
+		<a href="/admin">Admin:</a>
+		<a href="/admin/profile">Profile</a>
+		<a href="/admin/posts">Posts</a>
+		<a href="/admin/projects">Projects</a>
 	</div>
 	<div class="flex flex-row gap-x-2">
 		<a href="/admin">X</a>

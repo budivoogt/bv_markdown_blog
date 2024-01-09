@@ -17,18 +17,16 @@ export const actions = {
 		const provider = formData.get("provider") as Provider
 
 		if (provider) {
-			try {
-				const { data } = await supabase.auth.signInWithOAuth({
-					provider,
-					// Not sure if this is a viable redirect URL
-					options: { redirectTo: `${url.origin}/auth/callback?next=/admin` }
-				})
-				console.log("OAuth response data is: ", data)
+			const { data, error } = await supabase.auth.signInWithOAuth({
+				provider,
+				// Not sure if this is a viable redirect URL
+				options: { redirectTo: `${url.origin}/auth/callback?next=/admin` }
+			})
+			console.log("OAuth response data is: ", data)
 
-				if (data.url) throw redirect(303, data.url)
-			} catch (error) {
-				console.error("OAuth signin failed: ", error)
-			}
+			if (error) console.log("OAuth signin failed: ", error)
+
+			if (data.url) throw redirect(303, data.url)
 		} else {
 			return fail(400, { error: "No provider selected" })
 		}

@@ -10,7 +10,7 @@ export const load: LayoutServerLoad = async ({ locals: { getSession } }) => {
 	const session = await getSession()
 
 	if (posts) {
-		return { rootLayoutServerLoad: "FYI", posts, session }
+		return { message: "FYI", posts, session }
 	} else {
 		return { posts: [] }
 	}

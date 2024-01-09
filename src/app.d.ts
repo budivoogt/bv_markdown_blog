@@ -2,6 +2,7 @@
 
 import type { Database } from "$lib/types/supabase"
 import type { Session, SupabaseClient } from "@supabase/supabase-js"
+import type { Post } from "../drizzle/schema"
 
 // for information about these interfaces
 declare global {
@@ -12,7 +13,9 @@ declare global {
 			getSession(): Promise<Session | null>
 		}
 		interface PageData {
-			session: Session | null
+			session?: Session
+			posts?: Post[]
+			message?: string
 		}
 		// interface PageState {}
 		// interface Platform {}
