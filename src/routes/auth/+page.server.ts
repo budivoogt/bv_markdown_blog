@@ -19,23 +19,27 @@ export const actions = {
 		if (provider) {
 			const { data, error } = await supabase.auth.signInWithOAuth({
 				provider,
-				// Not sure if this is a viable redirect URL
 				options: { redirectTo: `${url.origin}/auth/callback?next=/admin` }
 			})
-			console.log("OAuth response data is: ", data)
 
-			if (error) console.log("OAuth signin failed: ", error)
+			if (error) {
+				return fail(400, { error, message: "OAuth signin failed." })
+			}
 
-			if (data.url) throw redirect(303, data.url)
+			if (data.url) {
+				console.log("Login successful: ", data)
+				redirect(303, data.url)
+			}
 		} else {
 			return fail(400, { error: "No provider selected" })
 		}
 	},
 	signout: async ({ locals: { supabase } }) => {
-		try {
-			await supabase.auth.signOut()
-			throw redirect(303, "/")
-		} catch (error) {
+		const { error } = await supabase.auth.signOut()
+		if (!error) {
+			console.log("Logout succesful")
+			redirect(303, "/admin")
+		} else {
 			console.error("Signout failed: ", error)
 		}
 	}

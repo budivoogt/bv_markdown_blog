@@ -1,7 +1,7 @@
 // See https://kit.svelte.dev/docs/types#app
 
 import type { Database } from "$lib/types/supabase"
-import type { Session, SupabaseClient } from "@supabase/supabase-js"
+import type { Session, SupabaseClient, User } from "@supabase/supabase-js"
 import type { Post } from "../drizzle/schema"
 
 // for information about these interfaces
@@ -13,7 +13,9 @@ declare global {
 			getSession(): Promise<Session | null>
 		}
 		interface PageData {
-			session?: Session
+			session: {
+				user: User
+			}
 			posts?: Post[]
 			message?: string
 		}
