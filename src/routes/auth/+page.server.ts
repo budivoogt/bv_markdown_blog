@@ -19,7 +19,7 @@ export const actions = {
 		if (provider) {
 			const { data, error } = await supabase.auth.signInWithOAuth({
 				provider,
-				options: { redirectTo: `${url.origin}/auth/callback?next=/admin` }
+				options: { redirectTo: `${url.origin}/auth/callback?next=/admin/profile` }
 			})
 
 			if (error) {
@@ -38,9 +38,9 @@ export const actions = {
 		const { error } = await supabase.auth.signOut()
 		if (!error) {
 			console.log("Logout succesful")
-			redirect(303, "/admin")
+			redirect(303, "/")
 		} else {
-			console.error("Signout failed: ", error)
+			return fail(400, { error, message: "Signout failed" })
 		}
 	}
 } satisfies Actions

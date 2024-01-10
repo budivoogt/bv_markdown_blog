@@ -23,10 +23,10 @@ export const load: LayoutLoad = async ({ fetch, data, depends }) => {
 	})
 
 	// // Isn't this redundant since the session is already provided by the server? Not making this call saves me a db interaction.
-	// const {
-	// 	data: { session }
-	// } = await supabase.auth.getSession()
+	const {
+		data: { session }
+	} = await supabase.auth.getSession()
 
 	// The last load function has priority over all others, so I need to pass the server load data through the layout load data for the page to access it.
-	return { supabase, session: data.session, posts: data.posts, message: data.message }
+	return { supabase, session, posts: data.posts, message: data.message }
 }

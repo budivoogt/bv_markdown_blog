@@ -1,10 +1,12 @@
 <script lang="ts">
 	import { enhance } from "$app/forms"
 	import PageHeader from "$lib/components/PageHeader.svelte"
+	import type { ActionData } from "../auth/$types"
 
 	export let data
 
 	const { session } = data
+	export let form: ActionData
 
 	// MAKE SURE THIS ROUTE AND CHILDREN ARE PROTECTED!
 </script>

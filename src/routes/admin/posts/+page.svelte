@@ -1,6 +1,8 @@
 <script lang="ts">
 	import PageHeader from "$lib/components/PageHeader.svelte"
 	import * as Table from "$lib/components/ui/table"
+
+	export let data
 </script>
 
 <PageHeader text="Blog posts" />
