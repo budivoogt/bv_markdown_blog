@@ -18,22 +18,17 @@
 			const {
 				data: { subscription }
 			} = $supabaseStore.auth.onAuthStateChange((event, _session) => {
-				console.log("Event: ", event, "_session: ", _session)
-
 				if (_session?.expires_at !== session?.expires_at || event === "SIGNED_OUT") {
 					// Invalidate the browser client.
 					invalidate("supabase:auth")
 				}
 			})
-
 			set(subscription)
 			// cleanup function, triggered on component destruction.
 			return () => {
-				console.log("Auth subscription cleaned")
 				subscription.unsubscribe()
 			}
 		})
-
 		// Returning an empty component which onMount calls when the component is destroyed. This'll trigger the cleanup returned function inside supabaseAuthStateSubscriptionStore.
 		return supabaseAuthStateSubscriptionStore.subscribe(() => {})
 	})

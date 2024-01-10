@@ -19,6 +19,7 @@ export const posts = pgTable("posts", {
 	title: text("title").notNull(),
 	description: text("description").notNull(),
 	body: text("body").notNull(),
+	status: text("status").default("draft"),
 	slug: text("slug").unique().notNull(),
 	tags: text("tags"),
 	createdAt: timestamp("created_at").defaultNow(),

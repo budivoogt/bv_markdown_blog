@@ -22,6 +22,13 @@
       "when": 1704395778133,
       "tag": "0002_majestic_marauders",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1704908213688,
+      "tag": "0003_bent_chamber",
+      "breakpoints": true
     }
   ]
 }

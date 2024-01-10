@@ -1,30 +1,65 @@
 <script lang="ts">
 	import PageHeader from "$lib/components/PageHeader.svelte"
+	import { Button } from "$lib/components/ui/button"
 	import * as Table from "$lib/components/ui/table"
+	import { Eye } from "lucide-svelte"
+	import type { PageData } from "../../$types"
 
-	export let data
+	export let data: PageData
+
+	$: ({ posts } = data)
 </script>
 
 <PageHeader text="Blog posts" />
 
-<p></p>
+<h2 class="mt-8 text-2xl">Manage your posts here</h2>
+<p class="my-4">View all posts below, or create new ones.</p>
 
-<Table.Root class="my-8">
-	<Table.Caption>A list of all your blog posts.</Table.Caption>
-	<Table.Header>
+<div class="my-4">
+	<Button variant="secondary">Create new post</Button>
+</div>
+
+<Table.Root>
+	<Table.Caption>A list of all your blog posts. Click to edit.</Table.Caption>
+	<Table.Header class="bg-slate-200">
 		<Table.Row>
-			<Table.Head class="w-[100px]">Invoice</Table.Head>
+			<Table.Head class="w-[100px]">ID #</Table.Head>
+			<Table.Head>Title</Table.Head>
+			<Table.Head>Description</Table.Head>
+			<Table.Head>Tags</Table.Head>
 			<Table.Head>Status</Table.Head>
-			<Table.Head>Method</Table.Head>
-			<Table.Head class="text-right">Amount</Table.Head>
+			<Table.Head class="text-right">Created At (MM/DD/YY)</Table.Head>
+			<Table.Head class="w-[150px] text-right">View public</Table.Head>
+			<Table.Head class="w-[50px] text-right">Edit</Table.Head>
+			<Table.Head class="w-[50px] text-right">Delete</Table.Head>
 		</Table.Row>
 	</Table.Header>
 	<Table.Body>
-		<Table.Row>
-			<Table.Cell class="font-medium">INV001</Table.Cell>
-			<Table.Cell>Paid</Table.Cell>
-			<Table.Cell>Credit Card</Table.Cell>
-			<Table.Cell class="text-right">$250.00</Table.Cell>
-		</Table.Row>
+		{#each posts as { id, title, description, tags, status, createdAt, slug }}
+			<Table.Row>
+				<Table.Cell class="font-medium">{id}</Table.Cell>
+				<Table.Cell>{title}</Table.Cell>
+				<Table.Cell>{description}</Table.Cell>
+				<Table.Cell>{tags}</Table.Cell>
+				<Table.Cell>{status}</Table.Cell>
+				<Table.Cell class="text-right"
+					>{new Date(createdAt).toLocaleDateString("en-US", {
+						year: "2-digit",
+						month: "2-digit",
+						day: "2-digit"
+					})}</Table.Cell
+				>
+				<Table.Cell class="flex justify-end">
+					<a href={`/blog/${slug}`}>
+						<Eye strokeWidth="1" />
+					</a>
+				</Table.Cell>
+				<Table.Cell class="flex-none justify-center">
+					<a href={`/blog/${slug}`}>
+						<Eye strokeWidth="1" />
+					</a>
+				</Table.Cell>
+			</Table.Row>
+		{/each}
 	</Table.Body>
 </Table.Root>

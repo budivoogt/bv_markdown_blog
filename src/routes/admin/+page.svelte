@@ -1,17 +1,16 @@
 <script lang="ts">
 	import { enhance } from "$app/forms"
 	import PageHeader from "$lib/components/PageHeader.svelte"
-	import type { ActionData } from "../auth/$types"
+	import { Rabbit } from "lucide-svelte"
 
 	export let data
-
-	const { session } = data
-	export let form: ActionData
+	$: ({ session } = data)
 
 	// MAKE SURE THIS ROUTE AND CHILDREN ARE PROTECTED!
 </script>
 
 <PageHeader text="Admin" />
+<Rabbit />
 
 {#if session}
 	<h1 class="my-8 text-2xl">
