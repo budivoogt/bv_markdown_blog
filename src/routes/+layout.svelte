@@ -2,26 +2,40 @@
 	import { invalidate } from "$app/navigation"
 	import Navbar from "$lib/components/Navbar.svelte"
 	import { onMount } from "svelte"
+	import { derived, writable } from "svelte/store"
 	import "../app.css"
 
 	export let data
-	let { supabase, session } = data
 	$: ({ supabase, session } = data)
 
-	onMount(() => {
-		const {
-			data: { subscription }
-		} = supabase.auth.onAuthStateChange(async (event, _session) => {
-			console.log("Event: ", event, "_session: ", _session)
+	let supabaseStore = writable<typeof supabase>()
 
-			if (_session?.expires_at !== session?.expires_at || event === "SIGNED_OUT") {
-				// Invalidate the browser client.
-				invalidate("supabase:auth")
+	// Subscribe to the store and set its value reactively.
+	$: supabaseStore.set(supabase)
+
+	onMount(() => {
+		const supabaseAuthStateSubscriptionStore = derived(supabaseStore, ($supabaseStore, set) => {
+			const {
+				data: { subscription }
+			} = $supabaseStore.auth.onAuthStateChange((event, _session) => {
+				console.log("Event: ", event, "_session: ", _session)
+
+				if (_session?.expires_at !== session?.expires_at || event === "SIGNED_OUT") {
+					// Invalidate the browser client.
+					invalidate("supabase:auth")
+				}
+			})
+
+			set(subscription)
+			// cleanup function, triggered on component destruction.
+			return () => {
+				console.log("Auth subscription cleaned")
+				subscription.unsubscribe()
 			}
 		})
 
-		// Return an anonymous function that unsubscribes (so that you don't call this automatically)
-		return () => subscription.unsubscribe()
+		// Returning an empty component which onMount calls when the component is destroyed. This'll trigger the cleanup returned function inside supabaseAuthStateSubscriptionStore.
+		return supabaseAuthStateSubscriptionStore.subscribe(() => {})
 	})
 </script>
 
