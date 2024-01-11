@@ -19,7 +19,7 @@
 		{/if}
 	</div>
 	<div class="flex flex-row gap-x-3">
-		<a href="https://twitter.com/0x_brucey" target="_blank"> <Twitter strokeWidth="1.5" /></a>
+		<a href="https://x.com/0x_brucey" target="_blank"> <Twitter strokeWidth="1.5" /></a>
 		<a href="https://github.com/brucey0x" target="_blank"><Github strokeWidth="1.5" /></a>
 		<a href="https://www.linkedin.com/in/budivoogt/" target="_blank"
 			><Linkedin strokeWidth="1.5" /></a
