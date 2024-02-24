@@ -1,7 +1,7 @@
 import { redirect } from "@sveltejs/kit"
 
 export const GET = async (event) => {
-	console.log("auth/callback/ was hit", event.url.pathname)
+	console.log("auth/callback/ was run", event.url.pathname)
 
 	const {
 		url,

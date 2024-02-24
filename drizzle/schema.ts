@@ -22,7 +22,7 @@ export const posts = pgTable("posts", {
 	status: text("status").default("draft"),
 	slug: text("slug").unique().notNull(),
 	tags: text("tags"),
-	createdAt: timestamp("created_at").defaultNow(),
+	createdAt: timestamp("created_at").defaultNow().notNull(),
 	updatedAt: timestamp("updated_at").defaultNow(),
 	authorId: integer("author_id").references(() => users.id) // authorId is linked to userId and this database constraint is checked on every insert/update/delete action
 })

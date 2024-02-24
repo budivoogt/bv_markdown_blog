@@ -16,7 +16,9 @@
 <p class="my-4">View all posts below, or create new ones.</p>
 
 <div class="my-4">
-	<Button variant="secondary">Create new post</Button>
+	<a href="/admin/posts/editor">
+		<Button variant="secondary">Create new post</Button>
+	</a>
 </div>
 
 <Table.Root>
@@ -60,9 +62,7 @@
 					</a>
 				</Table.Cell>
 				<Table.Cell class="flex-initial justify-end">
-					<a href={`/blog/${slug}`}>
-						<Trash2 strokeWidth="1" />
-					</a>
+					<Trash2 strokeWidth="1" />
 				</Table.Cell>
 			</Table.Row>
 		{/each}

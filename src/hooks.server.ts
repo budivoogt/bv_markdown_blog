@@ -4,6 +4,8 @@ import { createServerClient } from "@supabase/ssr"
 import type { Handle } from "@sveltejs/kit"
 
 export const handle: Handle = async ({ event, resolve }) => {
+	console.log("src/hooks.server.ts handle run")
+
 	event.locals.supabase = createServerClient<Database>(
 		PUBLIC_SUPABASE_URL,
 		PUBLIC_SUPABASE_ANON_KEY,

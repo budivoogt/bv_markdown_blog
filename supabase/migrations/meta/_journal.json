@@ -29,6 +29,13 @@
       "when": 1704908213688,
       "tag": "0003_bent_chamber",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "5",
+      "when": 1708537774011,
+      "tag": "0004_serious_red_ghost",
+      "breakpoints": true
     }
   ]
 }

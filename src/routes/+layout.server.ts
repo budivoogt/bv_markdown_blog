@@ -4,8 +4,9 @@ import type { Post } from "../../drizzle/schema"
 import type { LayoutServerLoad } from "./$types"
 
 export const load: LayoutServerLoad = async ({ locals: { getSession } }) => {
-	const database = db()
+	console.log("src/routes/+layout.server.ts load run")
 
+	const database = db()
 	const posts: Post[] = await database.query.posts.findMany()
 	const postsSortedDesc = sortPostsDesc(posts)
 

@@ -6,6 +6,8 @@ import type { LayoutLoad } from "./$types"
 export const load: LayoutLoad = async ({ fetch, data, depends }) => {
 	depends("supabase:auth")
 
+	console.log("src/routes/+layout.ts load run")
+
 	const supabase = createBrowserClient<Database>(PUBLIC_SUPABASE_URL, PUBLIC_SUPABASE_ANON_KEY, {
 		global: {
 			fetch
