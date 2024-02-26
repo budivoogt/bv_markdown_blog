@@ -1,11 +1,14 @@
 <script lang="ts">
-	let tags = ["tag1", "tag2", "tag3"] // Existing tags
+	import db from "$lib/server/database"
+	import { postTags } from "$lib/stores/generalStores"
+	const database = db()
 
-	let selectedTag = ""
+	let selectedTag: string
 
-	function handleTagChange(event: Event) {
-		selectedTag = (event.target as HTMLSelectElement).value
+	$: if ($postTags.length === 0) {
+		selectedTag = "__new__"
 	}
+	$: console.log("selectedTag is: ", selectedTag)
 </script>
 
 <div class="mx-auto mt-4 w-2/4 p-4">
@@ -18,20 +21,14 @@
 		<label for="body" class="label-input">Body</label>
 		<input type="text" name="body" id="body" class="input-field" />
 		<label for="tags" class="label-input">Tags</label>
-		<select name="tags" id="tags" on:change={handleTagChange} class="input-field">
-			{#each tags as tag}
+		<select name="tags" id="tags" class="input-field" bind:value={selectedTag}>
+			{#each $postTags as tag}
 				<option value={tag}>{tag}</option>
 			{/each}
 			<option value="__new__">Create New Tag</option>
 		</select>
 		{#if selectedTag === "__new__"}
-			<input
-				type="text"
-				name="newTag"
-				id="newTag"
-				placeholder="Enter new tag"
-				class="input-field"
-			/>
+			<input type="text" class="input-field" name="newTag" placeholder="Enter new tag" />
 		{/if}
 		<div class="mt-2 flex flex-row justify-center">
 			<button class="form-1-button">Save Draft</button>
