@@ -39,3 +39,18 @@
 		</div>
 	</form>
 </div>
+
+<style>
+	.form-1 {
+		@apply flex flex-col border-2 border-slate-300 p-4;
+	}
+	.label-input {
+		@apply my-2 border-2 border-slate-300 p-2 font-bold;
+	}
+	.input-field {
+		@apply my-2 border-2 border-slate-300 p-2;
+	}
+	.form-1-button {
+		@apply mx-2 w-1/6 border-2 border-slate-300;
+	}
+</style>

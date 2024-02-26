@@ -2,6 +2,11 @@
 	import PageHeader from "$lib/components/PageHeader.svelte"
 </script>
 
+<svelte:head>
+	<title>Coding projects</title>
+	<meta name="description" content="Overview of my coding and entrepreneurial projects." />
+</svelte:head>
+
 <PageHeader text="Coding" />
 
 <div>
@@ -37,3 +42,9 @@
 	<div class="col-start-2">Banana</div>
 	<div class="col-start-3">Banana</div>
 </div>
+
+<style>
+	p {
+		@apply my-2;
+	}
+</style>
