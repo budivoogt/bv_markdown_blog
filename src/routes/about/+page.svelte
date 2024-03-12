@@ -1,7 +1,8 @@
 <script lang="ts">
+	import PageHeader from "$lib/components/PageHeader.svelte"
 </script>
 
-<h1 class="my-4 text-3xl">About.</h1>
+<PageHeader text="About" />
 
 <p>pic of me</p>
 <p>bunch of stuff about me</p>

@@ -1,5 +1,8 @@
 <script lang="ts">
+	import PageHeader from "$lib/components/PageHeader.svelte"
 </script>
+
+<PageHeader text="About" />
 
 <p>Edit image</p>
 

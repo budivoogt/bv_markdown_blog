@@ -89,6 +89,7 @@ I've tried Prisma in the Lucia Auth project that I've built. I will now use **Dr
 -   [] Add semantic HTML
 -   [] Add metadata tags
 -   [] Create 404 routing for invalid slugs
+-   [] Make sure draft posts are only visible for the admin and not crawlable
 
 # Learnings
 

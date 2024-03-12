@@ -8,6 +8,9 @@ Goal is to replace my personal [Budi Voogt](https://budivoogt.com/) and [Strikin
 -   Tailwind CSS
 -   Prettier with prettier-plugin-tailwindcss and [prettier-plugin-svelte](https://github.com/sveltejs/prettier-plugin-svelte)
 -   [Shadcn-svelte](https://www.shadcn-svelte.com/docs) component collection
+-   Supabase Postgres DB
+-   Drizzle ORM
+-   Supabase Auth
 
 # Research questions
 

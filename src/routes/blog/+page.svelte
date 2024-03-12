@@ -1,40 +1,31 @@
 <script lang="ts">
-	import { page } from "$app/stores"
+	import PageHeader from "$lib/components/PageHeader.svelte"
+	import Test from "$lib/components/Test.svelte"
+	import { filterPostsPublished } from "$lib/helper"
 
 	export let data
+
+	$: ({ posts } = data)
+	$: publishedPosts = filterPostsPublished(posts)
 </script>
 
-<h1 class="my-4 text-3xl">Blog</h1>
+<PageHeader text="Blog" />
 
-<h2 class="text-2xl">Data:</h2>
-<pre>
-    {JSON.stringify(data, null, 2)}
-</pre>
-
-<h2 class="text-2xl">$page.data:</h2>
-<pre>
-    {JSON.stringify($page.data, null, 2)}
-</pre>
-
-<h2 class="text-2xl">All posts (by recency):</h2>
+<h2 class="text-2xl">Recent blog posts</h2>
 
 <ul class="my-4 flex flex-col gap-1">
-	{#each data.posts as post}
-		<a
-			href={`/blog/${post.title
-				.trim()
-				.toLowerCase()
-				.replace(/['"]+/g, "")
-				.replace(/[^a-zA-Z0-9]+/g, "-")}`}
-		>
+	{#each publishedPosts as { title, description, slug }}
+		<a href={`/blog/${slug}`}>
 			<li>
 				<h3 class="font-bold">
-					{post.title}
+					{title}
 				</h3>
 				<span class="italic">
-					{post.description}
+					{description}
 				</span>
 			</li>
 		</a>
 	{/each}
 </ul>
+
+<Test class="italic">Banana</Test>

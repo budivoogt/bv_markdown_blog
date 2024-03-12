@@ -10,9 +10,10 @@
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
     "lint": "prettier --check . && eslint .",
     "format": "prettier --write .",
-    "drizzle:generate": "drizzle-kit generate:sqlite",
+    "drizzle:seed": "tsx src/lib/server/seed",
+    "drizzle:generate": "drizzle-kit generate:pg",
     "drizzle:migrate": "tsx drizzle/migrate",
-    "drizzle:push": "drizzle-kit push:sqlite"
+    "drizzle:push": "drizzle-kit push:pg"
   },
   "devDependencies": {
     "@sveltejs/adapter-auto": "^3.0.0",
@@ -40,12 +41,21 @@
   },
   "type": "module",
   "dependencies": {
-    "@libsql/client": "0.4.0-pre.5",
+    "@supabase/ssr": "^0.0.10",
+    "@supabase/supabase-js": "^2.39.2",
+    "bits-ui": "^0.19.5",
     "clsx": "^2.0.0",
     "dotenv": "^16.3.1",
-    "drizzle-orm": "^0.29.2",
+    "drizzle-orm": "^0.29.3",
+    "formsnap": "^0.5.1",
+    "geist": "^1.2.0",
     "lucide-svelte": "^0.302.0",
+    "mode-watcher": "^0.2.2",
+    "postgres": "^3.4.3",
+    "svelte-sonner": "^0.3.19",
+    "sveltekit-superforms": "^2.8.1",
     "tailwind-merge": "^2.2.0",
-    "tailwind-variants": "^0.1.19"
+    "tailwind-variants": "^0.1.19",
+    "zod": "^3.22.4"
   }
 }
