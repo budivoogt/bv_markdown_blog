@@ -101,7 +101,7 @@
 
 	<div class="mt-4 flex justify-center gap-4">
 		<Form.Button type="submit">Save draft</Form.Button>
-		<Form.Button variant="destructive" type="reset">Discard</Form.Button>
+		<Form.Button variant="destructive">Discard</Form.Button>
 	</div>
 	{#if browser}
 		<div class="my-10">
