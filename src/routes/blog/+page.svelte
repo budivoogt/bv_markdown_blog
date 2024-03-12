@@ -1,5 +1,6 @@
 <script lang="ts">
 	import PageHeader from "$lib/components/PageHeader.svelte"
+	import Test from "$lib/components/Test.svelte"
 	import { filterPostsPublished } from "$lib/helper"
 
 	export let data
@@ -26,3 +27,5 @@
 		</a>
 	{/each}
 </ul>
+
+<Test class="italic">Banana</Test>

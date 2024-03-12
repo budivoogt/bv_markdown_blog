@@ -30,5 +30,5 @@ export const load: LayoutLoad = async ({ fetch, data, depends }) => {
 	} = await supabase.auth.getSession()
 
 	// The last load function has priority over all others, so I need to pass the server load data through the layout load data for the page to access it.
-	return { supabase, session, posts: data.posts, message: data.message }
+	return { supabase, session, posts: data.posts, tags: data.tags, message: data.message }
 }

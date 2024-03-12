@@ -38,7 +38,7 @@ export const postsRelations = relations(posts, ({ one, many }) => ({
 
 export const tags = pgTable("tags", {
 	id: serial("id").primaryKey(),
-	tag: text("tag").unique().notNull()
+	name: text("name").unique().notNull()
 })
 
 // A tag can be associated with many posts
@@ -74,3 +74,4 @@ export const tagsToPostsRelations = relations(tagsToPosts, ({ one }) => ({
 }))
 
 export type Post = typeof posts.$inferSelect
+export type Tag = typeof tags.$inferSelect
