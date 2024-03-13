@@ -18,6 +18,7 @@
 		onUpdated: ({ form: f }) => {
 			if (f.valid) {
 				toast.success("Your draft has been saved.")
+				console.log("Form is: ", f)
 			} else {
 				toast.error(
 					"Please fix the errors in your form: " + JSON.stringify(f.errors, null, 2)
@@ -30,8 +31,7 @@
 
 	export const { form: formData, enhance } = form
 
-	// All `tags` are selected by default since these are mapped over.
-	$: selectedTags = $formData.tags?.map((tag: string) => ({ label: tag, value: tag })) || []
+	$: selectedTags = $formData.tags?.map((tag) => ({ label: tag, value: tag })) || []
 </script>
 
 <form method="POST" use:enhance>
@@ -42,10 +42,21 @@
 				{...attrs}
 				bind:value={$formData.title}
 				class="border-neutral-300"
-				placeholder="SEO friendly title, max 60 chars."
+				placeholder="Max 60 chars."
 			/>
 		</Form.Control>
 
+		<Form.FieldErrors />
+	</Form.Field>
+
+	<Form.Field {form} name="slug">
+		<Form.Control let:attrs>
+			<Form.Label>URL slug</Form.Label>
+			<Input {...attrs} bind:value={$formData.slug} class="border-neutral-300" />
+		</Form.Control>
+		<Form.Description>
+			Max 50 chars, no spaces, only lowercase letters, numbers and hyphens.
+		</Form.Description>
 		<Form.FieldErrors />
 	</Form.Field>
 
@@ -70,7 +81,7 @@
 		<Form.FieldErrors />
 	</Form.Field>
 
-	<Form.Field {form} name="tag">
+	<Form.Field {form} name="tags">
 		<Form.Control let:attrs>
 			<Form.Label>Tags</Form.Label>
 			<Select.Root
@@ -84,9 +95,9 @@
 					}
 				}}
 			>
-				{#if tags}
-					{#each tags as tag}
-						<input hidden bind:value={tag.name} name={attrs.name} />
+				{#if $formData.tags}
+					{#each $formData.tags as tag}
+						<input hidden bind:value={tag} name={attrs.name} />
 					{/each}
 				{/if}
 				<Select.Trigger {...attrs}>

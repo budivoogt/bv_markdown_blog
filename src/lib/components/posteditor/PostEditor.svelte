@@ -7,8 +7,6 @@
 	let selectedTags: Tag[]
 
 	export let tags: Tag[]
-
-	$: console.log("selectedTag is: ", selectedTags)
 </script>
 
 <!-- My custom practice form -->
