@@ -17,7 +17,7 @@
 		validators: zodClient(formSchema),
 		onUpdated: ({ form: f }) => {
 			if (f.valid) {
-				toast.success("You submitted: " + JSON.stringify(f.data, null, 2))
+				toast.success("Your draft has been saved.")
 			} else {
 				toast.error(
 					"Please fix the errors in your form: " + JSON.stringify(f.errors, null, 2)
@@ -30,12 +30,8 @@
 
 	export const { form: formData, enhance } = form
 
-	$: selectedTag = $formData.tag
-		? {
-				label: $formData.tag,
-				value: $formData.tag
-			}
-		: undefined
+	// All `tags` are selected by default since these are mapped over.
+	$: selectedTags = $formData.tags?.map((tag: string) => ({ label: tag, value: tag })) || []
 </script>
 
 <form method="POST" use:enhance>
@@ -78,14 +74,23 @@
 		<Form.Control let:attrs>
 			<Form.Label>Tags</Form.Label>
 			<Select.Root
-				selected={selectedTag}
+				multiple
+				selected={selectedTags}
 				onSelectedChange={(s) => {
-					s && ($formData.tag = s.value)
+					if (s) {
+						$formData.tags = s.map((t) => t.value)
+					} else {
+						$formData.tags = []
+					}
 				}}
 			>
-				<input hidden bind:value={$formData.tag} name={attrs.name} />
+				{#if tags}
+					{#each tags as tag}
+						<input hidden bind:value={tag.name} name={attrs.name} />
+					{/each}
+				{/if}
 				<Select.Trigger {...attrs}>
-					<Select.Value placeholder="Select a tag" />
+					<Select.Value placeholder="Select tags" />
 				</Select.Trigger>
 				<Select.Content>
 					{#if tags}
