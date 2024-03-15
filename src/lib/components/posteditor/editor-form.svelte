@@ -1,24 +1,24 @@
 <script lang="ts">
-	import { browser } from "$app/environment"
 	import { page } from "$app/stores"
 	import { formSchema } from "$lib/components/posteditor/schema"
 	import * as Form from "$lib/components/ui/form"
 	import { Input } from "$lib/components/ui/input"
 	import * as Select from "$lib/components/ui/select"
 	import { toast } from "svelte-sonner"
-	import SuperDebug, { superForm } from "sveltekit-superforms"
+	import { superForm } from "sveltekit-superforms"
 	import { zodClient } from "sveltekit-superforms/adapters"
 	import { Toaster } from "../ui/sonner"
 	import { Textarea } from "../ui/textarea"
 
-	$: ({ tags } = $page.data)
+	$: ({
+		data: { tags }
+	} = $page)
 
 	const form = superForm($page.data.form, {
 		validators: zodClient(formSchema),
 		onUpdated: ({ form: f }) => {
 			if (f.valid) {
 				toast.success("Your draft has been saved.")
-				console.log("Form is: ", f)
 			} else {
 				toast.error(
 					"Please fix the errors in your form: " + JSON.stringify(f.errors, null, 2)
@@ -29,12 +29,12 @@
 
 	export const FormType = typeof form
 
-	export const { form: formData, enhance } = form
+	export const { form: formData, enhance, errors, constraints } = form
 
-	$: selectedTags = $formData.tags?.map((tag) => ({ label: tag, value: tag })) || []
+	$: selectedTags = $formData.tags?.map((tag: string) => ({ label: tag, value: tag })) || []
 </script>
 
-<form method="POST" use:enhance>
+<form method="POST" action="?/formSubmit" use:enhance>
 	<Form.Field {form} name="title">
 		<Form.Control let:attrs>
 			<Form.Label>Title</Form.Label>
@@ -43,16 +43,21 @@
 				bind:value={$formData.title}
 				class="border-neutral-300"
 				placeholder="Max 60 chars."
+				{...$constraints.title}
 			/>
 		</Form.Control>
-
 		<Form.FieldErrors />
 	</Form.Field>
 
 	<Form.Field {form} name="slug">
 		<Form.Control let:attrs>
 			<Form.Label>URL slug</Form.Label>
-			<Input {...attrs} bind:value={$formData.slug} class="border-neutral-300" />
+			<Input
+				{...attrs}
+				bind:value={$formData.slug}
+				class="border-neutral-300"
+				{...$constraints.slug}
+			/>
 		</Form.Control>
 		<Form.Description>
 			Max 50 chars, no spaces, only lowercase letters, numbers and hyphens.
@@ -68,6 +73,7 @@
 				bind:value={$formData.description}
 				class="border-neutral-300"
 				placeholder="SEO friendly description, max 160 chars."
+				{...$constraints.description}
 			/>
 		</Form.Control>
 		<Form.FieldErrors />
@@ -116,13 +122,14 @@
 	</Form.Field>
 
 	<div class="mt-4 flex justify-center gap-4">
-		<Form.Button type="submit">Save draft</Form.Button>
+		<Form.Button type="submit" formaction="?/formSubmit">Save draft</Form.Button>
 		<Form.Button variant="destructive">Discard</Form.Button>
+		<Form.Button variant="secondary" formaction="?/edit" class="hidden">Edit DB</Form.Button>
 	</div>
-	{#if browser}
+	<!-- {#if browser}
 		<div class="my-10">
 			<SuperDebug data={$formData} />
 		</div>
-	{/if}
+	{/if} -->
 	<Toaster />
 </form>

@@ -3,8 +3,10 @@ import { boolean, integer, pgTable, primaryKey, serial, text, timestamp } from "
 
 export const users = pgTable("users", {
 	id: serial("id").primaryKey(),
+	uuid: text("uuid").unique(),
+	fullName: text("full_name"),
 	firstName: text("first_name"),
-	lastName: text("last_name)"),
+	lastName: text("last_name"),
 	email: text("email"),
 	emailVerified: boolean("email_verified").default(false)
 })
@@ -75,3 +77,4 @@ export const tagsToPostsRelations = relations(tagsToPosts, ({ one }) => ({
 
 export type Post = typeof posts.$inferSelect
 export type Tag = typeof tags.$inferSelect
+export type schemaUser = typeof users.$inferSelect
