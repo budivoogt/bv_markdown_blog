@@ -2,6 +2,7 @@
 
 import type { FormType } from "$lib/components/posteditor/editor-form.svelte"
 import type { Database } from "$lib/types/supabase"
+import type { PostTag } from "$lib/types/types"
 import type { Session, SupabaseClient, User } from "@supabase/supabase-js"
 import type { Post, Tag } from "../drizzle/schema"
 
@@ -21,6 +22,7 @@ declare global {
 			tags?: Tag[]
 			message?: string
 			form?: FormType
+			postTags?: PostTag[]
 		}
 		// interface PageState {}
 		// interface Platform {}

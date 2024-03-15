@@ -37,12 +37,12 @@
 		</Table.Row>
 	</Table.Header>
 	<Table.Body>
-		{#each posts as { id, title, description, tags, status, createdAt, slug }}
+		{#each posts as { id, title, description, status, createdAt, slug }}
 			<Table.Row>
 				<Table.Cell class="font-medium">{id}</Table.Cell>
 				<Table.Cell>{title}</Table.Cell>
 				<Table.Cell>{description}</Table.Cell>
-				<Table.Cell>{tags}</Table.Cell>
+				<Table.Cell>{""}</Table.Cell>
 				<Table.Cell>{status}</Table.Cell>
 				<Table.Cell
 					>{new Date(createdAt).toLocaleDateString("en-US", {

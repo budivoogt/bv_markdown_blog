@@ -2,17 +2,18 @@
 module.exports = {
 	root: true,
 	extends: [
-		'eslint:recommended',
-		'plugin:@typescript-eslint/recommended',
-		'plugin:svelte/recommended',
-		'prettier'
+		"eslint:recommended",
+		"plugin:@typescript-eslint/recommended",
+		"plugin:svelte/recommended",
+		"plugin:drizzle/recommended",
+		"prettier"
 	],
-	parser: '@typescript-eslint/parser',
-	plugins: ['@typescript-eslint'],
+	parser: "@typescript-eslint/parser",
+	plugins: ["@typescript-eslint", "drizzle"],
 	parserOptions: {
-		sourceType: 'module',
+		sourceType: "module",
 		ecmaVersion: 2020,
-		extraFileExtensions: ['.svelte']
+		extraFileExtensions: [".svelte"]
 	},
 	env: {
 		browser: true,
@@ -21,11 +22,11 @@ module.exports = {
 	},
 	overrides: [
 		{
-			files: ['*.svelte'],
-			parser: 'svelte-eslint-parser',
+			files: ["*.svelte"],
+			parser: "svelte-eslint-parser",
 			parserOptions: {
-				parser: '@typescript-eslint/parser'
+				parser: "@typescript-eslint/parser"
 			}
 		}
 	]
-};
+}
