@@ -77,5 +77,5 @@ export const tagsToPostsRelations = relations(tagsToPosts, ({ one }) => ({
 
 export type Post = typeof posts.$inferSelect
 export type Tag = typeof tags.$inferSelect
-export type schemaUser = typeof users.$inferSelect
-export type tagToPost = typeof tagsToPosts.$inferSelect
+export type SchemaUser = typeof users.$inferSelect
+export type TagToPost = typeof tagsToPosts.$inferSelect

@@ -2,12 +2,13 @@
 	import PageHeader from "$lib/components/PageHeader.svelte"
 	import { Button } from "$lib/components/ui/button"
 	import * as Table from "$lib/components/ui/table"
+	import { findTagForPost } from "$lib/helper"
 	import { Eye, Pencil, Trash2 } from "lucide-svelte"
 	import type { PageData } from "../../$types"
 
 	export let data: PageData
 
-	$: ({ posts } = data)
+	$: ({ posts, postTags } = data)
 </script>
 
 <PageHeader text="Blog posts" />
@@ -17,7 +18,7 @@
 
 <div class="my-4">
 	<a href="/admin/posts/editor">
-		<Button variant="secondary">Create new post</Button>
+		<Button>Create new post</Button>
 	</a>
 </div>
 
@@ -42,7 +43,14 @@
 				<Table.Cell class="font-medium">{id}</Table.Cell>
 				<Table.Cell>{title}</Table.Cell>
 				<Table.Cell>{description}</Table.Cell>
-				<Table.Cell>{""}</Table.Cell>
+				<Table.Cell>
+					{#if postTags}
+						{#each findTagForPost(id, postTags) as tag}
+							{tag}
+							<br />
+						{/each}
+					{/if}
+				</Table.Cell>
 				<Table.Cell>{status}</Table.Cell>
 				<Table.Cell
 					>{new Date(createdAt).toLocaleDateString("en-US", {

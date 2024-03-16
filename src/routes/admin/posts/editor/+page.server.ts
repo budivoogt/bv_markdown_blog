@@ -5,7 +5,7 @@ import { fail } from "@sveltejs/kit"
 import { eq } from "drizzle-orm"
 import { superValidate } from "sveltekit-superforms"
 import { zod } from "sveltekit-superforms/adapters"
-import type { schemaUser } from "../../../../../drizzle/schema"
+import type { SchemaUser } from "../../../../../drizzle/schema"
 import { posts, tags, tagsToPosts, users } from "../../../../../drizzle/schema"
 import type { Actions, PageServerLoad } from "./$types"
 
@@ -32,7 +32,7 @@ export const actions: Actions = {
 
 		// Match Supabase authed user to db user
 		const { user }: { user: User | null } = (await event.locals.getSession()) || { user: null }
-		let matchedUser: schemaUser | undefined
+		let matchedUser: SchemaUser | undefined
 		if (user) {
 			matchedUser = await database.query.users.findFirst({
 				where: eq(users.uuid, user?.id)
