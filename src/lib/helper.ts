@@ -36,3 +36,10 @@ export function findTagForPost(postId: number, postTags: TagsPerPost) {
 	}
 	return matchedTags
 }
+
+export function recentPostSlug(posts: Post[]) {
+	const newestPost: Post = posts.reduce((prev, current) => {
+		return current.id > prev.id ? current : prev
+	})
+	return newestPost.slug
+}

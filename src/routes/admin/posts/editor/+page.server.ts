@@ -1,6 +1,6 @@
 import { formSchema } from "$lib/components/posteditor/schema"
 import db from "$lib/server/database"
-import type { Session, User } from "@supabase/supabase-js"
+import type { User } from "@supabase/supabase-js"
 import { fail } from "@sveltejs/kit"
 import { eq } from "drizzle-orm"
 import { superValidate } from "sveltekit-superforms"
@@ -84,18 +84,5 @@ export const actions: Actions = {
 		}
 
 		return { form }
-	},
-	edit: async (event) => {
-		console.log("edit form action run")
-
-		const database = db()
-
-		const { user } = (await event.locals.getSession()) as Session
-		const updatedUsers = await database
-			.update(users)
-			.set({ uuid: user.id })
-			.where(eq(users.id, 8))
-			.returning()
-		console.log("updatedUsers is: ", updatedUsers)
 	}
 }
