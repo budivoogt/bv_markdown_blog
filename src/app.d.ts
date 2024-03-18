@@ -17,12 +17,12 @@ declare global {
 			session: {
 				user: User
 			}
+			post?: Post
 			posts?: Post[]
 			tags?: Tag[]
 			message?: string
 			form?: FormType
 			postTags?: TagToPost[]
-			// postTags?: PostTag[]
 		}
 		// interface PageState {}
 		// interface Platform {}
