@@ -1,12 +1,12 @@
 import { formSchema } from "$lib/components/posteditor/schema"
 import db from "$lib/server/database"
 import type { User } from "@supabase/supabase-js"
-import { fail } from "@sveltejs/kit"
+import { fail, redirect } from "@sveltejs/kit"
 import { eq } from "drizzle-orm"
 import { superValidate } from "sveltekit-superforms"
 import { zod } from "sveltekit-superforms/adapters"
 import type { SchemaUser } from "../../../../../drizzle/schema"
-import { posts, tags, tagsToPosts, users } from "../../../../../drizzle/schema"
+import { posts, users } from "../../../../../drizzle/schema"
 import type { Actions, PageServerLoad } from "./$types"
 
 export const load: PageServerLoad = async () => {
@@ -73,15 +73,7 @@ export const actions: Actions = {
 			console.error("Error inserting: ", error)
 		}
 
-		// Match tags with posts. Does not insert new tags.
-		if (form.data.tags && postRow) {
-			for (const tag of form.data.tags) {
-				const matchTag = await database.select().from(tags).where(eq(tags.name, tag))
-				await database
-					.insert(tagsToPosts)
-					.values({ tagId: matchTag[0].id, postId: postRow[0].id })
-			}
-		}
+		if (postRow) redirect(303, `/blog/${postRow[0].slug}`)
 
 		return { form }
 	}

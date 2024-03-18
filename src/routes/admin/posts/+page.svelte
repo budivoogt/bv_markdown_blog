@@ -1,16 +1,26 @@
 <script lang="ts">
+	import { enhance } from "$app/forms"
 	import PageHeader from "$lib/components/PageHeader.svelte"
 	import { Button } from "$lib/components/ui/button"
 	import * as Table from "$lib/components/ui/table"
 	import { findTagForPost } from "$lib/helper"
 	import { Eye, Pencil, Trash2 } from "lucide-svelte"
+	import { Toaster, toast } from "svelte-sonner"
 	import type { PageData } from "../../$types"
+	import type { ActionData } from "./$types"
 
 	export let data: PageData
+
+	export let form: ActionData
+
+	$: if (form?.success && form?.deletedPost) {
+		toast.success(`Post deleted, id: ${form.deletedPost.id}`)
+	}
 
 	$: ({ posts, postTags } = data)
 </script>
 
+<Toaster />
 <PageHeader text="Blog posts" />
 
 <h2 class="mt-8 text-2xl">Manage your posts here</h2>
@@ -70,7 +80,12 @@
 					</a>
 				</Table.Cell>
 				<Table.Cell class="flex-initial justify-end">
-					<Trash2 strokeWidth="1" />
+					<form action="?/deletePost" method="post" use:enhance>
+						<input type="hidden" name="id" value={id} />
+						<button type="submit">
+							<Trash2 strokeWidth="1" />
+						</button>
+					</form>
 				</Table.Cell>
 			</Table.Row>
 		{/each}
