@@ -1,23 +1,24 @@
 <script lang="ts">
 	import { enhance } from "$app/forms"
+	import Alert from "$lib/components/Alert.svelte"
 	import PageHeader from "$lib/components/PageHeader.svelte"
 	import { Button } from "$lib/components/ui/button"
 	import * as Table from "$lib/components/ui/table"
-	import { findTagForPost } from "$lib/helper"
+	import { capitalizer, findTagForPost } from "$lib/helper"
 	import { Eye, Pencil, Trash2 } from "lucide-svelte"
 	import { Toaster, toast } from "svelte-sonner"
 	import type { PageData } from "../../$types"
 	import type { ActionData } from "./$types"
 
 	export let data: PageData
-
 	export let form: ActionData
 
+	$: ({ posts, postTags } = data)
 	$: if (form?.success && form?.deletedPost) {
 		toast.success(`Post deleted, id: ${form.deletedPost.id}`)
 	}
 
-	$: ({ posts, postTags } = data)
+	let deleteFormElement: HTMLFormElement | null = null
 </script>
 
 <Toaster />
@@ -32,15 +33,15 @@
 
 <Table.Root>
 	<Table.Caption>A list of all your blog posts. Click to edit.</Table.Caption>
-	<Table.Header class="bg-slate-200">
+	<Table.Header class="bg-neutral-200">
 		<Table.Row>
 			<Table.Head class="w-[100px]">ID #</Table.Head>
 			<Table.Head>Title</Table.Head>
 			<Table.Head>Description</Table.Head>
 			<Table.Head>Tags</Table.Head>
 			<Table.Head>Status</Table.Head>
-			<Table.Head>Created At (MM/DD/YY)</Table.Head>
-			<Table.Head class="w-[150px] text-right">View public</Table.Head>
+			<Table.Head>Created (MM/DD/YY)</Table.Head>
+			<Table.Head class="w-[50px] text-right">View</Table.Head>
 			<Table.Head class="w-[50px] text-right">Edit</Table.Head>
 			<Table.Head class="w-[50px] text-right">Delete</Table.Head>
 		</Table.Row>
@@ -48,7 +49,7 @@
 	<Table.Body>
 		{#each posts as { id, title, description, status, createdAt, slug }}
 			<Table.Row>
-				<Table.Cell class="font-medium">{id}</Table.Cell>
+				<Table.Cell>{id}</Table.Cell>
 				<Table.Cell>{title}</Table.Cell>
 				<Table.Cell>{description}</Table.Cell>
 				<Table.Cell>
@@ -59,15 +60,15 @@
 						{/each}
 					{/if}
 				</Table.Cell>
-				<Table.Cell>{status}</Table.Cell>
+				<Table.Cell>{status ? capitalizer(status) : null}</Table.Cell>
 				<Table.Cell
 					>{new Date(createdAt).toLocaleDateString("en-US", {
-						year: "2-digit",
-						month: "2-digit",
-						day: "2-digit"
+						year: "numeric",
+						month: "short",
+						day: "numeric"
 					})}</Table.Cell
 				>
-				<Table.Cell class="flex justify-end pr-5">
+				<Table.Cell class="flex-initial justify-center">
 					<a href={`/blog/${slug}`}>
 						<Eye strokeWidth="1" />
 					</a>
@@ -78,11 +79,22 @@
 					</a>
 				</Table.Cell>
 				<Table.Cell class="flex-initial justify-end">
-					<form action="?/deletePost" method="post" use:enhance>
+					<form
+						action="?/deletePost"
+						method="post"
+						use:enhance
+						bind:this={deleteFormElement}
+					>
 						<input type="hidden" name="id" value={id} />
-						<button type="submit">
-							<Trash2 strokeWidth="1" />
-						</button>
+						<Alert
+							proceedAction={() => {
+								if (deleteFormElement) deleteFormElement.submit()
+							}}
+						>
+							<button type="button" slot="trigger">
+								<Trash2 strokeWidth="1" />
+							</button>
+						</Alert>
 					</form>
 				</Table.Cell>
 			</Table.Row>

@@ -41,9 +41,8 @@
 
 	export const { form: formData, enhance, errors, constraints } = form
 
-	$: if (posts) {
+	$: if (posts && posts.length > 0) {
 		lastSlug = recentPostSlug(posts)
-		console.log("lastSlug: ", lastSlug)
 	}
 
 	$: selectedTags = $formData.tags?.map((tag: string) => ({ label: tag, value: tag })) || []
