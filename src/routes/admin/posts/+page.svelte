@@ -26,10 +26,8 @@
 <h2 class="mt-8 text-2xl">Manage your posts here</h2>
 <p class="my-4">View all posts below, or create new ones.</p>
 
-<div class="my-4">
-	<a href="/admin/posts/editor">
-		<Button>Create new post</Button>
-	</a>
+<div class="my-4 flex w-min flex-row gap-2 rounded border-2 border-neutral-500 p-2">
+	<Button href="/admin/posts/editor">Create new post</Button>
 </div>
 
 <Table.Root>

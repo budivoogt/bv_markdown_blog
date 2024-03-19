@@ -26,7 +26,6 @@ export const actions: Actions = {
 				form
 			})
 		}
-		console.log("Submit form action run with form: ", form)
 
 		const database = db()
 
@@ -51,7 +50,7 @@ export const actions: Actions = {
 					matchedUser = newUser[0]
 				}
 			}
-			console.log("matchedUser: ", matchedUser)
+			// console.log("matchedUser: ", matchedUser)
 		}
 
 		// Insert post into db
@@ -68,7 +67,6 @@ export const actions: Actions = {
 					authorId: matchedUser?.id
 				})
 				.returning()
-			console.log("Post inserted: ", postRow)
 		} catch (error) {
 			console.error("Error inserting: ", error)
 		}

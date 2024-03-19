@@ -43,12 +43,13 @@
 	<div class="col-start-2">Banana</div>
 	<div class="col-start-3">Banana</div>
 </div>
-
-<Card.Root>
-	<Card.Header slot="header" title="Recipe tracker" />
-	<Card.Body slot="body"><p>Wouter is een baas</p></Card.Body>
-	<Card.Footer slot="footer"><div>Wouter is kort</div></Card.Footer>
-</Card.Root>
+<div class="my-4">
+	<Card.Root>
+		<Card.Header slot="header" title="Recipe tracker" />
+		<Card.Body slot="body"><p>Wouter is een baas</p></Card.Body>
+		<Card.Footer slot="footer"><div>Wouter is kort</div></Card.Footer>
+	</Card.Root>
+</div>
 
 <style>
 	p {

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { goto } from "$app/navigation"
 	import { page } from "$app/stores"
+	import Alert from "$lib/components/Alert.svelte"
 	import { formSchema } from "$lib/components/posteditor/schema"
 	import * as Form from "$lib/components/ui/form"
 	import { Input } from "$lib/components/ui/input"
@@ -15,6 +16,8 @@
 	$: ({
 		data: { tags, posts }
 	} = $page)
+
+	let lastSlug: string | null = null
 
 	const form = superForm($page.data.form, {
 		validators: zodClient(formSchema),
@@ -34,13 +37,14 @@
 		}
 	})
 
-	let lastSlug: string | null = null
-
 	export const FormType = typeof form
 
 	export const { form: formData, enhance, errors, constraints } = form
 
-	$: if (posts) lastSlug = recentPostSlug(posts)
+	$: if (posts) {
+		lastSlug = recentPostSlug(posts)
+		console.log("lastSlug: ", lastSlug)
+	}
 
 	$: selectedTags = $formData.tags?.map((tag: string) => ({ label: tag, value: tag })) || []
 </script>
@@ -97,6 +101,7 @@
 				class="border-neutral-300"
 				bind:value={$formData.body}
 				placeholder="Write in Markdown"
+				{...$constraints.body}
 			/>
 		</Form.Control>
 		<Form.FieldErrors />
@@ -138,7 +143,15 @@
 
 	<div class="mt-4 flex justify-center gap-4">
 		<Form.Button type="submit" formaction="?/formSubmit">Save draft</Form.Button>
-		<Form.Button variant="destructive">Discard</Form.Button>
+		<Alert
+			description="Proceeding will clear the form."
+			title="Are you sure?"
+			proceedAction={() => {
+				if (form) form.reset()
+			}}
+		>
+			<Form.Button variant="destructive" slot="trigger" type="button">Discard</Form.Button>
+		</Alert>
 		{#if lastSlug}
 			<Form.Button variant="secondary" href={`/blog/${lastSlug}`}>View last draft</Form.Button
 			>

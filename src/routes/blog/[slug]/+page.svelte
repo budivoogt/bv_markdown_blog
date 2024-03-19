@@ -17,10 +17,21 @@
 	}
 </script>
 
+<svelte:head>
+	{#if post}
+		<title>{post.title}</title>
+		<meta name="description" content={post.description} />
+	{/if}
+</svelte:head>
+
 <Toaster />
 <h1 class="text-3xl">{capitalizer(post?.title ?? "")}</h1>
 {#if session}
-	<div class="my-4 w-min rounded border-2 border-slate-400 p-2">
+	<div class="my-4 flex w-min flex-row gap-2 rounded border-2 border-neutral-500 p-2">
+		<Button.Root variant="outline" class="border-2 border-black" href="/admin/posts/editor"
+			>Create new post</Button.Root
+		>
+		<Button.Root>Edit post</Button.Root>
 		<form method="POST" action="?/changeStatus" use:enhance>
 			<input type="hidden" name="id" value={post?.id} />
 			<input type="hidden" name="status" value={post?.status} />
