@@ -18,7 +18,7 @@
 		toast.success(`Post deleted, id: ${form.deletedPost.id}`)
 	}
 
-	let deleteFormElement: HTMLFormElement | null = null
+	let deleteButtonElement: HTMLButtonElement | null = null
 </script>
 
 <Toaster />
@@ -79,16 +79,12 @@
 					</a>
 				</Table.Cell>
 				<Table.Cell class="flex-initial justify-end">
-					<form
-						action="?/deletePost"
-						method="post"
-						use:enhance
-						bind:this={deleteFormElement}
-					>
+					<form action="?/deletePost" method="post" use:enhance>
 						<input type="hidden" name="id" value={id} />
+						<button hidden bind:this={deleteButtonElement}></button>
 						<Alert
 							proceedAction={() => {
-								if (deleteFormElement) deleteFormElement.submit()
+								if (deleteButtonElement) deleteButtonElement.click()
 							}}
 						>
 							<button type="button" slot="trigger">
