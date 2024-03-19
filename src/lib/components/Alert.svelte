@@ -3,7 +3,7 @@
 
 	export let description: string =
 		"This action cannot be undone. This will permanently delete your data."
-	export let title: string = "Are you absolutely sure?"
+	export let title: string = "Are you sure?"
 	export let cancel: string = "Cancel"
 	export let cancelAction: (() => void) | null = null
 	export let proceed: string = "Continue"
