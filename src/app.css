@@ -1,12 +1,9 @@
+/* Defines Inter as the default font and imports it */
+@import url("/fonts/inter/inter.css");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-/* @layer base {
-	html {
-		font-family: "--font-geist-sans", system-ui, sans-serif;
-	}
-} */
 
 @layer base {
 	:root {
