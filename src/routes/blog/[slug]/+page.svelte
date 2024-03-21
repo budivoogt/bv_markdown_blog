@@ -15,6 +15,12 @@
 	$: if (form?.success) {
 		toast.success(`Post status changed to ${form?.status}`)
 	}
+
+	
+
+	function editPost (){
+
+	}
 </script>
 
 <svelte:head>
@@ -25,21 +31,23 @@
 </svelte:head>
 
 <Toaster />
-<h1 class="text-3xl">{capitalizer(post?.title ?? "")}</h1>
-{#if session}
-	<div class="my-4 flex w-min flex-row gap-2 rounded border-2 border-neutral-500 p-2">
-		<Button.Root variant="outline" class="border-2 border-black" href="/admin/posts/editor"
-			>Create new post</Button.Root
-		>
-		<Button.Root>Edit post</Button.Root>
-		<form method="POST" action="?/changeStatus" use:enhance>
-			<input type="hidden" name="id" value={post?.id} />
-			<input type="hidden" name="status" value={post?.status} />
-			<Button.Root type="submit"
-				>{post?.status === "draft" ? "Make public" : "Set draft"}</Button.Root
+<div class="mx-auto w-4/5">
+	<h1 class="text-3xl">{capitalizer(post?.title ?? "")}</h1>
+	{#if session}
+		<div class="my-4 flex w-min flex-row gap-2 rounded border-2 border-neutral-500 p-2">
+			<Button.Root variant="outline" class="border-2 border-black" href="/admin/posts/editor"
+				>Create new post</Button.Root
 			>
-		</form>
-	</div>
-{/if}
+			<Button.Root>Edit post</Button.Root>
+			<form method="POST" action="?/changeStatus" use:enhance>
+				<input type="hidden" name="id" value={post?.id} />
+				<input type="hidden" name="status" value={post?.status} />
+				<Button.Root type="submit"
+					>{post?.status === "draft" ? "Make public" : "Set draft"}</Button.Root
+				>
+			</form>
+		</div>
+	{/if}
 
-<p class="my-4">{capitalizer(post?.body ?? "")}</p>
+	<p class="my-8">{capitalizer(post?.body ?? "")}</p>
+</div>

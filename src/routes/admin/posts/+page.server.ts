@@ -1,7 +1,9 @@
 import db from "$lib/server/database"
+import { deletePost } from "$lib/stores/postStores"
 import { error } from "@sveltejs/kit"
 import { eq } from "drizzle-orm"
-import { posts, tagsToPosts } from "../../../../drizzle/schema"
+import type { Post, TagToPost } from "../../../../drizzle/schema"
+import { tagsToPosts } from "../../../../drizzle/schema"
 import type { Actions } from "./$types"
 
 export const actions: Actions = {
@@ -12,24 +14,29 @@ export const actions: Actions = {
 		}
 
 		const form = await request.formData()
-		const postId = form.get("id")
-
+		const postId = Number(form.get("id"))
 		const database = db()
+		let deletedPost: Post[] | null = null
+		let deletedTagsToPosts: TagToPost[] | null = null
 
-		const deletedTagsToPosts = await database
-			.delete(tagsToPosts)
-			.where(eq(tagsToPosts.postId, postId))
-			.returning()
+		if (postId) {
+			deletedTagsToPosts = await database
+				.delete(tagsToPosts)
+				.where(eq(tagsToPosts.postId, postId))
+				.returning()
 
-		const deletedPost = await database.delete(posts).where(eq(posts.id, postId)).returning()
-		if (deletedPost || deletedTagsToPosts)
-			console.log(
-				"Deleted post IDs #",
-				deletedPost[0].id,
-				" deleted tag IDs #",
-				deletedTagsToPosts.map((item) => item.tagId)
-			)
+			deletedPost = await deletePost(postId)
+		}
 
-		return { success: true, deletedPost: deletedPost[0] }
+		if (deletedPost) {
+			console.log("Deleted post IDs #", deletedPost[0].id)
+			if (deletedTagsToPosts && deletedTagsToPosts.length > 0)
+				console.log(
+					"Deleted tag IDs #",
+					deletedTagsToPosts.map((item) => item.tagId)
+				)
+		}
+
+		return { success: true, deletedPost: deletedPost ? deletedPost[0] : null }
 	}
 }

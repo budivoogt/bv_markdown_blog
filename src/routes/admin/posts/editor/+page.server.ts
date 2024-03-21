@@ -6,7 +6,7 @@ import { eq } from "drizzle-orm"
 import { superValidate } from "sveltekit-superforms"
 import { zod } from "sveltekit-superforms/adapters"
 import type { SchemaUser } from "../../../../../drizzle/schema"
-import { posts, users } from "../../../../../drizzle/schema"
+import { posts, tags, tagsToPosts, users } from "../../../../../drizzle/schema"
 import type { Actions, PageServerLoad } from "./$types"
 
 export const load: PageServerLoad = async () => {
@@ -62,11 +62,43 @@ export const actions: Actions = {
 					title: form.data.title,
 					description: form.data.description,
 					body: form.data.body,
-					tags: form.data.tags,
 					slug: form.data.slug,
 					authorId: matchedUser?.id
 				})
 				.returning()
+			if (form.data.tags) {
+				for (const tagName of form.data.tags) {
+					let tagId: number
+
+					const existingTag = await database.query.tags.findFirst({
+						where: eq(tags.name, tagName)
+					})
+					if (existingTag) {
+						tagId = existingTag.id
+					} else {
+						const insertedTag = await database
+							.insert(tags)
+							.values({
+								name: tagName
+							})
+							.returning()
+						if (insertedTag.length === 0) {
+							console.error("Failed to insert tag ", tagName)
+							continue
+						}
+						tagId = insertedTag[0].id
+					}
+					if (tagId) {
+						const tagToPostRow = await database
+							.insert(tagsToPosts)
+							.values({
+								postId: postRow[0].id,
+								tagId: tagId
+							})
+							.returning()
+					}
+				}
+			}
 		} catch (error) {
 			console.error("Error inserting: ", error)
 		}
