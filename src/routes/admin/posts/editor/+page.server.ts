@@ -89,13 +89,10 @@ export const actions: Actions = {
 						tagId = insertedTag[0].id
 					}
 					if (tagId) {
-						const tagToPostRow = await database
-							.insert(tagsToPosts)
-							.values({
-								postId: postRow[0].id,
-								tagId: tagId
-							})
-							.returning()
+						await database.insert(tagsToPosts).values({
+							postId: postRow[0].id,
+							tagId: tagId
+						})
 					}
 				}
 			}

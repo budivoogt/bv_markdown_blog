@@ -2,6 +2,7 @@ import db from "$lib/server/database"
 import { error, type Actions } from "@sveltejs/kit"
 import { eq } from "drizzle-orm"
 import type { PostgresJsDatabase } from "drizzle-orm/postgres-js"
+import type { Post } from "../../../../drizzle/schema"
 import * as schema from "../../../../drizzle/schema"
 import { posts } from "../../../../drizzle/schema"
 import type { PageServerLoad } from "./$types"
@@ -11,7 +12,7 @@ export const load: PageServerLoad = async ({ params }) => {
 
 	const database: PostgresJsDatabase<typeof schema> = db()
 
-	const post = await database.query.posts.findFirst({
+	const post: Post | undefined = await database.query.posts.findFirst({
 		where: eq(posts.slug, slug)
 	})
 

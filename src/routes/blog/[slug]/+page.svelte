@@ -1,25 +1,29 @@
 <script lang="ts">
 	import { enhance } from "$app/forms"
+	import DeletePostForm from "$lib/components/DeletePostForm.svelte"
 	import * as Button from "$lib/components/ui/button"
 	import { capitalizer } from "$lib/helper.js"
+	import type { Session } from "@supabase/supabase-js"
 	import { Toaster, toast } from "svelte-sonner"
 	import type { PageData } from "../$types"
+	import type { Post } from "../../../../drizzle/schema"
 	import type { ActionData } from "./$types"
 
 	export let data: PageData
+	let post: Post
+	let session: Session | null
+	$: ({
+		post,
+		session,
+		post: { id }
+	} = data)
 
 	export let form: ActionData
-
-	$: ({ post, session } = data)
-
 	$: if (form?.success) {
 		toast.success(`Post status changed to ${form?.status}`)
 	}
-
-	
-
-	function editPost (){
-
+	$: if (form?.deletedPost) {
+		toast.success("Post deleted")
 	}
 </script>
 
@@ -46,6 +50,8 @@
 					>{post?.status === "draft" ? "Make public" : "Set draft"}</Button.Root
 				>
 			</form>
+			<DeletePostForm id={post?.id} formAction="../../admin/posts?/deletePost"
+			></DeletePostForm>
 		</div>
 	{/if}
 

@@ -1,6 +1,7 @@
 import { PUBLIC_SUPABASE_ANON_KEY, PUBLIC_SUPABASE_URL } from "$env/static/public"
 import type { Database } from "$lib/types/supabase"
 import { createBrowserClient, isBrowser, parse } from "@supabase/ssr"
+import type { AuthError, Session } from "@supabase/supabase-js"
 import type { LayoutLoad } from "./$types"
 
 export const load: LayoutLoad = async ({ fetch, data, depends }) => {
@@ -25,7 +26,10 @@ export const load: LayoutLoad = async ({ fetch, data, depends }) => {
 	// // Isn't this redundant since the session is already provided by the server? Not making this call saves me a db interaction.
 	const {
 		data: { session }
-	} = await supabase.auth.getSession()
+	} = (await supabase.auth.getSession()) as {
+		data: { session: Session | null }
+		error: null | AuthError
+	}
 
 	// The last load function has priority over all others, so I need to pass the server load data through the layout load data for the page to access it.
 	return {

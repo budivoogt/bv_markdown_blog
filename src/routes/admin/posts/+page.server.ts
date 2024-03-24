@@ -1,13 +1,13 @@
 import db from "$lib/server/database"
 import { deletePost } from "$lib/stores/postStores"
-import { error } from "@sveltejs/kit"
+import { error, redirect } from "@sveltejs/kit"
 import { eq } from "drizzle-orm"
 import type { Post, TagToPost } from "../../../../drizzle/schema"
 import { tagsToPosts } from "../../../../drizzle/schema"
 import type { Actions } from "./$types"
 
 export const actions: Actions = {
-	deletePost: async ({ locals: { getSession }, request }) => {
+	deletePost: async ({ locals: { getSession }, request, url }) => {
 		const session = await getSession()
 		if (!session) {
 			throw error(403, "Not authorized")
@@ -37,6 +37,6 @@ export const actions: Actions = {
 				)
 		}
 
-		return { success: true, deletedPost: deletedPost ? deletedPost[0] : null }
+		return redirect(302, url ?? "/")
 	}
 }
