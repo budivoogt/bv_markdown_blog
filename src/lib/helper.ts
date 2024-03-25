@@ -1,3 +1,5 @@
+import { goto } from "$app/navigation"
+import { error } from "@sveltejs/kit"
 import type { Post } from "../../drizzle/schema"
 import type { TagsPerPost } from "./types/types"
 
@@ -42,4 +44,34 @@ export function recentPostSlug(posts: Post[]) {
 		return current.id > prev.id ? current : prev
 	})
 	return newestPost.slug
+}
+
+export async function editPostHandler(postId: number) {
+	const postResponse = await fetch("/api/getPostById", {
+		method: "POST",
+		body: JSON.stringify(postId),
+		headers: { "content-type": "application/json" }
+	})
+
+	if (!postResponse.ok) {
+		error(400, "request failed")
+	}
+
+	const postObject = await postResponse.json()
+
+	let editResponse
+	if (postObject) {
+		editResponse = await fetch("/api/setEditPost", {
+			method: "POST",
+			body: JSON.stringify(postObject),
+			headers: { "content-type": "application/json" }
+		})
+
+		if (!editResponse.ok) {
+			error(400, "request failed")
+		}
+
+		const location = await editResponse.json()
+		if (location) return await goto(location)
+	}
 }

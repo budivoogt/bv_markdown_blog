@@ -3,7 +3,8 @@
 	import PageHeader from "$lib/components/PageHeader.svelte"
 	import { Button } from "$lib/components/ui/button"
 	import * as Table from "$lib/components/ui/table"
-	import { capitalizer, findTagForPost } from "$lib/helper"
+	import { capitalizer, editPostHandler, findTagForPost } from "$lib/helper"
+	import { error } from "@sveltejs/kit"
 	import { Eye, Pencil, Trash2 } from "lucide-svelte"
 	import { Toaster, toast } from "svelte-sonner"
 	import type { PageData } from "../../$types"
@@ -16,8 +17,6 @@
 	$: if (form?.success && form?.deletedPost) {
 		toast.success(`Post deleted, id: ${form.deletedPost.id}`)
 	}
-
-	let deleteButtonElement: HTMLButtonElement | null = null
 </script>
 
 <Toaster />
@@ -73,9 +72,9 @@
 					</a>
 				</Table.Cell>
 				<Table.Cell class="flex-initial justify-center">
-					<a href={`/blog/${slug}`}>
+					<button type="button" on:click={() => editPostHandler(id)}>
 						<Pencil strokeWidth="1" />
-					</a>
+					</button>
 				</Table.Cell>
 				<Table.Cell class="flex-initial justify-end">
 					<DeletePostForm {id} formAction="?/deletePost">

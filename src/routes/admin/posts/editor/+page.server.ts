@@ -1,16 +1,27 @@
 import { formSchema } from "$lib/components/posteditor/schema"
 import db from "$lib/server/database"
+import { editPostStore } from "$lib/stores/postStores"
 import type { User } from "@supabase/supabase-js"
 import { fail, redirect } from "@sveltejs/kit"
 import { eq } from "drizzle-orm"
+import { get } from "svelte/store"
 import { superValidate } from "sveltekit-superforms"
 import { zod } from "sveltekit-superforms/adapters"
-import type { SchemaUser } from "../../../../../drizzle/schema"
+import type { Post, SchemaUser } from "../../../../../drizzle/schema"
 import { posts, tags, tagsToPosts, users } from "../../../../../drizzle/schema"
 import type { Actions, PageServerLoad } from "./$types"
 
 export const load: PageServerLoad = async () => {
-	const form = await superValidate(zod(formSchema))
+	let postToEdit: Post | null = null
+	let form
+
+	postToEdit = get(editPostStore)
+
+	if (postToEdit) {
+		form = await superValidate(postToEdit, zod(formSchema))
+	} else {
+		form = await superValidate(zod(formSchema))
+	}
 
 	return {
 		form

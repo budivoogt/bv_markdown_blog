@@ -1,5 +1,6 @@
 import db from "$lib/server/database"
-import { error, type Actions } from "@sveltejs/kit"
+import { editPostStore } from "$lib/stores/postStores"
+import { error, redirect, type Actions } from "@sveltejs/kit"
 import { eq } from "drizzle-orm"
 import type { PostgresJsDatabase } from "drizzle-orm/postgres-js"
 import type { Post } from "../../../../drizzle/schema"
@@ -21,7 +22,6 @@ export const load: PageServerLoad = async ({ params }) => {
 
 export const actions: Actions = {
 	changeStatus: async ({ locals: { getSession }, request }) => {
-		// Check if user's authorized to change status
 		const session = await getSession()
 		if (!session) {
 			throw error(403, "Not authorized")
@@ -41,5 +41,21 @@ export const actions: Actions = {
 			.returning()
 
 		return { success: true, status: oppositeStatus }
+	},
+	editPost: async ({ locals: { getSession }, request }) => {
+		const session = await getSession()
+		if (!session) {
+			throw error(403, "Not authorized")
+		}
+
+		const formData = await request.formData()
+		const postId: number | null = formData.get("id")
+
+		const database: PostgresJsDatabase<typeof schema> = db()
+
+		const postToEdit = await database.query.posts.findFirst({ where: eq(posts.id, postId) })
+		editPostStore.set(postToEdit)
+
+		redirect(302, `/admin/posts/editor?edit=${postToEdit?.slug || ""}`)
 	}
 }
