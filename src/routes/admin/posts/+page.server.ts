@@ -37,6 +37,6 @@ export const actions: Actions = {
 				)
 		}
 
-		return redirect(302, url ?? "/")
+		redirect(302, url ?? "/")
 	}
 }
