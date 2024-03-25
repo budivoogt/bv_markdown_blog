@@ -1,6 +1,5 @@
 <script lang="ts">
-	import { enhance } from "$app/forms"
-	import Alert from "$lib/components/Alert.svelte"
+	import DeletePostForm from "$lib/components/DeletePostForm.svelte"
 	import PageHeader from "$lib/components/PageHeader.svelte"
 	import { Button } from "$lib/components/ui/button"
 	import * as Table from "$lib/components/ui/table"
@@ -79,19 +78,11 @@
 					</a>
 				</Table.Cell>
 				<Table.Cell class="flex-initial justify-end">
-					<form action="?/deletePost" method="post" use:enhance>
-						<input type="hidden" name="id" value={id} />
-						<button hidden bind:this={deleteButtonElement}></button>
-						<Alert
-							proceedAction={() => {
-								if (deleteButtonElement) deleteButtonElement.click()
-							}}
-						>
-							<button type="button" slot="trigger">
-								<Trash2 strokeWidth="1" />
-							</button>
-						</Alert>
-					</form>
+					<DeletePostForm {id} formAction="?/deletePost">
+						<button type="button">
+							<Trash2 strokeWidth="1" />
+						</button>
+					</DeletePostForm>
 				</Table.Cell>
 			</Table.Row>
 		{/each}
