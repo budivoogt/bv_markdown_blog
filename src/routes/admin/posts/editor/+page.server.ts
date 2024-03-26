@@ -1,6 +1,6 @@
 import { formSchema } from "$lib/components/posteditor/schema"
 import db from "$lib/server/database"
-import { editPostStore } from "$lib/stores/postStores"
+import { editPostStore } from "$lib/stores/serverPostStores"
 import type { User } from "@supabase/supabase-js"
 import { fail, redirect } from "@sveltejs/kit"
 import { eq } from "drizzle-orm"

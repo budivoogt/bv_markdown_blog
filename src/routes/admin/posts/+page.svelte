@@ -4,20 +4,30 @@
 	import { Button } from "$lib/components/ui/button"
 	import * as Table from "$lib/components/ui/table"
 	import { capitalizer, editPostHandler, findTagForPost } from "$lib/helper"
-	import { error } from "@sveltejs/kit"
 	import { Eye, Pencil, Trash2 } from "lucide-svelte"
 	import { Toaster, toast } from "svelte-sonner"
 	import type { PageData } from "../../$types"
-	import type { ActionData } from "./$types"
 
 	export let data: PageData
-	export let form: ActionData
 
-	$: ({ posts, postTags } = data)
-	$: if (form?.success && form?.deletedPost) {
-		toast.success(`Post deleted, id: ${form.deletedPost.id}`)
+	let deletedPostId: string | null
+	$: ({
+		posts,
+		postTags,
+		props: { deletedPostId }
+	} = data)
+
+	$: if (deletedPostId) {
+		if (deletedPostId) {
+			console.log("deletedPostId:", deletedPostId)
+			toast.success(`Post deleted, id: ${deletedPostId}`)
+		}
 	}
 </script>
+
+<pre>
+	{JSON.stringify(deletedPostId, null, 2)}
+</pre>
 
 <Toaster />
 <PageHeader text="Blog posts" />

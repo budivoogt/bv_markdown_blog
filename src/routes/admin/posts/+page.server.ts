@@ -1,10 +1,18 @@
 import db from "$lib/server/database"
-import { deletePost } from "$lib/stores/postStores"
+import { deletePost } from "$lib/stores/serverPostStores"
 import { error, redirect } from "@sveltejs/kit"
 import { eq } from "drizzle-orm"
 import type { Post, TagToPost } from "../../../../drizzle/schema"
 import { tagsToPosts } from "../../../../drizzle/schema"
-import type { Actions } from "./$types"
+import type { Actions, PageServerLoad } from "./$types"
+
+export const load: PageServerLoad = async ({ url }) => {
+	const deletedPostId: string | null = url.searchParams.get("deletedPostId")
+	if (deletedPostId) {
+		return { props: { deletedPostId } }
+	}
+	return { props: {} }
+}
 
 export const actions: Actions = {
 	deletePost: async ({ locals: { getSession }, request, url }) => {
@@ -29,14 +37,10 @@ export const actions: Actions = {
 		}
 
 		if (deletedPost) {
-			console.log("Deleted post IDs #", deletedPost[0].id)
-			if (deletedTagsToPosts && deletedTagsToPosts.length > 0)
-				console.log(
-					"Deleted tag IDs #",
-					deletedTagsToPosts.map((item) => item.tagId)
-				)
+			const id = deletedPost[0].id
+			const redirectUrl = new URL(url)
+			redirectUrl.searchParams.append("deletedPostId", id.toString())
+			redirect(302, redirectUrl ?? "/")
 		}
-
-		redirect(302, url ?? "/")
 	}
 }

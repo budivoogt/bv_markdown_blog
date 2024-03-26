@@ -23,6 +23,9 @@ declare global {
 			message?: string
 			form?: FormType
 			postTags?: TagToPost[]
+			props?: {
+				deletedPostId?: string | null
+			}
 		}
 		// interface PageState {}
 		// interface Platform {}

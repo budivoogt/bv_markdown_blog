@@ -12,14 +12,14 @@
 	action={formAction}
 	method="post"
 	use:enhance={() => {
-		return async ({ result, update }) => {
+		return async ({ result }) => {
 			await applyAction(result)
-			update()
+			// toast.success(`Post deleted, ID #: ${id?.toString()}`)
 		}
 	}}
 >
 	<input type="hidden" name="id" value={id} />
-	<button hidden bind:this={deleteButtonElement}></button>
+	<button hidden bind:this={deleteButtonElement} />
 	<Alert
 		proceedAction={() => {
 			if (deleteButtonElement) deleteButtonElement.click()
