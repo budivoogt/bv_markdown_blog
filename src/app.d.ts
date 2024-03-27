@@ -12,6 +12,7 @@ declare global {
 		interface Locals {
 			supabase: SupabaseClient<Database>
 			getSession(): Promise<Session | null>
+			isBudiAuthenticated: boolean | null
 		}
 		interface PageData {
 			session: {

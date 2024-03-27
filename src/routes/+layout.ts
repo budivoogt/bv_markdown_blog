@@ -40,6 +40,7 @@ export const load: LayoutLoad = async ({ fetch, data, depends }) => {
 		message: data.message,
 		postTags: data.postTags,
 		post: data.post,
-		props: data.props
+		props: data.props,
+		isBudiAuthenticated: data.isBudiAuthenticated
 	}
 }

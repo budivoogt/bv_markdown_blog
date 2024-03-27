@@ -11,7 +11,7 @@
 
 	export let data: PageData
 
-	$: ({ posts, postTags, session } = data)
+	$: ({ posts, postTags } = data)
 
 	// onMount(() => {
 	// 	if ($delPostToastStore) {
@@ -35,10 +35,6 @@
 		}, 100) // 0.1-second delay
 	}
 </script>
-
-<pre>
-	{JSON.stringify(session, null, 2)}
-</pre>
 
 <Toaster />
 <PageHeader text="Blog posts" />

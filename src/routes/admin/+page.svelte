@@ -5,8 +5,6 @@
 
 	export let data
 	$: ({ session } = data)
-
-	// MAKE SURE THIS ROUTE AND CHILDREN ARE PROTECTED!
 </script>
 
 <PageHeader text="Admin" />
