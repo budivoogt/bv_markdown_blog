@@ -32,6 +32,6 @@ export const actions: Actions = {
 			redirect(302, url ?? "/")
 		}
 
-		fail(400)
+		fail(400, {message: "Post not deleted"})
 	}
 }

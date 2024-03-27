@@ -11,8 +11,17 @@
 
 	export let data: PageData
 
-	$: ({ posts, postTags } = data)
+	$: ({ posts, postTags, session } = data)
 
+	// onMount(() => {
+	// 	if ($delPostToastStore) {
+	// 		const { deleted, id } = $delPostToastStore
+	// 		if (deleted) {
+	// 			toast.success(`Post deleted, id: ${id.toString()}`)
+	// 			$delPostToastStore = null
+	// 		}
+	// 	}
+	// })
 	$: if ($delPostToastStore) {
 		setTimeout(() => {
 			if ($delPostToastStore) {
@@ -26,6 +35,10 @@
 		}, 100) // 0.1-second delay
 	}
 </script>
+
+<pre>
+	{JSON.stringify(session, null, 2)}
+</pre>
 
 <Toaster />
 <PageHeader text="Blog posts" />
