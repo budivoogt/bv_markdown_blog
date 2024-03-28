@@ -1,6 +1,6 @@
 import { deletePost, deleteTagsToPosts } from "$lib/server/postStores"
 import { error, fail, redirect } from "@sveltejs/kit"
-import type { Post } from "../../../../drizzle/schema"
+import type { Post } from "../../../lib/schemas/drizzleSchema"
 import type { Actions } from "./$types"
 
 export const actions: Actions = {

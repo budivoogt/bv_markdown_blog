@@ -1,7 +1,7 @@
 import db from "$lib/server/database"
 import { eq } from "drizzle-orm"
 import { writable } from "svelte/store"
-import { posts, tagsToPosts, type Post, type TagToPost } from "../../../drizzle/schema"
+import { posts, tagsToPosts, type Post, type TagToPost } from "../schemas/drizzleSchema"
 
 export async function deletePost(id: number) {
 	const database = db()
@@ -22,4 +22,3 @@ export async function deleteTagsToPosts(id: number) {
 }
 
 export const editPostStore = writable<Post | null>(null)
-

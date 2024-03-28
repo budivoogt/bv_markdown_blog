@@ -2,6 +2,7 @@
 	import { goto } from "$app/navigation"
 	import { page } from "$app/stores"
 	import { discardPostHandler, recentPostSlug } from "$lib/client/postHelpers"
+	import { postInEditFlag } from "$lib/client/postStores"
 	import Alert from "$lib/components/Alert.svelte"
 	import { formSchema } from "$lib/components/posteditor/schema"
 	import * as Form from "$lib/components/ui/form"
@@ -141,7 +142,11 @@
 	</Form.Field>
 
 	<div class="mt-4 flex justify-center gap-4">
-		<Form.Button type="submit" formaction="?/formSubmit">Save draft</Form.Button>
+		{#if $postInEditFlag}
+			<Form.Button type="submit" formaction="?/saveChanges">Save changes</Form.Button>
+		{:else}
+			<Form.Button type="submit" formaction="?/formSubmit">Save post</Form.Button>
+		{/if}
 		<Alert
 			description="Proceeding will clear the form."
 			title="Are you sure?"

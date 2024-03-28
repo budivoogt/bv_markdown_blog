@@ -1,8 +1,7 @@
 import { goto, invalidate } from "$app/navigation"
-import { error } from "@sveltejs/kit"
 import { get } from "svelte/store"
 import type { SuperForm } from "sveltekit-superforms"
-import type { Post } from "../../../drizzle/schema"
+import { type Post } from "../schemas/drizzleSchema"
 import type { TagsPerPost } from "../types/types"
 import { postInEditFlag } from "./postStores"
 
@@ -53,7 +52,7 @@ export async function editPostHandler(postId: number) {
 	})
 
 	if (!postResponse.ok) {
-		error(400, "request failed")
+		return { failure: true }
 	}
 
 	const postObject = await postResponse.json()
@@ -67,7 +66,7 @@ export async function editPostHandler(postId: number) {
 		})
 
 		if (!editResponse.ok) {
-			error(400, "request failed")
+			return { failure: true }
 		}
 
 		postInEditFlag.set(true)
@@ -77,7 +76,7 @@ export async function editPostHandler(postId: number) {
 }
 
 export async function newPostHandler() {
-	clearEditPostStore()
+	await clearEditPostStore()
 
 	goto("/admin/posts/editor")
 }
@@ -97,7 +96,7 @@ export async function clearEditPostStore() {
 			headers: { "content-type": "application/json" }
 		})
 		if (!response.ok) {
-			error(400, "request failed")
+			return { failure: true }
 		}
 		postInEditFlag.set(false)
 		invalidate("editingPost")

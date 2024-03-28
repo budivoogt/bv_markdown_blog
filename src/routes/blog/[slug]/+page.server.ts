@@ -3,9 +3,9 @@ import { editPostStore } from "$lib/server/postStores"
 import { error, redirect, type Actions } from "@sveltejs/kit"
 import { eq } from "drizzle-orm"
 import type { PostgresJsDatabase } from "drizzle-orm/postgres-js"
-import type { Post } from "../../../../drizzle/schema"
-import * as schema from "../../../../drizzle/schema"
-import { posts } from "../../../../drizzle/schema"
+import type { Post } from "../../../lib/schemas/drizzleSchema"
+import * as schema from "../../../lib/schemas/drizzleSchema"
+import { posts } from "../../../lib/schemas/drizzleSchema"
 import type { PageServerLoad } from "./$types"
 
 export const load: PageServerLoad = async ({ params }) => {

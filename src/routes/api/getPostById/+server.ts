@@ -1,7 +1,7 @@
 import db from "$lib/server/database"
 import { json } from "@sveltejs/kit"
 import { eq } from "drizzle-orm"
-import { posts, type Post } from "../../../../drizzle/schema"
+import { posts, type Post } from "../../../lib/schemas/drizzleSchema"
 import type { RequestHandler } from "./$types"
 
 export const POST: RequestHandler = async ({ request }) => {

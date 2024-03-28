@@ -1,14 +1,20 @@
 import { formSchema } from "$lib/components/posteditor/schema"
 import db from "$lib/server/database"
+import {
+	findTagByName,
+	insertPost,
+	insertTag,
+	insertTagToPost
+} from "$lib/server/postDatabaseHelpers"
 import { editPostStore } from "$lib/server/postStores"
 import type { User } from "@supabase/supabase-js"
-import { fail, redirect } from "@sveltejs/kit"
+import { error, fail, redirect } from "@sveltejs/kit"
 import { eq } from "drizzle-orm"
 import { get } from "svelte/store"
 import { superValidate } from "sveltekit-superforms"
 import { zod } from "sveltekit-superforms/adapters"
-import type { Post, SchemaUser } from "../../../../../drizzle/schema"
-import { posts, tags, tagsToPosts, users } from "../../../../../drizzle/schema"
+import type { Post, SchemaUser } from "../../../../lib/schemas/drizzleSchema"
+import { users } from "../../../../lib/schemas/drizzleSchema"
 import type { Actions, PageServerLoad } from "./$types"
 
 export const load: PageServerLoad = async ({ depends }) => {
@@ -33,6 +39,7 @@ export const load: PageServerLoad = async ({ depends }) => {
 export const actions: Actions = {
 	formSubmit: async (event) => {
 		const form = await superValidate(event, zod(formSchema))
+		const { data } = form
 
 		if (!form.valid) {
 			return fail(400, {
@@ -63,57 +70,35 @@ export const actions: Actions = {
 					matchedUser = newUser[0]
 				}
 			}
-			// console.log("matchedUser: ", matchedUser)
 		}
 
 		// Insert post into db
-		let postRow
+		let post
 		try {
-			postRow = await database
-				.insert(posts)
-				.values({
-					title: form.data.title,
-					description: form.data.description,
-					body: form.data.body,
-					slug: form.data.slug,
-					authorId: matchedUser?.id
-				})
-				.returning()
-			if (form.data.tags) {
-				for (const tagName of form.data.tags) {
-					let tagId: number
+			post = await insertPost(data, matchedUser)
+			if (post) {
+				if (data.tags) {
+					for (const tagName of data.tags) {
+						let tagId: number
 
-					const existingTag = await database.query.tags.findFirst({
-						where: eq(tags.name, tagName)
-					})
-					if (existingTag) {
-						tagId = existingTag.id
-					} else {
-						const insertedTag = await database
-							.insert(tags)
-							.values({
-								name: tagName
-							})
-							.returning()
-						if (insertedTag.length === 0) {
-							console.error("Failed to insert tag ", tagName)
-							continue
+						const existingTag = await findTagByName(tagName)
+						if (existingTag) {
+							tagId = existingTag.id
+						} else {
+							const tag = await insertTag(tagName)
+							tagId = tag.id
 						}
-						tagId = insertedTag[0].id
-					}
-					if (tagId) {
-						await database.insert(tagsToPosts).values({
-							postId: postRow[0].id,
-							tagId: tagId
-						})
+						if (tagId) {
+							await insertTagToPost(post.id, tagId)
+						}
 					}
 				}
 			}
-		} catch (error) {
-			console.error("Error inserting: ", error)
+		} catch (err) {
+			error(400, "failed to insert post")
 		}
 
-		if (postRow) redirect(303, `/blog/${postRow[0].slug}`)
+		if (post) redirect(303, `/blog/${post.slug}`)
 
 		return { form }
 	}

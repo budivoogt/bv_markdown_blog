@@ -1,4 +1,4 @@
-import { posts, users } from "../../../drizzle/schema"
+import { posts, users } from "../schemas/drizzleSchema"
 import db from "./database"
 import { postSeeds, userSeeds } from "./seedData"
 

@@ -7,7 +7,7 @@
 	import type { Session } from "@supabase/supabase-js"
 	import { Toaster, toast } from "svelte-sonner"
 	import type { PageData } from "../$types"
-	import type { Post } from "../../../../drizzle/schema"
+	import type { Post } from "../../../lib/schemas/drizzleSchema"
 	import type { ActionData } from "./$types"
 
 	export let data: PageData

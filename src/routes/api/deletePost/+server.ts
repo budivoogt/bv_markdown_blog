@@ -1,6 +1,6 @@
 import { deletePost, deleteTagsToPosts } from "$lib/server/postStores"
 import { error, json, type RequestHandler } from "@sveltejs/kit"
-import { type Post } from "../../../../drizzle/schema"
+import { type Post } from "../../../lib/schemas/drizzleSchema"
 
 export const POST: RequestHandler = async ({ request }) => {
 	const postId = await request.json()
