@@ -77,14 +77,7 @@ export async function editPostHandler(postId: number) {
 }
 
 export async function newPostHandler() {
-	const postResponse = await fetch("/api/clearEditPost", {
-		method: "GET",
-		headers: { "content-type": "application/json" }
-	})
-
-	if (!postResponse.ok) {
-		error(400, "request failed")
-	}
+	clearEditPostStore()
 
 	goto("/admin/posts/editor")
 }
@@ -93,14 +86,20 @@ export async function newPostHandler() {
 export async function discardPostHandler(form: SuperForm<any, any>) {
 	if (form.isTainted()) form.reset()
 
+	clearEditPostStore()
+}
+
+export async function clearEditPostStore() {
 	const existingPostInEdit = get(postInEditFlag)
 	if (existingPostInEdit) {
-		await fetch("/api/clearEditPost", {
+		const response = await fetch("/api/clearEditPost", {
 			method: "GET",
 			headers: { "content-type": "application/json" }
 		})
+		if (!response.ok) {
+			error(400, "request failed")
+		}
 		postInEditFlag.set(false)
+		invalidate("editingPost")
 	}
-
-	invalidate("editingPost")
 }
