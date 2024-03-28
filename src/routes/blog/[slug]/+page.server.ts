@@ -1,5 +1,5 @@
 import db from "$lib/server/database"
-import { editPostStore } from "$lib/stores/serverPostStores"
+import { editPostStore } from "$lib/server/postStores"
 import { error, redirect, type Actions } from "@sveltejs/kit"
 import { eq } from "drizzle-orm"
 import type { PostgresJsDatabase } from "drizzle-orm/postgres-js"

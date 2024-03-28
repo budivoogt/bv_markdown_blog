@@ -1,6 +1,6 @@
 import { formSchema } from "$lib/components/posteditor/schema"
 import db from "$lib/server/database"
-import { editPostStore } from "$lib/stores/serverPostStores"
+import { editPostStore } from "$lib/server/postStores"
 import type { User } from "@supabase/supabase-js"
 import { fail, redirect } from "@sveltejs/kit"
 import { eq } from "drizzle-orm"
@@ -11,7 +11,9 @@ import type { Post, SchemaUser } from "../../../../../drizzle/schema"
 import { posts, tags, tagsToPosts, users } from "../../../../../drizzle/schema"
 import type { Actions, PageServerLoad } from "./$types"
 
-export const load: PageServerLoad = async () => {
+export const load: PageServerLoad = async ({ depends }) => {
+	depends("editingPost")
+
 	let postToEdit: Post | null = null
 	let form
 

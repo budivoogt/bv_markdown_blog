@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { applyAction, enhance } from "$app/forms"
 	import * as Button from "$lib/components/ui/button"
-	import { delPostToastStore } from "$lib/stores/clientPostStore"
+	import { delPostToastStore } from "$lib/client/postStores"
 	import Alert from "./Alert.svelte"
 
 	let deleteButtonElement: HTMLButtonElement | null = null

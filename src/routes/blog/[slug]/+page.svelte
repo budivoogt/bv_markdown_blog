@@ -1,8 +1,9 @@
 <script lang="ts">
 	import { enhance } from "$app/forms"
+	import { editPostHandler, newPostHandler } from "$lib/client/postHelpers.js"
 	import DeletePostForm from "$lib/components/DeletePostForm.svelte"
 	import * as Button from "$lib/components/ui/button"
-	import { capitalizer, editPostHandler } from "$lib/helper.js"
+	import { capitalizer } from "$lib/utils"
 	import type { Session } from "@supabase/supabase-js"
 	import { Toaster, toast } from "svelte-sonner"
 	import type { PageData } from "../$types"
@@ -20,12 +21,8 @@
 	} = data)
 
 	export let form: ActionData
-	$: if (form?.success) {
+	$: if (form?.status) {
 		toast.success(`Post status changed to ${form?.status}`)
-	}
-	// Need to fix how to pass the deletedpost while redirecting
-	$: if (form?.deletedPost) {
-		toast.success("Post deleted")
 	}
 </script>
 
@@ -41,7 +38,7 @@
 	<h1 class="text-3xl">{capitalizer(post?.title ?? "")}</h1>
 	{#if session}
 		<div class="my-4 flex w-min flex-row gap-2 rounded border-2 border-neutral-500 p-2">
-			<Button.Root variant="outline" class="border-2 border-black" href="/admin/posts/editor"
+			<Button.Root variant="outline" class="border-2 border-black" on:click={newPostHandler}
 				>Create new post</Button.Root
 			>
 			<Button.Root type="submit" on:click={() => editPostHandler(id)}>Edit post</Button.Root>

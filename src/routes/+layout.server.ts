@@ -1,12 +1,10 @@
-import { sortPostsDesc, tagsPerPost } from "$lib/helper"
+import { sortPostsDesc, tagsPerPost } from "$lib/client/postHelpers"
 import db from "$lib/server/database"
 import { eq, isNotNull } from "drizzle-orm"
 import { posts, tags, tagsToPosts, type Post, type Tag } from "../../drizzle/schema"
 import type { LayoutServerLoad } from "./$types"
 
-export const load: LayoutServerLoad = async ({
-	locals: { getSession, isBudiAuthenticated }
-}) => {
+export const load: LayoutServerLoad = async ({ locals: { getSession, isBudiAuthenticated } }) => {
 	const database = db()
 	const postRows: Post[] = await database.query.posts.findMany()
 	const tagRows: Tag[] = await database.query.tags.findMany()

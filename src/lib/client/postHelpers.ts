@@ -1,11 +1,10 @@
-import { goto } from "$app/navigation"
+import { goto, invalidate } from "$app/navigation"
 import { error } from "@sveltejs/kit"
-import type { Post } from "../../drizzle/schema"
-import type { TagsPerPost } from "./types/types"
-
-export function capitalizer(string: string) {
-	return string.charAt(0).toUpperCase() + string.slice(1)
-}
+import { get } from "svelte/store"
+import type { SuperForm } from "sveltekit-superforms"
+import type { Post } from "../../../drizzle/schema"
+import type { TagsPerPost } from "../types/types"
+import { postInEditFlag } from "./postStores"
 
 export function sortPostsDesc(posts: Post[]) {
 	return posts.sort((a, b) => b.id - a.id)
@@ -71,7 +70,37 @@ export async function editPostHandler(postId: number) {
 			error(400, "request failed")
 		}
 
+		postInEditFlag.set(true)
 		const location = await editResponse.json()
 		if (location) return await goto(location)
 	}
+}
+
+export async function newPostHandler() {
+	const postResponse = await fetch("/api/clearEditPost", {
+		method: "GET",
+		headers: { "content-type": "application/json" }
+	})
+
+	if (!postResponse.ok) {
+		error(400, "request failed")
+	}
+
+	goto("/admin/posts/editor")
+}
+
+// eslint-disable-next-line
+export async function discardPostHandler(form: SuperForm<any, any>) {
+	if (form.isTainted()) form.reset()
+
+	const existingPostInEdit = get(postInEditFlag)
+	if (existingPostInEdit) {
+		await fetch("/api/clearEditPost", {
+			method: "GET",
+			headers: { "content-type": "application/json" }
+		})
+		postInEditFlag.set(false)
+	}
+
+	invalidate("editingPost")
 }

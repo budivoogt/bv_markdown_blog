@@ -1,34 +1,29 @@
 <script lang="ts">
+	import {
+		
+		editPostHandler,
+		findTagForPost,
+		newPostHandler
+	} from "$lib/client/postHelpers"
+	import { capitalizer } from "$lib/utils"
+	import { delPostToastStore } from "$lib/client/postStores"
 	import DeletePostForm from "$lib/components/DeletePostForm.svelte"
 	import PageHeader from "$lib/components/PageHeader.svelte"
 	import { Button } from "$lib/components/ui/button"
 	import * as Table from "$lib/components/ui/table"
-	import { capitalizer, editPostHandler, findTagForPost } from "$lib/helper"
-	import { delPostToastStore } from "$lib/stores/clientPostStore"
 	import { Eye, Pencil, Trash2 } from "lucide-svelte"
 	import { Toaster, toast } from "svelte-sonner"
 	import type { PageData } from "../../$types"
 
 	export let data: PageData
-
 	$: ({ posts, postTags } = data)
 
-	// onMount(() => {
-	// 	if ($delPostToastStore) {
-	// 		const { deleted, id } = $delPostToastStore
-	// 		if (deleted) {
-	// 			toast.success(`Post deleted, id: ${id.toString()}`)
-	// 			$delPostToastStore = null
-	// 		}
-	// 	}
-	// })
 	$: if ($delPostToastStore) {
 		setTimeout(() => {
 			if ($delPostToastStore) {
 				const { deleted, id } = $delPostToastStore
 				if (deleted) {
 					toast.success(`Post deleted, id: ${id.toString()}`)
-
 					$delPostToastStore = null
 				}
 			}
@@ -43,7 +38,7 @@
 <p class="my-4">View all posts below, or create new ones.</p>
 
 <div class="my-4 flex w-min flex-row gap-2 rounded border-2 border-neutral-500 p-2">
-	<Button href="/admin/posts/editor">Create new post</Button>
+	<Button on:click={newPostHandler}>Create new post</Button>
 </div>
 
 <Table.Root>
