@@ -1,29 +1,18 @@
-import { sortPostsDesc, tagsPerPost } from "$lib/client/postHelpers"
-import db from "$lib/server/database"
-import { eq, isNotNull } from "drizzle-orm"
-import { posts, tags, tagsToPosts, type Post, type Tag } from "../lib/schemas/drizzleSchema"
+import { tagsPerPost as findTagsPerPost, sortPostsDesc } from "$lib/client/postHelpers"
+import { getPosts, getTagPostPairs, getTags } from "$lib/server/postDatabaseHelpers"
 import type { LayoutServerLoad } from "./$types"
 
 export const load: LayoutServerLoad = async ({ locals: { getSession, isBudiAuthenticated } }) => {
-	const database = db()
-	const postRows: Post[] = await database.query.posts.findMany()
-	const tagRows: Tag[] = await database.query.tags.findMany()
-	const postTags = await database
-		.select({
-			postId: tagsToPosts.postId,
-			tagName: tags.name
-		})
-		.from(posts)
-		.leftJoin(tagsToPosts, eq(tagsToPosts.postId, posts.id))
-		.leftJoin(tags, eq(tags.id, tagsToPosts.tagId))
-		.where(isNotNull(tags.name))
-	const postTagRows = await tagsPerPost(postTags)
-
+	const postRows = await getPosts()
 	const postsSortedDesc = sortPostsDesc(postRows)
+
+	const tagRows = await getTags()
+	const postTags = await getTagPostPairs()
+	const postTagRows = findTagsPerPost(postTags)
 
 	const session = await getSession()
 
-	if (postRows) {
+	if (postsSortedDesc && tagRows && postTagRows) {
 		return {
 			posts: postsSortedDesc,
 			tags: tagRows,
@@ -32,6 +21,6 @@ export const load: LayoutServerLoad = async ({ locals: { getSession, isBudiAuthe
 			isBudiAuthenticated
 		}
 	} else {
-		return { posts: [] }
+		return { posts: [], tags: [], postTags: [], session, isBudiAuthenticated }
 	}
 }

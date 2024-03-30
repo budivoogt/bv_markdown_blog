@@ -21,9 +21,7 @@ export function tagsPerPost(
 		if (!acc[postId]) {
 			acc[postId] = []
 		}
-
 		acc[postId].push(tagName)
-
 		return acc
 	}, {} as TagsPerPost)
 	return tagsPerPost
