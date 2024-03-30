@@ -1,4 +1,4 @@
-import { deletePost, deleteTagsToPosts } from "$lib/server/postStores"
+import { deleteAllTagsOfPost, deletePost } from "$lib/server/postStores"
 import { error, fail, redirect } from "@sveltejs/kit"
 import type { Post } from "../../../lib/schemas/drizzleSchema"
 import type { Actions } from "./$types"
@@ -14,7 +14,7 @@ export const actions: Actions = {
 		let deletedPost: Post[] | null = null
 
 		if (postId) {
-			const deletedTagsToPosts = await deleteTagsToPosts(postId)
+			const deletedTagsToPosts = await deleteAllTagsOfPost(postId)
 			deletedPost = await deletePost(postId)
 			if (deletedPost) {
 				redirect(302, url ?? "/")

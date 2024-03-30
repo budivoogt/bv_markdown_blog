@@ -50,7 +50,7 @@
 </script>
 
 <Toaster />
-<form method="POST" action="?/formSubmit" use:enhance>
+<form method="POST" action="?/createPost" use:enhance>
 	<Form.Field {form} name="title">
 		<Form.Control let:attrs>
 			<Form.Label>Title</Form.Label>
@@ -143,9 +143,9 @@
 
 	<div class="mt-4 flex justify-center gap-4">
 		{#if $postInEditFlag}
-			<Form.Button type="submit" formaction="?/saveChanges">Save changes</Form.Button>
+			<Form.Button type="submit" formaction="?/editPost">Save changes</Form.Button>
 		{:else}
-			<Form.Button type="submit" formaction="?/formSubmit">Save post</Form.Button>
+			<Form.Button type="submit" formaction="?/createPost">Save post</Form.Button>
 		{/if}
 		<Alert
 			description="Proceeding will clear the form."

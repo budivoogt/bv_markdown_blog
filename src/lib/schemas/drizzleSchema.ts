@@ -35,7 +35,7 @@ export const postsRelations = relations(posts, ({ one, many }) => ({
 		references: [users.id]
 	}),
 	// A post can have many tags
-	tags: many(tags)
+	tags: many(tagsToPosts)
 }))
 
 export const tags = pgTable("tags", {
