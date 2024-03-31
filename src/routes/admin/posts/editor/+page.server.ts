@@ -51,27 +51,20 @@ export const actions: Actions = {
 			})
 		}
 
-		let matchedUser: SchemaUser | undefined
+		let matchedUser: SchemaUser | null = null
 		try {
 			const { user }: { user: User | null } = (await event.locals.getSession()) || {
 				user: null
 			}
-			if (user) {
-				matchedUser = await findUserById(user.id)
-				if (!matchedUser) {
-					const newUser = await createNewUser(user)
-					if (newUser) {
-						matchedUser = newUser
-					}
-				}
-			}
-			if (!matchedUser) console.error()
+			if (!user) error(400, "no user")
+			matchedUser = (await findUserById(user.id)) || (await createNewUser(user)) || null
+			if (!matchedUser) error(400, "Couldn't find nor create user")
 		} catch (err) {
-			error(400, "Couldn't add user")
+			console.error(err)
+			error(400, "No user matched")
 		}
 
-		let post: Post | undefined
-		if (matchedUser) post = await insertPost(data, matchedUser)
+		const post: Post | undefined = await insertPost(data, matchedUser)
 		if (post) {
 			if (data.tags) {
 				for (const tagName of data.tags) {
@@ -104,23 +97,17 @@ export const actions: Actions = {
 			})
 		}
 
-		let matchedUser: SchemaUser | undefined
+		let matchedUser: SchemaUser | null = null
 		try {
 			const { user }: { user: User | null } = (await event.locals.getSession()) || {
 				user: null
 			}
-			if (user) {
-				matchedUser = await findUserById(user.id)
-				if (!matchedUser) {
-					const newUser = await createNewUser(user)
-					if (newUser) {
-						matchedUser = newUser
-					}
-				}
-			}
-			if (!matchedUser) console.error()
+			if (!user) error(400, "no user")
+			matchedUser = (await findUserById(user.id)) || (await createNewUser(user)) || null
+			if (!matchedUser) error(400, "Couldn't find nor create user")
 		} catch (err) {
-			error(400, "Couldn't add user")
+			console.error(err)
+			error(400, "No user matched")
 		}
 
 		const postInEdit = get(editPostStore)

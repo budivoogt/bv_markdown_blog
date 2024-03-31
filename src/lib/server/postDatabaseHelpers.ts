@@ -18,6 +18,7 @@ export async function getAllPosts() {
 		const posts = await database.query.posts.findMany()
 		return posts
 	} catch (err) {
+		console.error(err)
 		error(400, "Couldn't get posts")
 	}
 }
@@ -27,6 +28,7 @@ export async function getPostById(postId: number) {
 		const database = db()
 		return await database.query.posts.findFirst({ where: eq(posts.id, postId) })
 	} catch (err) {
+		console.error(err)
 		error(400, "Couldn't get post")
 	}
 }
@@ -36,6 +38,7 @@ export async function getAllTags() {
 		const database = db()
 		return await database.query.tags.findMany()
 	} catch (err) {
+		console.error(err)
 		error(400, "Couldn't get tags")
 	}
 }
@@ -53,6 +56,7 @@ export async function getAllPostTagPairs() {
 			.leftJoin(tags, eq(tags.id, tagsToPosts.tagId))
 			.where(isNotNull(tags.name))
 	} catch (err) {
+		console.error(err)
 		error(400, "Couldn't get tag post pairs")
 	}
 }
@@ -64,6 +68,7 @@ export async function getPostTagPairObjects(postId: number) {
 			where: eq(tagsToPosts.postId, postId)
 		})
 	} catch (err) {
+		console.error(err)
 		error(400, "Could not get post tags")
 	}
 }
@@ -93,6 +98,7 @@ export async function getPostTagObjects(postId: number) {
 				.filter((tag): tag is Tag => tag !== null && tag !== undefined)
 		return tagPairArray
 	} catch (err) {
+		console.error(err)
 		error(400, "Could not get post tags")
 	}
 }
@@ -121,6 +127,7 @@ export async function getPostTagsStrings(postId: number) {
 				.filter((tag): tag is string => tag !== null && tag !== undefined)
 		return tagPairArray
 	} catch (err) {
+		console.error(err)
 		error(400, "Could not get post tags")
 	}
 }
@@ -140,6 +147,7 @@ export async function insertPost(data, matchedUser: SchemaUser) {
 			.returning()
 		return postArray[0]
 	} catch (er) {
+		console.error(er)
 		error(400, "error inserting post")
 	}
 }
@@ -159,6 +167,7 @@ export async function updatePost(data, postInEdit: Post, matchedUser: SchemaUser
 			.returning()
 		return postArray[0]
 	} catch (er) {
+		console.error(er)
 		error(400, "error updating post")
 	}
 }
@@ -171,6 +180,7 @@ export async function findTagByName(tagName: string) {
 		})
 		return tag
 	} catch (err) {
+		console.error(err)
 		error(400, "No tag found")
 	}
 }
@@ -182,6 +192,7 @@ export async function findTagById(tagId: number) {
 		})
 		return tag
 	} catch (err) {
+		console.error(err)
 		error(400, "No tag found")
 	}
 }
@@ -200,6 +211,7 @@ export async function insertTag(tagName: string) {
 		}
 		return tagArray[0]
 	} catch (err) {
+		console.error(err)
 		error(400, "Tag insert failed")
 	}
 }
@@ -216,6 +228,7 @@ export async function insertTagToPostPair(postId: number, tagId: number) {
 			.returning()
 		return response
 	} catch (err) {
+		console.error(err)
 		error(400, "Couldn't match post to tag")
 	}
 }
@@ -236,6 +249,7 @@ export async function deleteTagToPostPair(postId: number, tagId?: number) {
 			return response
 		}
 	} catch (err) {
+		console.error(err)
 		error(400, "Couldn't delete pair(s)")
 	}
 }
@@ -247,6 +261,7 @@ export async function findUserById(id: string) {
 			where: eq(users.uuid, id)
 		})
 	} catch (err) {
+		console.error(err)
 		error(400, "couldn't find user by id")
 	}
 }
@@ -265,15 +280,21 @@ export async function createNewUser(user: User) {
 			.returning()
 		return userArray[0]
 	} catch (err) {
+		console.error(err)
 		error(400, "Couldn't create new user")
 	}
 }
 
 export async function updatePostStatus(postId: number, oppositeStatus: string) {
 	const database = db()
-	return await database
-		.update(posts)
-		.set({ status: oppositeStatus })
-		.where(eq(posts.id, postId))
-		.returning()
+	try {
+		return await database
+			.update(posts)
+			.set({ status: oppositeStatus })
+			.where(eq(posts.id, postId))
+			.returning()
+	} catch (err) {
+		console.error(err)
+		error(400, "Couldn't update post status")
+	}
 }
