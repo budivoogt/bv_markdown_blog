@@ -1,3 +1,4 @@
+import { BUDI_SUPABASE_ID } from "$env/static/private"
 import { PUBLIC_SUPABASE_ANON_KEY, PUBLIC_SUPABASE_URL } from "$env/static/public"
 import type { Database } from "$lib/types/supabase"
 import { createServerClient } from "@supabase/ssr"
@@ -26,7 +27,7 @@ export const handle: Handle = async ({ event, event: { locals, cookies, url }, r
 	const session = await locals.getSession()
 	if (session) {
 		const user = session.user
-		if (user.id === "8d531343-a486-4070-a505-2d16c512ccf5" && user.aud === "authenticated") {
+		if (user.id === BUDI_SUPABASE_ID && user.aud === "authenticated") {
 			locals.isBudiAuthenticated = true
 		} else {
 			locals.isBudiAuthenticated = false
