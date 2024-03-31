@@ -13,9 +13,13 @@
 <div>
 	<h2 class="my-4 text-2xl">My journey</h2>
 	<p>
-		I began programming in April 2023. After learning basic Python, I realized I wanted to learn
-		front-end development and leverage modern frameworks and "serverless" solutions to build
-		tech enabled businesses.
+		I want to build a bootstrapped tech business. That's why I'm learning to code.
+		<br />
+		<br />
+		I began in 2023 with Python. I then added Javascript, Typescript. Since I'm still a solo dev
+		who wants to build full-stack applications, I chose SvelteKit as my meta-framework of choice.
+		It's an efficient way of doing front-end and back-end in the same ecosystem, while sticking to
+		web standards like HTML and Javascript (the only stuff I know, haha).
 	</p>
 	<p class="my-2">My stack includes:</p>
 	<ul class="my-2 list-inside list-disc">

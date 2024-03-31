@@ -56,12 +56,12 @@ export const actions: Actions = {
 			const { user }: { user: User | null } = (await event.locals.getSession()) || {
 				user: null
 			}
-			if (!user) error(400, "no user")
+			if (!user) return fail(400, { message: "no user" })
 			matchedUser = (await findUserById(user.id)) || (await createNewUser(user)) || null
-			if (!matchedUser) error(400, "Couldn't find nor create user")
+			if (!matchedUser) return fail(400, { message: "Couldn't find nor create user" })
 		} catch (err) {
 			console.error(err)
-			error(400, "No user matched")
+			return fail(400, { message: "no user matched" })
 		}
 
 		const post: Post | undefined = await insertPost(data, matchedUser)
@@ -102,12 +102,12 @@ export const actions: Actions = {
 			const { user }: { user: User | null } = (await event.locals.getSession()) || {
 				user: null
 			}
-			if (!user) error(400, "no user")
+			if (!user) return fail(400, { message: "no user" })
 			matchedUser = (await findUserById(user.id)) || (await createNewUser(user)) || null
-			if (!matchedUser) error(400, "Couldn't find nor create user")
+			if (!matchedUser) return fail(400, { message: "Couldn't find nor create user" })
 		} catch (err) {
 			console.error(err)
-			error(400, "No user matched")
+			return fail(400, { message: "no user matched" })
 		}
 
 		const postInEdit = get(editPostStore)
