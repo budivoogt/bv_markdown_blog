@@ -5,29 +5,37 @@ import {
 	findTagById,
 	findTagByName,
 	findUserById,
-	getPostTags,
+	getPostTagsObjects,
 	insertPost,
 	insertTag,
 	insertTagToPostPair,
 	updatePost
 } from "$lib/server/postDatabaseHelpers"
-import { editPostStore } from "$lib/server/postStores"
+import { editPostStore, editPostTagPairStore } from "$lib/server/postStores"
 import type { User } from "@supabase/supabase-js"
 import { error, fail, redirect } from "@sveltejs/kit"
 import { get } from "svelte/store"
 import { superValidate } from "sveltekit-superforms"
 import { zod } from "sveltekit-superforms/adapters"
-import { type Post, type SchemaUser, type Tag } from "../../../../lib/schemas/drizzleSchema"
+import {
+	type Post,
+	type SchemaUser,
+	type Tag,
+	type TagToPost
+} from "../../../../lib/schemas/drizzleSchema"
 import type { Actions, PageServerLoad } from "./$types"
 
 export const load: PageServerLoad = async ({ depends }) => {
 	depends("editingPost")
 
-	let postToEdit: Post | null = null
+	let postToEdit: (Post & { tags?: string[] }) | null = null
+	let postToEditTags: string[] | null = null
 	let form
 
 	postToEdit = get(editPostStore)
+	postToEditTags = get(editPostTagPairStore)
 	if (postToEdit) {
+		if (postToEditTags) postToEdit.tags = postToEditTags
 		form = await superValidate(postToEdit, zod(formSchema))
 	} else {
 		form = await superValidate(zod(formSchema))
@@ -122,47 +130,43 @@ export const actions: Actions = {
 		}
 
 		const postInEdit = get(editPostStore)
+		let currentPostTagPairs: TagToPost[] | undefined
 		let post: Post | undefined
 
 		if (postInEdit && data && matchedUser) {
-			post = await updatePost(data, matchedUser)
+			post = await updatePost(data, postInEdit, matchedUser)
 			if (post) {
+				currentPostTagPairs = await getPostTagsObjects(post.id)
 				if (data.tags) {
-					const currentPostTagPairs = await getPostTags(post.id)
 					for (const { tagId } of currentPostTagPairs) {
-						const existingTag: Tag | undefined = await findTagById(tagId)
-						if (existingTag) {
-							const tagIsSelected: boolean = data.tags.includes(existingTag.name)
+						const currentTag: Tag | undefined = await findTagById(tagId)
+						if (currentTag) {
+							const tagIsSelected: boolean = data.tags.includes(currentTag.name)
 							// If existing tag is selected, continue to next existing tag
 							if (tagIsSelected) continue
-							// Else if not selected, remove it
-							const deletedPair = await deleteTagToPostPair(post.id, existingTag.id)
-						}
-						for (const tagName of data.tags) {
-							const selectedTag = await findTagByName(tagName)
-							// I left off here
-							if (selectedTag) {
-								const currentPostTagPair = currentPostTagPairs.map(
-									(pair: typeof selectedTag) => pair.id
-								)
-							}
+							// Else if not selected, remove pair
+							await deleteTagToPostPair(post.id, currentTag.id)
 						}
 					}
 					for (const tagName of data.tags) {
-						let tagId: number
-
-						// Find existing or add new tag
-						const existingTag = await findTagByName(tagName)
-						if (existingTag) {
-							tagId = existingTag.id
-						} else {
-							const tag = await insertTag(tagName)
-							tagId = tag.id
+						// check if the tag exists
+						let selectedTag = await findTagByName(tagName)
+						if (!selectedTag) {
+							// if it does not, add it
+							selectedTag = await insertTag(tagName)
 						}
-						if (tagId) {
-							await insertTagToPostPair(post.id, tagId)
+						// If pair isn't selected, add it
+						const currentTagPairByTagId = currentPostTagPairs.map((pair) => pair.tagId)
+						const tagIsSelected: boolean = currentTagPairByTagId.includes(
+							selectedTag.id
+						)
+						if (!tagIsSelected) {
+							await insertTagToPostPair(post.id, selectedTag.id)
 						}
 					}
+					// if no tags are selected, but some exist
+				} else if (!data.tags && currentPostTagPairs) {
+					await deleteTagToPostPair(post.id)
 				}
 				redirect(303, `/blog/${post.slug}`)
 			}

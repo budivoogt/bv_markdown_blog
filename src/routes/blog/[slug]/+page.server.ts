@@ -1,5 +1,6 @@
 import db from "$lib/server/database"
-import { editPostStore } from "$lib/server/postStores"
+import { getPostById, getPostTagsStrings, updatePostStatus } from "$lib/server/postDatabaseHelpers"
+import { editPostStore, editPostTagPairStore } from "$lib/server/postStores"
 import { error, redirect, type Actions } from "@sveltejs/kit"
 import { eq } from "drizzle-orm"
 import type { PostgresJsDatabase } from "drizzle-orm/postgres-js"
@@ -21,40 +22,32 @@ export const load: PageServerLoad = async ({ params }) => {
 }
 
 export const actions: Actions = {
-	changeStatus: async ({ locals: { getSession }, request }) => {
-		const session = await getSession()
-		if (!session) {
+	changeStatus: async ({ locals: { isBudiAuthenticated }, request }) => {
+		if (!isBudiAuthenticated) {
 			throw error(403, "Not authorized")
 		}
 
 		const formData = await request.formData()
-		const postId: number | null = formData.get("id")
+		const postId: number | null = Number(formData.get("id"))
 		const status: string | null = formData.get("status")
 		const oppositeStatus = status === "published" ? "draft" : "published"
 
-		const database: PostgresJsDatabase<typeof schema> = db()
-
-		const updatedRow = await database
-			.update(posts)
-			.set({ status: oppositeStatus })
-			.where(eq(posts.id, postId))
-			.returning()
+		if (postId) await updatePostStatus(postId, oppositeStatus)
 
 		return { success: true, status: oppositeStatus }
 	},
-	editPost: async ({ locals: { getSession }, request }) => {
-		const session = await getSession()
-		if (!session) {
+	editPost: async ({ locals: { isBudiAuthenticated }, request }) => {
+		if (!isBudiAuthenticated) {
 			throw error(403, "Not authorized")
 		}
 
 		const formData = await request.formData()
-		const postId: number | null = formData.get("id")
+		const postId: number | null = Number(formData.get("id"))
 
-		const database: PostgresJsDatabase<typeof schema> = db()
-
-		const postToEdit = await database.query.posts.findFirst({ where: eq(posts.id, postId) })
-		editPostStore.set(postToEdit)
+		const postToEdit = await getPostById(postId)
+		if (postToEdit) editPostStore.set(postToEdit)
+		const postTags = await getPostTagsStrings(postId)
+		if (postTags) editPostTagPairStore.set(postTags)
 
 		redirect(302, `/admin/posts/editor?edit=${postToEdit?.slug || ""}`)
 	}

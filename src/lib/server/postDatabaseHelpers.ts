@@ -1,10 +1,17 @@
 import type { User } from "@supabase/supabase-js"
 import { error } from "@sveltejs/kit"
 import { and, eq, isNotNull } from "drizzle-orm"
-import { posts, tags, tagsToPosts, users, type SchemaUser } from "../schemas/drizzleSchema"
+import {
+	posts,
+	tags,
+	tagsToPosts,
+	users,
+	type Post,
+	type SchemaUser
+} from "../schemas/drizzleSchema"
 import db from "./database"
 
-export async function getPosts() {
+export async function getAllPosts() {
 	try {
 		const database = db()
 		const posts = await database.query.posts.findMany()
@@ -14,7 +21,16 @@ export async function getPosts() {
 	}
 }
 
-export async function getTags() {
+export async function getPostById(postId: number) {
+	try {
+		const database = db()
+		return await database.query.posts.findFirst({ where: eq(posts.id, postId) })
+	} catch (err) {
+		error(400, "Couldn't get post")
+	}
+}
+
+export async function getAllTags() {
 	try {
 		const database = db()
 		return await database.query.tags.findMany()
@@ -23,7 +39,7 @@ export async function getTags() {
 	}
 }
 
-export async function getAllTagPostPairs() {
+export async function getAllPostTagPairs() {
 	try {
 		const database = db()
 		return await database
@@ -40,12 +56,41 @@ export async function getAllTagPostPairs() {
 	}
 }
 
-export async function getPostTags(postId: number) {
+export async function getPostTagsObjects(postId: number) {
 	try {
 		const database = db()
 		return await database.query.tagsToPosts.findMany({
 			where: eq(tagsToPosts.postId, postId)
 		})
+	} catch (err) {
+		error(400, "Could not get post tags")
+	}
+}
+
+export async function getPostTagsStrings(postId: number) {
+	try {
+		const database = db()
+		const tagPairs = await database.query.tagsToPosts.findMany({
+			where: eq(tagsToPosts.postId, postId)
+		})
+		const tagPairArray =
+			// wait for all promises to resolve
+			(
+				await Promise.all(
+					tagPairs.map(async (pair) => {
+						try {
+							const tag = await findTagById(pair.tagId)
+							return tag?.name
+							// catch any rejected promises per tag
+						} catch (error) {
+							return null
+						}
+					})
+				)
+			)
+				// filter for tags that exist
+				.filter((tag): tag is string => tag !== null && tag !== undefined)
+		return tagPairArray
 	} catch (err) {
 		error(400, "Could not get post tags")
 	}
@@ -69,7 +114,7 @@ export async function insertPost(data, matchedUser: SchemaUser) {
 		error(400, "error inserting post")
 	}
 }
-export async function updatePost(data, matchedUser: SchemaUser) {
+export async function updatePost(data, postInEdit: Post, matchedUser: SchemaUser) {
 	const database = db()
 	try {
 		const postArray = await database
@@ -81,7 +126,7 @@ export async function updatePost(data, matchedUser: SchemaUser) {
 				slug: data.slug,
 				authorId: matchedUser?.id
 			})
-			.where(eq(posts.id, data.id))
+			.where(eq(posts.id, postInEdit.id))
 			.returning()
 		return postArray[0]
 	} catch (er) {
@@ -146,15 +191,23 @@ export async function insertTagToPostPair(postId: number, tagId: number) {
 	}
 }
 
-export async function deleteTagToPostPair(postId: number, tagId: number) {
+export async function deleteTagToPostPair(postId: number, tagId?: number) {
 	const database = db()
 	try {
-		const response = await database
-			.delete(tagsToPosts)
-			.where(and(eq(tagsToPosts.postId, postId), eq(tagsToPosts.tagId, tagId)))
-		return response
+		if (postId && tagId) {
+			const response = await database
+				.delete(tagsToPosts)
+				.where(and(eq(tagsToPosts.postId, postId), eq(tagsToPosts.tagId, tagId)))
+			return response
+		}
+		if (postId) {
+			const response = await database
+				.delete(tagsToPosts)
+				.where(eq(tagsToPosts.postId, postId))
+			return response
+		}
 	} catch (err) {
-		error(400, "Couldn't delete pair")
+		error(400, "Couldn't delete pair(s)")
 	}
 }
 
@@ -185,4 +238,13 @@ export async function createNewUser(user: User) {
 	} catch (err) {
 		error(400, "Couldn't create new user")
 	}
+}
+
+export async function updatePostStatus(postId: number, oppositeStatus: string) {
+	const database = db()
+	return await database
+		.update(posts)
+		.set({ status: oppositeStatus })
+		.where(eq(posts.id, postId))
+		.returning()
 }

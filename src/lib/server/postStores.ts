@@ -22,3 +22,4 @@ export async function deleteAllTagsOfPost(postId: number) {
 }
 
 export const editPostStore = writable<Post | null>(null)
+export const editPostTagPairStore = writable<string[] | null>(null)
