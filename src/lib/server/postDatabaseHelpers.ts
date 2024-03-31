@@ -7,7 +7,8 @@ import {
 	tagsToPosts,
 	users,
 	type Post,
-	type SchemaUser
+	type SchemaUser,
+	type Tag
 } from "../schemas/drizzleSchema"
 import db from "./database"
 
@@ -56,7 +57,7 @@ export async function getAllPostTagPairs() {
 	}
 }
 
-export async function getPostTagsObjects(postId: number) {
+export async function getPostTagPairObjects(postId: number) {
 	try {
 		const database = db()
 		return await database.query.tagsToPosts.findMany({
@@ -67,6 +68,34 @@ export async function getPostTagsObjects(postId: number) {
 	}
 }
 
+export async function getPostTagObjects(postId: number) {
+	try {
+		const database = db()
+		const tagPairs = await database.query.tagsToPosts.findMany({
+			where: eq(tagsToPosts.postId, postId)
+		})
+		const tagPairArray =
+			// wait for all promises to resolve
+			(
+				await Promise.all(
+					tagPairs.map(async (pair) => {
+						try {
+							const tag = await findTagById(pair.tagId)
+							return tag
+							// catch any rejected promises per tag
+						} catch (error) {
+							return null
+						}
+					})
+				)
+			)
+				// filter for tags that exist
+				.filter((tag): tag is Tag => tag !== null && tag !== undefined)
+		return tagPairArray
+	} catch (err) {
+		error(400, "Could not get post tags")
+	}
+}
 export async function getPostTagsStrings(postId: number) {
 	try {
 		const database = db()
