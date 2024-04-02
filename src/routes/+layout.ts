@@ -31,12 +31,16 @@ export const load: LayoutLoad = async ({ fetch, data, depends }) => {
 		error: null | AuthError
 	}
 
+	const markdownResponse = await fetch("/api/getMarkdownPosts")
+	const markdownPosts = await markdownResponse.json()
+
 	// The last load function has priority over all others, so I need to pass the server load data through the layout load data for the page to access it.
 	return {
 		supabase,
 		session,
 		posts: data.posts,
 		tags: data.tags,
+		markdownPosts: markdownPosts,
 		message: data.message,
 		postTags: data.postTags,
 		post: data.post,

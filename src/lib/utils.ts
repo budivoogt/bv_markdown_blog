@@ -62,3 +62,17 @@ export const flyAndScale = (
 export function capitalizer(string: string) {
 	return string.charAt(0).toUpperCase() + string.slice(1)
 }
+
+type DateStyle = Intl.DateTimeFormatOptions["dateStyle"]
+
+export function formatDate(
+	date: string | Date,
+	dateStyle: DateStyle = "medium",
+	locales: string = "en"
+) {
+	// apparently safari doesn't like dashes in dates
+	const dateToFormat = typeof date === "string" ? new Date(date.replaceAll("-", "/")) : date
+	// input the desired formatting (which I presume won't be passed as argument to this function since they are set in default)
+	const dateFormatter = new Intl.DateTimeFormat(locales, { dateStyle })
+	return dateFormatter.format(dateToFormat)
+}

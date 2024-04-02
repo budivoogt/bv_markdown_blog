@@ -4,7 +4,6 @@
 	import DeletePostForm from "$lib/components/DeletePostForm.svelte"
 	import * as Button from "$lib/components/ui/button"
 	import { capitalizer } from "$lib/utils"
-	import type { Session } from "@supabase/supabase-js"
 	import { Toaster, toast } from "svelte-sonner"
 	import type { PageData } from "../$types"
 	import type { Post } from "../../../lib/schemas/drizzleSchema"
@@ -12,11 +11,11 @@
 
 	export let data: PageData
 	let post: Post
-	let session: Session | null
 	let id: Post["id"]
+	let isBudiAuthenticated: boolean | null
 	$: ({
 		post,
-		session,
+		isBudiAuthenticated,
 		post: { id }
 	} = data)
 
@@ -36,7 +35,7 @@
 <Toaster />
 <div class="mx-auto w-4/5">
 	<h1 class="text-3xl">{capitalizer(post?.title ?? "")}</h1>
-	{#if session}
+	{#if isBudiAuthenticated}
 		<div class="my-4 flex w-min flex-row gap-2 rounded border-2 border-neutral-500 p-2">
 			<Button.Root variant="outline" class="border-2 border-black" on:click={newPostHandler}
 				>Create new post</Button.Root
@@ -53,6 +52,5 @@
 			></DeletePostForm>
 		</div>
 	{/if}
-
 	<p class="my-8">{capitalizer(post?.body ?? "")}</p>
 </div>

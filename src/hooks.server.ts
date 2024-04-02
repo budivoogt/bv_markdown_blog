@@ -5,6 +5,7 @@ import { createServerClient } from "@supabase/ssr"
 import { redirect, type Handle } from "@sveltejs/kit"
 
 export const handle: Handle = async ({ event, event: { locals, cookies, url }, resolve }) => {
+
 	locals.supabase = createServerClient<Database>(PUBLIC_SUPABASE_URL, PUBLIC_SUPABASE_ANON_KEY, {
 		cookies: {
 			get: (key) => cookies.get(key),
@@ -12,6 +13,7 @@ export const handle: Handle = async ({ event, event: { locals, cookies, url }, r
 				cookies.set(key, value, { ...options, path: "/" })
 			},
 			remove: (key, options) => {
+
 				cookies.delete(key, { ...options, path: "/" })
 			}
 		}
