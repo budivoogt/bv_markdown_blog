@@ -13,23 +13,22 @@
 <div>
 	<h2 class="my-4 text-2xl">My journey</h2>
 	<p>
-		I want to build a bootstrapped tech business. That's why I'm learning to code.
-		<br />
-		<br />
-		I began in 2023 with Python. I then added Javascript, Typescript. Since I'm still a solo dev
-		who wants to build full-stack applications, I chose SvelteKit as my meta-framework of choice.
-		It's an efficient way of doing front-end and back-end in the same ecosystem, while sticking to
-		web standards like HTML and Javascript (the only stuff I know, haha).
+		After more than 10 years of non-technical entrepreneurship, I'm eager to run a tech
+		business. That's why I'm learning to code. <br /><br />
+		I began in 2023 with Python, progressed to Javascript, Typescript and now primarily work in SvelteKit.
+		<br /><br />
+		As a solo dev I need to keep things simple, so I'm excited to master a few tools. I'm now learning
+		this stack:
 	</p>
-	<p class="my-2">My stack includes:</p>
-	<ul class="my-2 list-inside list-disc">
+	<ul class="my-2 ml-4 list-inside list-disc">
 		<li>SvelteKit</li>
 		<li>Typescript</li>
 		<li>Supabase</li>
 		<li>Tailwind CSS</li>
+		<li>Vercel</li>
 	</ul>
 	<p>
-		I'm eager to connect with other devs. Find me on <a
+		I'm eager to connect with other builders. Find me on <a
 			href="https://x.com/0x_brucey"
 			target="_blank">X</a
 		>
