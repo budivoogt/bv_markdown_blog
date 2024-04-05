@@ -1,4 +1,5 @@
 import { formSchema } from "$lib/components/posteditor/schema"
+import { type Post, type SchemaUser } from "$lib/schemas/drizzleSchema"
 import {
 	createNewUser,
 	deleteTagToPostPair,
@@ -12,11 +13,10 @@ import {
 } from "$lib/server/postDatabaseHelpers"
 import { editPostStore, editPostTagPairStore } from "$lib/server/postStores"
 import type { User } from "@supabase/supabase-js"
-import { error, fail, redirect } from "@sveltejs/kit"
+import { fail, redirect } from "@sveltejs/kit"
 import { get } from "svelte/store"
 import { superValidate } from "sveltekit-superforms"
 import { zod } from "sveltekit-superforms/adapters"
-import { type Post, type SchemaUser } from "../../../../lib/schemas/drizzleSchema"
 import type { Actions, PageServerLoad } from "./$types"
 
 export const load: PageServerLoad = async ({ depends }) => {

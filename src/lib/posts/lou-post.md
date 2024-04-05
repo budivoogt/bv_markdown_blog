@@ -1,10 +1,10 @@
 ---
-title: First post
-description: First post.
-date: '2023-4-14'
+title: Lou her post
+description: A post about a beautiful woman
+date: "2024-4-14"
 categories:
-  - sveltekit
-  - svelte
+    - sveltekit
+    - svelte
 published: true
 ---
 

@@ -16,12 +16,12 @@
 <PageHeader text="Blog" />
 
 {#if markdownPosts}
-	<h2 class="text-2xl">Recent Markdown blog posts</h2>
-	<ul class="my-4 flex flex-col gap-y-2 divide-y">
+	<h2 class="text-2xl">Markdown posts</h2>
+	<ul class="my-4 flex flex-col gap-y-3">
 		{#each markdownPosts as { title, description, slug, date }}
 			<a href={`/blog/${slug}`}>
 				<li>
-					<h3>
+					<h3 class="post-titles">
 						{title}
 					</h3>
 					<p class="text-sm font-light">
@@ -36,13 +36,13 @@
 	</ul>
 {/if}
 
-<h2 class="text-2xl">Recent database blog posts</h2>
+<h2 class="text-2xl">Database posts</h2>
 
-<ul class="my-4 flex flex-col gap-y-4">
+<ul class="my-4 flex flex-col gap-y-3">
 	{#each publishedPosts as { title, description, slug, createdAt }}
 		<a href={`/blog/${slug}`}>
 			<li>
-				<h3>
+				<h3 class="post-titles">
 					{title}
 				</h3>
 				<p class="text-sm font-light">
@@ -55,9 +55,3 @@
 		</a>
 	{/each}
 </ul>
-
-<style>
-	h3 {
-		@apply text-lg font-semibold hover:underline hover:decoration-lime-500 hover:decoration-4 hover:underline-offset-2;
-	}
-</style>
