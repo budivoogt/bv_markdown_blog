@@ -67,7 +67,7 @@ type DateStyle = Intl.DateTimeFormatOptions["dateStyle"]
 
 export function formatDate(
 	date: string | Date,
-	dateStyle: DateStyle = "medium",
+	dateStyle: DateStyle = "long",
 	locales: string = "en"
 ) {
 	// apparently safari doesn't like dashes in dates

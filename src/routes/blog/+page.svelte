@@ -19,7 +19,7 @@
 	<h2 class="text-2xl">Markdown posts</h2>
 	<ul class="my-4 flex flex-col gap-y-3">
 		{#each markdownPosts as { title, description, slug, date }}
-			<a href={`/blog/${slug}`}>
+			<a href={`/blog/md/${slug}`}>
 				<li>
 					<h3 class="post-titles">
 						{title}

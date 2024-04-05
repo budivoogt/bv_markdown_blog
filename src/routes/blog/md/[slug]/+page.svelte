@@ -1,30 +1,18 @@
 <script lang="ts">
-	import { enhance } from "$app/forms"
-	import { editPostHandler, newPostHandler } from "$lib/client/postHelpers.js"
-	import DeletePostForm from "$lib/components/DeletePostForm.svelte"
-	import * as Button from "$lib/components/ui/button"
-	import type { Post } from "$lib/schemas/drizzleSchema"
+	import type { MarkdownPost } from "$lib/types/types"
 	import { capitalizer, formatDate } from "$lib/utils"
-	import { Toaster, toast } from "svelte-sonner"
-	import type { ActionData } from "../../[slug]/$types"
+	import { Toaster } from "svelte-sonner"
 	import type { PageData } from "./$types"
 
 	export let data: PageData
-	let post: Post
-	let id: Post["id"]
-	let isBudiAuthenticated: boolean | null
-	$: ({
-		post,
-		isBudiAuthenticated,
-		post: { id },
-		content,
-		meta
-	} = data)
 
-	export let form: ActionData
-	$: if (form?.status) {
-		toast.success(`Post status changed to ${form?.status}`)
-	}
+	let meta: MarkdownPost
+	$: ({ content, meta } = data)
+
+	// export let form: ActionData
+	// $: if (form?.status) {
+	// 	toast.success(`Post status changed to ${form?.status}`)
+	// }
 </script>
 
 <svelte:head>
@@ -38,26 +26,16 @@
 
 <Toaster />
 <article class="mx-auto w-4/5">
-	<hgroup>
-		<h1 class="text-3xl">{capitalizer(post?.title ?? "")}</h1>
-		<p>Published at {formatDate(meta.date)}</p>
+	<hgroup class="">
+		<h1 class="mb-1 text-3xl">{capitalizer(meta.title ?? "")}</h1>
+		<p class="border-b-2 border-neutral-400/50 pb-1">{formatDate(meta.date)}</p>
 	</hgroup>
-	{#if isBudiAuthenticated}
-		<div class="my-4 flex w-min flex-row gap-2 rounded border-2 border-neutral-500 p-2">
-			<Button.Root variant="outline" class="border-2 border-black" on:click={newPostHandler}
-				>Create new post</Button.Root
-			>
-			<Button.Root type="submit" on:click={() => editPostHandler(id)}>Edit post</Button.Root>
-			<form method="POST" action="?/changeStatus" use:enhance>
-				<input type="hidden" name="id" value={post?.id} />
-				<input type="hidden" name="status" value={post?.status} />
-				<Button.Root type="submit"
-					>{post?.status === "draft" ? "Make public" : "Set draft"}</Button.Root
-				>
-			</form>
-			<DeletePostForm id={post?.id} formAction="../../admin/posts?/deletePost"
-			></DeletePostForm>
-		</div>
-	{/if}
-	<p class="my-8">{capitalizer(post?.body ?? "")}</p>
+	<div class="mt-1 flex gap-x-2">
+		{#each meta.categories as category}
+			<span class="">{category}</span>
+		{/each}
+	</div>
+	<div class=" mt-8">
+		<svelte:component this={content} />
+	</div>
 </article>
