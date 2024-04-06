@@ -1,12 +1,12 @@
 <script lang="ts">
 	import { formatDate } from "$lib/utils"
-	export let posts
-	export let header = "Posts"
 	import { cn } from "$lib/utils";
 
+	export let posts
+	export let header = "Posts"
+	export let hrefPath = "/blog/md"
 	let className: string | undefined= undefined
 	export {className as class}
-	export let hrefPath = "/blog/md"
 </script>
 
 <div class={cn("mt-4 space-y-3", className)}>
