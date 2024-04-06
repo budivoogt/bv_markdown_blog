@@ -64,15 +64,18 @@ export function capitalizer(string: string) {
 }
 
 type DateStyle = Intl.DateTimeFormatOptions["dateStyle"]
+type DateStyle2 = Intl.DateTimeFormatOptions
 
 export function formatDate(
 	date: string | Date,
-	dateStyle: DateStyle = "long",
-	locales: string = "en"
+	dateStyle: DateStyle2 = {
+		year: "numeric",
+		month: "2-digit",
+		day: "2-digit"
+	},
+	locales: string = "en-US"
 ) {
-	// apparently safari doesn't like dashes in dates
 	const dateToFormat = typeof date === "string" ? new Date(date.replaceAll("-", "/")) : date
-	// input the desired formatting (which I presume won't be passed as argument to this function since they are set in default)
-	const dateFormatter = new Intl.DateTimeFormat(locales, { dateStyle })
+	const dateFormatter = new Intl.DateTimeFormat(locales, dateStyle)
 	return dateFormatter.format(dateToFormat)
 }

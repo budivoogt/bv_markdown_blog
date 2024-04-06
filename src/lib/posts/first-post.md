@@ -1,6 +1,6 @@
 ---
 title: First post
-description: First post.
+description: This is the first post written on my Markdown blog. You should read it to get terrific insights.
 date: "2023-4-14"
 categories:
     - sveltekit

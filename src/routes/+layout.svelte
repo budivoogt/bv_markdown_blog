@@ -36,7 +36,7 @@
 
 <div class="m-4">
 	<Navbar />
-	<div class="mt-8">
+	<div class=" mx-auto mb-16 mt-8 flex h-full max-w-3xl flex-col">
 		<slot />
 	</div>
 </div>

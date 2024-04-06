@@ -71,7 +71,7 @@
 	}
 
 	.post-titles {
-		@apply text-lg font-semibold hover:underline hover:decoration-lime-500 hover:decoration-4 hover:underline-offset-2;
+		@apply hover:underline hover:decoration-lime-500 hover:decoration-2 hover:underline-offset-4;
 	}
 }
 
