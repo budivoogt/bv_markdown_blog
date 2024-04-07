@@ -53,7 +53,10 @@ const config = {
 				sm: "calc(var(--radius) - 4px)"
 			}
 		}
-	}
+	},
+	plugins: [
+		require('@tailwindcss/typography')
+	]
 }
 
 export default config

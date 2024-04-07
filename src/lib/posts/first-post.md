@@ -12,13 +12,23 @@ published: true
 
 Hey friends! 👋
 
+Here's a code block:
+
 ```ts
 function greet(name: string) {
 	console.log(`Hey ${name}! 👋`)
 }
 ```
 
+And this is just something between backticks `console.log(lol!)`.
+
 ### Hello friend this is a header 3
+
+Here's a new line that includes a quote:
+
+"The quote goes as such"
+
+Here come two dashes -- how do they look?
 
 ## This is a header 2
 

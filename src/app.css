@@ -1,5 +1,6 @@
 /* Defines Inter as the default font and imports it */
 @import url("/fonts/inter/inter.css");
+@import url("$lib/themes/prism-vsc-dark-plus.css");
 
 @tailwind base;
 @tailwind components;
