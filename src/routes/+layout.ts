@@ -34,10 +34,7 @@ export const load: LayoutLoad = async ({ fetch, data, depends }) => {
 	}
 
 	const markdownResponse = await fetch("/api/getMarkdownPosts")
-	let markdownPosts: MarkdownPost[] = await markdownResponse.json()
-	if (markdownPosts) {
-		markdownPosts = sortMarkdownPosts(markdownPosts)
-	}
+	const markdownPosts: MarkdownPost[] = await markdownResponse.json()
 
 	// The last load function has priority over all others, so I need to pass the server load data through the layout load data for the page to access it.
 	return {

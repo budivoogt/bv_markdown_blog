@@ -1,9 +1,10 @@
 <script lang="ts">
+	import type { MarkdownPost } from "$lib/types/types"
 	import { cn, formatDate } from "$lib/utils"
 
-	export let posts
+	export let posts: MarkdownPost[]
 	export let header = "Posts"
-	export let hrefPath = "/blog/md"
+	export let hrefPath = "/blog"
 	export let readMore: boolean = false
 	let className: string | undefined = undefined
 	export { className as class }

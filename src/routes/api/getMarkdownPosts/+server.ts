@@ -1,10 +1,10 @@
+import { sortMarkdownPosts } from "$lib/client/mdPostHelpers"
 import type { MarkdownPost } from "$lib/types/types"
 import { error, json, type RequestHandler } from "@sveltejs/kit"
 
 async function getPosts() {
 	let posts: MarkdownPost[] = []
 
-	// importing all matching files eagerly (statically)
 	const paths = import.meta.glob("/src/lib/posts/*.md", { eager: true })
 
 	for (const path in paths) {
@@ -19,9 +19,7 @@ async function getPosts() {
 		}
 	}
 
-	posts = posts.sort(
-		(first, second) => new Date(second.date).getTime() - new Date(first.date).getTime()
-	)
+	posts = sortMarkdownPosts(posts)
 
 	return posts
 }

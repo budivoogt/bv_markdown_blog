@@ -1,6 +1,6 @@
 ---
 title: Code blocks
-description: Checking how the code  blocks display using my MDsveX settings.
+description: Checking how the code blocks display using my MDsveX settings.
 date: "2023-4-14"
 categories:
     - sveltekit

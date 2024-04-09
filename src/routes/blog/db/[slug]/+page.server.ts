@@ -4,10 +4,10 @@ import { editPostStore, editPostTagPairStore } from "$lib/server/postStores"
 import { error, redirect, type Actions } from "@sveltejs/kit"
 import { eq } from "drizzle-orm"
 import type { PostgresJsDatabase } from "drizzle-orm/postgres-js"
-import type { Post } from "../../../lib/schemas/drizzleSchema"
-import * as schema from "../../../lib/schemas/drizzleSchema"
-import { posts } from "../../../lib/schemas/drizzleSchema"
-import type { PageServerLoad } from "./$types"
+import type { Post } from "../../../../lib/schemas/drizzleSchema"
+import * as schema from "../../../../lib/schemas/drizzleSchema"
+import { posts } from "../../../../lib/schemas/drizzleSchema"
+import type { PageServerLoad } from "../../[slug]/$types"
 
 export const load: PageServerLoad = async ({ params }) => {
 	const { slug } = params
