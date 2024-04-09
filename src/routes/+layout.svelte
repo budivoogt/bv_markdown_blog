@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { invalidate } from "$app/navigation"
+	import { page } from "$app/stores"
 	import Navbar from "$lib/components/Navbar.svelte"
+	import SeoComponent from "$lib/components/SEOComponent.svelte"
 	import { onMount } from "svelte"
 	import { derived, writable } from "svelte/store"
 	import "../app.css"
@@ -34,9 +36,11 @@
 	})
 </script>
 
-<div class="m-4">
+<SeoComponent data={{ title: $page.data.title, description: $page.data.description }} />
+
+<div class="mx-auto my-4 flex h-full max-w-3xl flex-col px-4">
 	<Navbar />
-	<div class=" mx-auto mb-16 mt-8 flex h-full max-w-3xl flex-col">
+	<div class="mt-8">
 		<slot />
 	</div>
 </div>

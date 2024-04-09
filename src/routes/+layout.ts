@@ -1,4 +1,5 @@
 import { PUBLIC_SUPABASE_ANON_KEY, PUBLIC_SUPABASE_URL } from "$env/static/public"
+import { sortMarkdownPosts } from "$lib/client/mdPostHelpers"
 import type { Database } from "$lib/types/supabase"
 import type { MarkdownPost } from "$lib/types/types"
 import { createBrowserClient, isBrowser, parse } from "@supabase/ssr"
@@ -33,12 +34,9 @@ export const load: LayoutLoad = async ({ fetch, data, depends }) => {
 	}
 
 	const markdownResponse = await fetch("/api/getMarkdownPosts")
-	const markdownPosts: MarkdownPost[] = await markdownResponse.json()
-	let sortedMarkdownPosts: MarkdownPost[] | null = null
+	let markdownPosts: MarkdownPost[] = await markdownResponse.json()
 	if (markdownPosts) {
-		sortedMarkdownPosts = markdownPosts.sort(
-			(first, second) => new Date(second.date).getTime() - new Date(first.date).getTime()
-		)
+		markdownPosts = sortMarkdownPosts(markdownPosts)
 	}
 
 	// The last load function has priority over all others, so I need to pass the server load data through the layout load data for the page to access it.
@@ -47,7 +45,7 @@ export const load: LayoutLoad = async ({ fetch, data, depends }) => {
 		session,
 		posts: data.posts,
 		tags: data.tags,
-		markdownPosts: sortedMarkdownPosts || markdownPosts,
+		markdownPosts: markdownPosts,
 		message: data.message,
 		postTags: data.postTags,
 		post: data.post,

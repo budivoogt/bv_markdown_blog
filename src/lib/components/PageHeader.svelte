@@ -3,5 +3,5 @@
 </script>
 
 {#if text}
-	<h1 class="my-4 text-3xl">{text}</h1>
+	<h1 class="text-3xl">{text}</h1>
 {/if}

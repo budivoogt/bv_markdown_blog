@@ -13,9 +13,8 @@
 	$: publishedPosts = filterPostsPublished(posts)
 </script>
 
-<PageHeader text="Blog" />
+<div class="space-y-6">
+	<PageHeader text="Blog" />
 
-<PostList posts={markdownPosts} header="Markdown posts" />
-<div class="mt-8">
-	<PostList posts={publishedPosts} header="Database posts" hrefPath="/blog" />
+	<PostList posts={markdownPosts} header="Posts" />
 </div>

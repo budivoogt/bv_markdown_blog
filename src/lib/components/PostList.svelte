@@ -1,12 +1,12 @@
 <script lang="ts">
-	import { formatDate } from "$lib/utils"
-	import { cn } from "$lib/utils";
+	import { cn, formatDate } from "$lib/utils"
 
 	export let posts
 	export let header = "Posts"
 	export let hrefPath = "/blog/md"
-	let className: string | undefined= undefined
-	export {className as class}
+	export let readMore: boolean = false
+	let className: string | undefined = undefined
+	export { className as class }
 </script>
 
 <div class={cn("mt-4 space-y-3", className)}>
@@ -26,5 +26,10 @@
 				</ul>
 			{/each}
 		</ul>
+	{/if}
+	{#if readMore}
+		<a href="/blog">
+			<h3 class="mt-4 text-sm font-light hover:underline">Read more...</h3>
+		</a>
 	{/if}
 </div>

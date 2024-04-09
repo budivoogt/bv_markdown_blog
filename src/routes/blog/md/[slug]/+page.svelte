@@ -1,6 +1,6 @@
 <script lang="ts">
 	import PostList from "$lib/components/PostList.svelte"
-	import SeoHeader from "$lib/components/SEOHeader.svelte"
+	import SeoHeader from "$lib/components/MarkdownSEOHeader.svelte"
 	import * as Button from "$lib/components/ui/button"
 	import type { MarkdownPost } from "$lib/types/types"
 	import { SvelteComponent, type ComponentType } from "svelte"
@@ -18,8 +18,7 @@
 
 <svelte:component this={content} />
 
-<PostList posts={markdownPosts} header="Read more" class="mt-8" />
-
-<a href="/blog" class="mt-8">
+<PostList posts={markdownPosts} header="Read more" class="my-6 border-t border-neutral-100 " />
+<a href="/blog" class="">
 	<Button.Root variant="outline" class="border-2 border-black">← Back</Button.Root>
 </a>

@@ -79,3 +79,7 @@ export function formatDate(
 	const dateFormatter = new Intl.DateTimeFormat(locales, dateStyle)
 	return dateFormatter.format(dateToFormat)
 }
+
+export function decorate(title: string) {
+	return `${title} - Budi Voogt`
+}
