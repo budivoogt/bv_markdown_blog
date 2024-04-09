@@ -1,6 +1,6 @@
 ---
-title: First post
-description: This is the first post written on my Markdown blog. You should read it to get terrific insights.
+title: Code blocks
+description: Checking how the code  blocks display using my MDsveX settings.
 date: "2023-4-14"
 categories:
     - sveltekit
@@ -8,13 +8,13 @@ categories:
 published: true
 ---
 
-## Markdown
+# Header 1 example
 
 Hey friends! 👋
 
-Here's a code block:
+Typescript code block:
 
-```ts
+```ts showLineNumbers title="typescript block" {2}
 function greet(name: string) {
 	console.log(`Hey ${name}! 👋`)
 }
@@ -22,15 +22,64 @@ function greet(name: string) {
 
 And this is just something between backticks `console.log(lol!)`.
 
-### Hello friend this is a header 3
+A note[^1]
 
-Here's a new line that includes a quote:
+[^1]: Big note
+
+https://striking.markets
+
+www.budivoogt.com
+
+budi@budivoogt.com
+
+~~strikethrough~~
+
+## Header 2 example
+
+Here's a quote:
 
 "The quote goes as such"
 
 Here come two dashes -- how do they look?
 
-## This is a header 2
+Here's a Svelte code block:
+
+```svelte title="PostList.svelte"
+<script lang="ts">
+	import { capitalizer, formatDate } from "$lib/utils"
+
+	export let title, date, categories
+</script>
+
+<article>
+	<hgroup class="space-y-3">
+		<h1 class="mb-1 text-3xl">{capitalizer(title ?? "")}</h1>
+		{#if date}
+			<p class="text-sm font-light">{formatDate(date)}</p>
+		{/if}
+	</hgroup>
+	<div class="mt-1 flex gap-x-2 border-b-2 border-neutral-400/10">
+		{#if categories}
+			{#each categories as category}
+				<span class="rounded-sm">{category}</span>
+			{/each}
+		{/if}
+	</div>
+	<div class="prose prose-neutral mt-8">
+		<slot />
+	</div>
+</article>
+```
+
+### Header 3
+
+Here's some Javascript:
+
+```js title="bananacake"
+function greet(name) {
+	console.log(`Hey ${name}! 👋`)
+}
+```
 
 Does MSDVEX respect spaces in this Markdown?
 

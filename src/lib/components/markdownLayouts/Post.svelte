@@ -1,8 +1,7 @@
 <script lang="ts">
 	import { capitalizer, formatDate } from "$lib/utils"
 
-	export let meta
-	$: ({ title, date, categories } = meta)
+	export let title, date, categories
 </script>
 
 <article>

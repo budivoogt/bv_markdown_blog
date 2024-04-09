@@ -1,5 +1,4 @@
 <script lang="ts">
-	import PostLayout from "$lib/components/PostLayout.svelte"
 	import PostList from "$lib/components/PostList.svelte"
 	import SeoHeader from "$lib/components/SEOHeader.svelte"
 	import * as Button from "$lib/components/ui/button"
@@ -17,9 +16,7 @@
 
 <SeoHeader {meta} />
 
-<PostLayout {meta}>
-	<svelte:component this={content} />
-</PostLayout>
+<svelte:component this={content} />
 
 <PostList posts={markdownPosts} header="Read more" class="mt-8" />
 

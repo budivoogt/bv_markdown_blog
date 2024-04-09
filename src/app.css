@@ -74,6 +74,36 @@
 	.post-titles {
 		@apply hover:underline hover:decoration-lime-500 hover:decoration-2 hover:underline-offset-4;
 	}
+
+	/* Code for Shiki highlighting */
+	pre[data-code-title]:before {
+		@apply mx-2 mb-2 h-min pb-2 font-medium;
+		font-family: "Inter";
+		min-height: calc(2rem + 1px);
+		content: attr(data-code-title);
+		display: block;
+		border-bottom: solid 1px rgb(63 63 70);
+	}
+
+	code[data-line-numbers] > span[data-line-number]::before {
+		/* Insert the line number data attribute before the line */
+		content: attr(data-line-number);
+		/* Other styling */
+		display: inline-block;
+		width: 1rem;
+		@apply mx-4;
+		text-align: right;
+		@apply text-neutral-400;
+	}
+
+	code > span {
+		@apply mx-2;
+	}
+
+	code > span[data-highlighted] {
+		background: #3b4252;
+		width: 100%;
+	}
 }
 
 @layer base {
