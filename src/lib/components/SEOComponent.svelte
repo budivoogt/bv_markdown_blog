@@ -17,8 +17,9 @@
 	}
 
 	export let data: SeoData = {
-		title: "A title",
-		description: "A description",
+		title: "Budi Voogt",
+		description:
+			"From music industry founder to indie web developer. Follow my journey on this personal blog.",
 		ogType: "website",
 		index: true,
 		follow: true,

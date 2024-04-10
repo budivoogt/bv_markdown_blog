@@ -2,12 +2,19 @@
 	import { getLastPosts } from "$lib/client/mdPostHelpers"
 	import PageHeader from "$lib/components/PageHeader.svelte"
 	import PostList from "$lib/components/PostList.svelte"
+	import SeoComponent from "$lib/components/SEOComponent.svelte"
 	import * as Button from "$lib/components/ui/button"
 
 	export let data
 	$: ({ markdownPosts } = data)
 	$: posts = getLastPosts(markdownPosts, 5)
+
+	const title = "Budi Voogt"
+	const description =
+		"From music industry founder to indie web developer. Follow my journey on this personal blog."
 </script>
+
+<SeoComponent data={{ title, description }} />
 
 <div class="space-y-6">
 	<PageHeader text="Budi Voogt" />
