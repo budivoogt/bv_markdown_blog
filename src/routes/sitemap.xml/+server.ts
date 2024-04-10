@@ -41,6 +41,7 @@ export const GET: RequestHandler = async ({ fetch, setHeaders }) => {
                     <loc>${url}/blog/${post.slug}</loc>
                     <changefreq>monthly</changefreq>
                     <priority>0.7</priority>
+                    <lastmod>${post.date}</lastmod>
                 </url>
                 `
 				: null
