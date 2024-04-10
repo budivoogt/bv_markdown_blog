@@ -63,12 +63,9 @@ export function capitalizer(string: string) {
 	return string.charAt(0).toUpperCase() + string.slice(1)
 }
 
-type DateStyle = Intl.DateTimeFormatOptions["dateStyle"]
-type DateStyle2 = Intl.DateTimeFormatOptions
-
 export function formatDate(
 	date: string | Date,
-	dateStyle: DateStyle2 = {
+	dateStyle: Intl.DateTimeFormatOptions = {
 		year: "numeric",
 		month: "2-digit",
 		day: "2-digit"
