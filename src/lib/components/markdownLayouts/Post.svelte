@@ -1,7 +1,9 @@
 <script lang="ts">
 	import { capitalizer, formatDate } from "$lib/utils"
 
-	export let title, date, categories
+	export let title: string
+	export let date: string | Date
+	export let categories: string[]
 </script>
 
 <article>
