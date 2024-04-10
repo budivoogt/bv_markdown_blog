@@ -7,7 +7,6 @@
 	<div class="flex gap-x-3">
 		<a href="/">Home</a>
 		<a href="/blog">Blog</a>
-		<a href="/coding">Coding</a>
 		<a href="/about">About</a>
 	</div>
 	<div class="flex gap-x-3">

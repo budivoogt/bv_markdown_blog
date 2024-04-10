@@ -6,6 +6,7 @@
 	export let header = "Posts"
 	export let hrefPath = "/blog"
 	export let readMore: boolean = false
+	export let DateTimeFormatOptions: Intl.DateTimeFormatOptions | undefined = undefined
 	let className: string | undefined = undefined
 	export { className as class }
 </script>
@@ -17,8 +18,8 @@
 			{#each posts as { title, slug, date }}
 				<ul class="group">
 					<a href={`${hrefPath}/${slug}`} class="flex items-center space-x-4 py-2.5">
-						<p class="text-sm font-light">
-							{formatDate(date)}
+						<p class="text-sm text-neutral-500">
+							{formatDate(date, DateTimeFormatOptions)}
 						</p>
 						<p class="post-titles">
 							{title}

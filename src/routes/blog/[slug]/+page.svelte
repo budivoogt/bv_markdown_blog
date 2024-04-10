@@ -20,11 +20,7 @@
 
 <svelte:component this={content} />
 
-<PostList
-	posts={getLastPosts(markdownPosts, 5, title)}
-	header="Read more"
-	class="my-6 border-t border-neutral-100 "
-/>
+<PostList posts={getLastPosts(markdownPosts, 5, title)} header="Read more" class="my-6 " />
 <a href="/blog" class="">
 	<Button.Root variant="outline" class="border-2 border-black">← Back</Button.Root>
 </a>
