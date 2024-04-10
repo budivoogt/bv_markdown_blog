@@ -2,6 +2,7 @@ import { createHighlighter } from "@bitmachina/highlighter"
 import adapter from "@sveltejs/adapter-auto"
 import { vitePreprocess } from "@sveltejs/vite-plugin-svelte"
 import { mdsvex } from "mdsvex"
+import readingtime from "mdsvex-reading-time"
 import { resolve } from "path"
 import remarkGithub from "remark-github"
 import { fileURLToPath } from "url"
@@ -13,7 +14,8 @@ const mdsvexOptions = {
 	extensions: [".md"],
 	smartypants: { quotes: true, dashes: "oldschool" },
 	remarkPlugins: [
-		[remarkGithub, { repository: "https://github.com/budivoogt/bv_markdown_blog" }]
+		[remarkGithub, { repository: "https://github.com/budivoogt/bv_markdown_blog" }],
+		[readingtime]
 	],
 	highlight: {
 		highlighter: await createHighlighter({
