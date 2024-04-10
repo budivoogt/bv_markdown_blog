@@ -3,21 +3,19 @@
 	import { editPostHandler, newPostHandler } from "$lib/client/postHelpers.js"
 	import DeletePostForm from "$lib/components/DeletePostForm.svelte"
 	import * as Button from "$lib/components/ui/button"
+	import type { Post } from "$lib/schemas/drizzleSchema"
 	import { capitalizer } from "$lib/utils"
 	import { Toaster, toast } from "svelte-sonner"
-	import type { PageData } from "../$types"
-	import type { Post } from "../../../lib/schemas/drizzleSchema"
-	import type { ActionData } from "./$types"
+	import type { ActionData, PageData } from "./$types"
 
 	export let data: PageData
-	let post: Post
+	let post: Post | undefined
 	let id: Post["id"]
 	let isBudiAuthenticated: boolean | null
-	$: ({
-		post,
-		isBudiAuthenticated,
-		post: { id }
-	} = data)
+	$: ({ post, isBudiAuthenticated } = data)
+	$: if (post) {
+		;({ id } = post)
+	}
 
 	export let form: ActionData
 	$: if (form?.status) {

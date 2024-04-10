@@ -132,7 +132,7 @@ export async function getPostTagsStrings(postId: number) {
 	}
 }
 
-export async function insertPost(data, matchedUser: SchemaUser) {
+export async function insertPost(data: Post, matchedUser: SchemaUser) {
 	const database = db()
 	try {
 		const postArray = await database
@@ -151,7 +151,7 @@ export async function insertPost(data, matchedUser: SchemaUser) {
 		error(400, "error inserting post")
 	}
 }
-export async function updatePost(data, postInEdit: Post, matchedUser: SchemaUser) {
+export async function updatePost(data: Post, postInEdit: Post, matchedUser: SchemaUser) {
 	const database = db()
 	try {
 		const postArray = await database

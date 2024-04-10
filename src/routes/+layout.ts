@@ -43,7 +43,6 @@ export const load: LayoutLoad = async ({ fetch, data, depends }) => {
 		posts: data.posts,
 		tags: data.tags,
 		markdownPosts: markdownPosts,
-		message: data.message,
 		postTags: data.postTags,
 		post: data.post,
 		props: data.props,

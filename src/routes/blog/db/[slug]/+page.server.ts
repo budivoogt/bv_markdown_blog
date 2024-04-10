@@ -1,13 +1,13 @@
+import type { Post } from "$lib/schemas/drizzleSchema"
+import * as schema from "$lib/schemas/drizzleSchema"
+import { posts } from "$lib/schemas/drizzleSchema"
 import db from "$lib/server/database"
 import { getPostById, getPostTagsStrings, updatePostStatus } from "$lib/server/postDatabaseHelpers"
 import { editPostStore, editPostTagPairStore } from "$lib/server/postStores"
 import { error, redirect, type Actions } from "@sveltejs/kit"
 import { eq } from "drizzle-orm"
 import type { PostgresJsDatabase } from "drizzle-orm/postgres-js"
-import type { Post } from "../../../../lib/schemas/drizzleSchema"
-import * as schema from "../../../../lib/schemas/drizzleSchema"
-import { posts } from "../../../../lib/schemas/drizzleSchema"
-import type { PageServerLoad } from "../../[slug]/$types"
+import type { PageServerLoad } from "./$types"
 
 export const load: PageServerLoad = async ({ params }) => {
 	const { slug } = params
@@ -29,7 +29,7 @@ export const actions: Actions = {
 
 		const formData = await request.formData()
 		const postId: number | null = Number(formData.get("id"))
-		const status: string | null = formData.get("status")
+		const status: string | null = String(formData.get("status"))
 		const oppositeStatus = status === "published" ? "draft" : "published"
 
 		if (postId) await updatePostStatus(postId, oppositeStatus)

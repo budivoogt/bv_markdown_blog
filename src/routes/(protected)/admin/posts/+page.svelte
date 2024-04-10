@@ -13,9 +13,13 @@
 	import * as Table from "$lib/components/ui/table"
 	import { Eye, Pencil, Trash2 } from "lucide-svelte"
 	import { Toaster, toast } from "svelte-sonner"
-	import type { PageData } from "../../$types"
+	import type { PageData } from "./$types"
+	import type { TagsPerPost } from "$lib/types/types"
+	import type { Post } from "$lib/schemas/drizzleSchema"
 
 	export let data: PageData
+	let postTags: TagsPerPost
+	let posts: Post[]
 	$: ({ posts, postTags } = data)
 
 	$: if ($delPostToastStore) {
