@@ -22,8 +22,8 @@
 	<enhanced:img
 		src="$lib/images/budi@2x.jpg"
 		alt="A headshot photo of Budi Voogt"
-		sizes="(min-width:6014px) 6338px"
-		class="my-4 w-3/5 rounded border border-black lg:w-1/2"
+		sizes="(min-width:3840px) 6014px"
+		class="my-4 h-auto w-3/5 rounded border border-black lg:w-1/2"
 	/>
 	<p class="prose">
 		Welcome! I'm an indie developer and founder from The Netherlands. I spent a decade running
