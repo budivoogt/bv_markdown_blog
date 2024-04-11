@@ -19,6 +19,12 @@
 
 <div class="space-y-4">
 	<PageHeader text="Budi Voogt" />
+	<enhanced:img
+		src="$lib/images/budi@2x.jpg"
+		alt="A headshot photo of Budi Voogt"
+		sizes="(min-width:6014px) 6338px"
+		class="my-4 w-3/5 rounded border border-black lg:w-1/2"
+	/>
 	<p class="prose">
 		Welcome! I'm an indie developer and founder from The Netherlands. I spent a decade running
 		businesses in the music industry. Now I aspire to bootstrap a modest tech business. Read my
