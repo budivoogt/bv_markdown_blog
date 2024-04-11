@@ -26,9 +26,10 @@
 		class="my-4 h-auto w-3/5 rounded border border-black lg:w-1/2"
 	/>
 	<p class="prose">
-		Welcome! I'm an indie developer and founder from The Netherlands. I spent a decade running
-		businesses in the music industry. Now I aspire to bootstrap a modest tech business. Read my
-		<a href="/about">story here.</a>
+		Welcome! I'm a founder and web developer from The Netherlands. I spent a decade running
+		businesses in the music industry. I plan to bootstrap a tech business next. I love exercise,
+		art, reading and am a recent father of one.
+		<a href="/about">Read more about me here. </a>
 	</p>
 	<div class="flex flex-row gap-x-3">
 		<a href="https://x.com/0x_brucey" target="_blank">
