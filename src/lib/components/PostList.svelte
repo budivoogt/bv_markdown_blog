@@ -31,7 +31,7 @@
 	{/if}
 	{#if readMore}
 		<a href="/blog">
-			<h3 class="mt-4 text-sm font-light hover:underline">Read more...</h3>
+			<h3 class="mt-4 text-sm hover:underline">Read more...</h3>
 		</a>
 	{/if}
 </div>

@@ -4,6 +4,7 @@
 	import PostList from "$lib/components/PostList.svelte"
 	import SeoComponent from "$lib/components/SEOComponent.svelte"
 	import * as Button from "$lib/components/ui/button"
+	import { Github, Linkedin, Twitter } from "lucide-svelte"
 
 	export let data
 	$: ({ markdownPosts } = data)
@@ -16,13 +17,26 @@
 
 <SeoComponent data={{ title, description }} />
 
-<div class="space-y-6">
+<div class="space-y-4">
 	<PageHeader text="Budi Voogt" />
 	<p class="prose">
 		Welcome! I'm an indie developer and founder from The Netherlands. I spent a decade running
 		businesses in the music industry. Now I aspire to bootstrap a modest tech business. Read my
 		<a href="/about">story here.</a>
 	</p>
+	<div class="flex flex-row gap-x-3">
+		<a href="https://x.com/0x_brucey" target="_blank">
+			<Twitter strokeWidth="1.5" class="h-5" /></a
+		>
+		<a href="https://github.com/brucey0x" target="_blank"
+			><Github strokeWidth="1.5" class="h-5" /></a
+		>
+		<a href="https://www.linkedin.com/in/budivoogt/" target="_blank"
+			><Linkedin strokeWidth="1.5" class="h-5" /></a
+		>
+	</div>
+</div>
+<div class="mt-8 space-y-6">
 	<PostList header="Latest posts" {posts} readMore />
 	<h2 class="text-lg">Newsletter</h2>
 	<div class="flex flex-row items-baseline justify-start space-x-2">

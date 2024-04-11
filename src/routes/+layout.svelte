@@ -40,7 +40,7 @@
 
 <div class="mx-auto my-4 flex h-full max-w-3xl flex-col px-4">
 	<Navbar />
-	<div class="mt-8 lg:mt-12">
+	<div class="mt-6">
 		<slot />
 	</div>
 </div>
