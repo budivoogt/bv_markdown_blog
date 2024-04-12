@@ -8,7 +8,7 @@
 <article>
 	<hgroup class="space-y-2">
 		<h1 class="text-3xl">{capitalizer(title ?? "")}</h1>
-		<div class="flex gap-x-4 align-top">
+		<div class="flex gap-x-4 align-top text-neutral-500">
 			{#if date}
 				<p>{formatDate(date, { dateStyle: "long" })}</p>
 			{/if}
@@ -22,7 +22,7 @@
 		<div class="flex gap-x-2">
 			{#if categories}
 				{#each categories as category}
-					<span class="rounded-lg bg-neutral-500 px-1.5 py-1 text-neutral-50"
+					<span class="rounded-lg bg-neutral-500/80 px-1.5 text-neutral-50"
 						>{category}</span
 					>
 				{/each}

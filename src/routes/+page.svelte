@@ -20,15 +20,17 @@
 <div class="space-y-4">
 	<PageHeader text="Budi Voogt" />
 	<enhanced:img
-		src="$lib/images/budi@2x.jpg"
+		src="$lib/images/budi_2@2x.png"
 		alt="A headshot photo of Budi Voogt"
-		sizes="(min-width:3840px) 6014px"
-		class="my-4 h-auto w-3/5 rounded border border-black lg:w-1/2"
+		sizes="(min-width:3840px) 4008px"
+		class="my-4 w-3/5 rounded-sm lg:w-1/2"
+		fetchpriority="high"
+		loading="eager"
 	/>
 	<p class="prose">
-		Welcome! I'm a founder and web developer from The Netherlands. I spent a decade running
-		businesses in the music industry. I plan to bootstrap a tech business next. I love exercise,
-		art, reading and am a recent father of one.
+		Welcome! I'm a founder and indie web developer from The Netherlands. I spent a decade
+		running businesses in the music industry. I plan to bootstrap a tech business next. I love
+		exercise, art, reading and am a recent father of one.
 		<a href="/about">Read more about me here. </a>
 	</p>
 	<div class="flex flex-row gap-x-3">

@@ -9,5 +9,9 @@
 <div class="space-y-6">
 	<PageHeader text="Blog" />
 
-	<PostList posts={markdownPosts} header="Posts" />
+	<PostList
+		posts={markdownPosts}
+		header="Posts"
+		DateTimeFormatOptions={{ month: "long", year: "numeric" }}
+	/>
 </div>

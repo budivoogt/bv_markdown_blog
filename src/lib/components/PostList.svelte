@@ -6,7 +6,7 @@
 	export let header = "Posts"
 	export let hrefPath = "/blog"
 	export let readMore: boolean = false
-	export let DateTimeFormatOptions: Intl.DateTimeFormatOptions | undefined = undefined
+	export let DateTimeFormatOptions: Intl.DateTimeFormatOptions | undefined = { month: "long", year: "numeric" }
 	let className: string | undefined = undefined
 	export { className as class }
 </script>

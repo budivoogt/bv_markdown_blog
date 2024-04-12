@@ -72,7 +72,11 @@
 	}
 
 	.post-titles {
-		@apply hover:underline hover:decoration-lime-500 hover:decoration-2 hover:underline-offset-4;
+		@apply hover:underline hover:decoration-orange-400 hover:decoration-2 hover:underline-offset-4;
+	}
+
+	.project-header {
+		@apply underline decoration-2 underline-offset-4 hover:decoration-orange-400;
 	}
 
 	/* Code for Shiki highlighting */
