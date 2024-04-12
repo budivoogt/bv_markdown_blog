@@ -14,14 +14,13 @@
 	<PageHeader text="A long story, short" />
 	<p class="prose">
 		Over the past decade I built multiple music businesses. It began by managing my friends in
-		university. Then we added record labels, publishing and education companies. You may know
-		some of our artists like San Holo, DROELOE, Unlike Pluto and Ark Patrol. It was an intense
-		and educational ride where I learned how to operate. I was able to close this chapter in
-		2022 via Heroic's acquisition.
+		university. Then we added record labels, publishing and education companies. It was an
+		intense and educational ride where I learned how to operate. In 2022 we were acquired,
+		allowing me to pursue other goals.
 		<br /><br />
 		I then built a job board for the music industry and dove into the world of crypto and venture
 		capital. I founded a crypto DAO and angel investment syndicate for Media Tech and Future of Work.
-		I did 10 investments and realized that while supporting founders is cool, it's distant from building
+		After 10 investments I realized that while supporting founders is cool, it's distant from building
 		and taking an idea from zero to one. That's what I love most.
 		<br /><br />
 		That's why I'm going to build a new business. I'll bootstrap it and it should be more scalable
