@@ -3,6 +3,8 @@
 	import { Timer } from "lucide-svelte"
 
 	export let title, date, categories, readingTime
+	// Need to remove this function after I standardize tags
+	let sortedCategories = categories.toSorted().map((cat) => cat.toLowerCase())
 </script>
 
 <article>
@@ -20,8 +22,8 @@
 			{/if}
 		</div>
 		<div class="flex gap-x-2">
-			{#if categories}
-				{#each categories as category}
+			{#if sortedCategories}
+				{#each sortedCategories as category}
 					<span class="rounded-lg bg-neutral-500/80 px-1.5 text-neutral-50"
 						>{category}</span
 					>

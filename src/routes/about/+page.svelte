@@ -5,7 +5,8 @@
 	import ProjectList from "$lib/components/projectList/ProjectList.svelte"
 
 	const title = "About"
-	const description = "Learn how I went from music industry founder to indie web developer."
+	const description =
+		"A brief history about my journey from music entrepreneurship to angel investing, crypto and coding."
 </script>
 
 <SeoComponent data={{ title, description }} />
@@ -23,46 +24,44 @@
 		After 10 investments I realized that while supporting founders is cool, it's distant from building
 		and taking an idea from zero to one. That's what I love most.
 		<br /><br />
-		That's why I'm going to build a new business. I'll bootstrap it and it should be more scalable
-		than anything I have done before. I began coding in 2023 to make this more viable. I'm now working
-		with SvelteKit, a full-stack framework. This is my public declaration. Think I'll make it happen?
-
-		<br /><br />
+		That's why I'm going to build a new business. I'll bootstrap it and want it to be more scalable
+		than anything I've done before. I've learned to code to make this happen. I'm now working with
+		SvelteKit, a full-stack framework (which I built this blog with). This is my public declaration.
+		<a href="https://x.com/0x_brucey" target="_blank">Follow along?</a>
 	</p>
 </hgroup>
 
-<div class="prose mt-8">
-	<h3>Projects</h3>
+<div class="my-8">
+	<h3 class="text-xl">Projects</h3>
+	<ProjectList>
+		<Project
+			link="https://striking.markets/"
+			name="Striking Markets"
+			description="Angel syndicate for media tech and future of work"
+		/>
+		<Project
+			link="https://www.deusexdao.com/"
+			name="Deus Ex DAO"
+			description="Crypto advisory and angel syndicate"
+		/>
+		<Project
+			link="http://musiccareers.co"
+			name="MusicCareers"
+			description="Music industry job board"
+			acquired="(Acquired)"
+		/>
+		<Project
+			name="bitbird"
+			description="Record label, publishing, merchandising"
+			link="https://bitbirdofficial.com/"
+			acquired="(Exited)"
+		/>
+		<Project name="Heroic Academy" description="Music industry educational platform" />
+		<Project
+			name="Heroic"
+			description="Artist management, record label, publishing"
+			link="https://heroicrecordings.com/"
+			acquired="(Acquired)"
+		/>
+	</ProjectList>
 </div>
-
-<ProjectList>
-	<Project
-		link="https://striking.markets/"
-		name="Striking Markets"
-		description="Angel investment syndicate focused on media tech and future of work"
-	/>
-	<Project
-		link="https://www.deusexdao.com/"
-		name="Deus Ex DAO"
-		description="Crypto advisory and angel syndicate"
-	/>
-	<Project
-		link="http://musiccareers.co"
-		name="MusicCareers"
-		description="Music industry job board"
-		acquired="(Acquired)"
-	/>
-	<Project
-		name="bitbird"
-		description="Record label, publishing, merchandising"
-		link="https://bitbirdofficial.com/"
-		acquired="(Exited)"
-	/>
-	<Project name="Heroic Academy" description="Music industry educational platform" />
-	<Project
-		name="Heroic"
-		description="Artist management, record label, publishing"
-		link="https://heroicrecordings.com/"
-		acquired="(Acquired)"
-	/>
-</ProjectList>

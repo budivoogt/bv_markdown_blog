@@ -75,8 +75,14 @@
 		@apply hover:underline hover:decoration-orange-400 hover:decoration-2 hover:underline-offset-4;
 	} */
 
-	.project-header, .post-titles {
-		@apply underline decoration-orange-400 decoration-2 underline-offset-4 hover:decoration-yellow-300 active:decoration-yellow-300;
+	.project-header,
+	.post-titles,
+	.nav-active {
+		@apply underline decoration-orange-400 decoration-2 underline-offset-4 hover:decoration-yellow-300;
+	}
+
+	.nav-inactive {
+		@apply hover:underline hover:decoration-yellow-300 hover:decoration-2 hover:underline-offset-4;
 	}
 
 	/* Code for Shiki highlighting */

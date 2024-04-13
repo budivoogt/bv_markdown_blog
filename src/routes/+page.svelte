@@ -22,8 +22,8 @@
 	<enhanced:img
 		src="$lib/images/budi_2@2x.png"
 		alt="A headshot photo of Budi Voogt"
-		sizes="(min-width:3840px) 4008px"
-		class="my-4 w-3/5 rounded-sm lg:w-1/2"
+		sizes="min(4008px, 100vw)"
+		class="my-4 w-1/2 rounded-sm lg:w-1/3"
 		fetchpriority="high"
 		loading="eager"
 	/>
@@ -45,8 +45,8 @@
 		>
 	</div>
 </div>
-<div class="mt-8 space-y-6">
-	<PostList header="Latest posts" {posts} readMore />
+<PostList header="Latest posts" {posts} readMore class="mt-10" />
+<div class="mt-8">
 	<h2 class="text-lg">Newsletter</h2>
 	<div class="flex flex-row items-baseline justify-start space-x-2">
 		<input
