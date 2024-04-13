@@ -76,13 +76,36 @@
 	} */
 
 	.project-header,
-	.post-titles,
-	.nav-active {
+	.post-titles {
 		@apply underline decoration-orange-400 decoration-2 underline-offset-4 hover:decoration-yellow-300;
 	}
 
+	/* Navigation styles */
+	.nav-active {
+		@apply underline decoration-orange-400 decoration-2 underline-offset-4;
+	}
+
 	.nav-inactive {
-		@apply hover:underline hover:decoration-yellow-300 hover:decoration-2 hover:underline-offset-4;
+		@apply relative overflow-hidden hover:underline-offset-4;
+		text-decoration: none;
+	}
+
+	/* Decorative underline element */
+	.nav-inactive::after {
+		content: "";
+		position: absolute;
+		left: 0;
+		right: 100%; /* Start with the underline fully "hidden" to the right */
+		bottom: 0px; /* Adjust according to your design */
+		background-color: orange; /* Your choice of initial decoration color */
+		height: 2px;
+		transition: right 0.125s ease-in-out; /* Animates the right property for the ease-in-out effect */
+	}
+
+	/* Hover state to reveal the underline */
+	.nav-inactive:hover::after {
+		right: 0; /* Reveal the underline */
+		background-color: #fb923c; /* Decoration color on hover (yellow-300) */
 	}
 
 	/* Code for Shiki highlighting */

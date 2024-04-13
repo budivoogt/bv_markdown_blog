@@ -18,10 +18,10 @@
 	} = $page)
 </script>
 
-<div class="flex flex-wrap justify-between border-b border-neutral-300 pb-2">
+<div class="flex flex-wrap justify-between border-b border-neutral-100 pb-2">
 	<div class="flex gap-x-3">
 		{#each navLinks as link}
-			<a href={link.href} class:nav-active={pathname === link.href} class="nav-inactive"
+			<a href={link.href} class={pathname === link.href ? "nav-active" : "nav-inactive"}
 				>{link.label}</a
 			>
 		{/each}
@@ -30,7 +30,7 @@
 		<a href="/admin" class="nav-inactive">Admin</a>
 		{#if $page.data.session}
 			{#each adminLinks as link}
-				<a href={link.href} class:nav-active={pathname === link.href} class="nav-inactive"
+				<a href={link.href} class={pathname === link.href ? "nav-active" : "nav-inactive"}
 					>{link.label}</a
 				>
 			{/each}
