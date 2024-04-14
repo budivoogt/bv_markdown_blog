@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { Badge } from "$lib/components/ui/badge"
 	import { capitalizer, formatDate } from "$lib/utils"
 	import { Timer } from "lucide-svelte"
 
@@ -21,12 +22,14 @@
 				</div>
 			{/if}
 		</div>
-		<div class="flex gap-x-2">
+		<div class="flex gap-x-1">
 			{#if sortedCategories}
 				{#each sortedCategories as category}
-					<span class="rounded-lg bg-neutral-500/80 px-1.5 text-neutral-50"
-						>{category}</span
-					>
+					<a href={`/tags/${category}`}>
+						<Badge variant="postTags">
+							{category}
+						</Badge>
+					</a>
 				{/each}
 			{/if}
 		</div>

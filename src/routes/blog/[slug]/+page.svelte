@@ -6,6 +6,7 @@
 	import type { MarkdownPost } from "$lib/types/types"
 	import { SvelteComponent, type ComponentType } from "svelte"
 	import type { PageData } from "./$types"
+	
 
 	export let data: PageData
 

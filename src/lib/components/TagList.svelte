@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { Badge } from "$lib/components/ui/badge"
 	import { cn } from "$lib/utils"
 
 	export let tags: string[] = ["svelte", "sveltekit", "coding", "philosophy", "health"]
@@ -13,38 +14,10 @@
 	<ul class="flex gap-x-1 gap-y-2">
 		{#each sortedTags as tag}
 			<li class="">
-				<a href={`/tags/${tag}`} class="">
-					<p
-						class="rounded-lg bg-neutral-500/80 px-1.5 text-center text-neutral-50 hover:bg-orange-400 active:bg-yellow-300"
-					>
+				<a href={`/tags/${tag}`}>
+					<Badge variant="postTags">
 						{tag}
-					</p>
-				</a>
-			</li>
-		{/each}
-	</ul>
-	<ul class="grid auto-cols-min gap-y-2">
-		{#each sortedTags as tag}
-			<li class="">
-				<a href={`/tags/${tag}`} class="">
-					<p
-						class="rounded-lg bg-neutral-500/80 px-1.5 text-center text-neutral-50 hover:bg-orange-400 active:bg-yellow-300"
-					>
-						{tag}
-					</p>
-				</a>
-			</li>
-		{/each}
-	</ul>
-	<ul class="grid auto-cols-max gap-y-2">
-		{#each sortedTags as tag}
-			<li class="">
-				<a href={`/tags/${tag}`} class="">
-					<p
-						class="rounded-lg bg-neutral-500/80 px-1.5 text-neutral-50 hover:bg-orange-400 active:bg-yellow-300"
-					>
-						{tag}
-					</p>
+					</Badge>
 				</a>
 			</li>
 		{/each}
