@@ -24,8 +24,15 @@ export function getCategories(posts: MarkdownPost[]) {
 		}
 	}
 	if (uniqueTags.size > 0) {
-		return uniqueTags
+		const sortedTags = Array.from(uniqueTags).sort()
+		return new Set(sortedTags)
 	} else {
 		console.error("Couldn't find any tags")
 	}
+}
+
+export function standardizeCategories (categories) {
+	
+
+	return 
 }

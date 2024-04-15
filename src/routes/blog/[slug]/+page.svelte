@@ -22,5 +22,5 @@
 
 <PostList posts={getLastPosts(markdownPosts, 5, title)} header="Read more" class="mb-6 mt-12" />
 <a href="/blog" class="">
-	<Button.Root variant="outline" class="border-2 border-black">← Back</Button.Root>
+	<Button.Root variant="outline" class="border-2 border-black">← Back to blog</Button.Root>
 </a>

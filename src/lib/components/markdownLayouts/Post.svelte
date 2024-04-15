@@ -4,8 +4,6 @@
 	import { Timer } from "lucide-svelte"
 
 	export let title, date, tags, readingTime
-	// Need to remove this function after I standardize tags
-	let sortedTags = tags.toSorted().map((cat) => cat.toLowerCase())
 </script>
 
 <article>
@@ -23,11 +21,11 @@
 			{/if}
 		</div>
 		<div class="flex gap-x-1">
-			{#if sortedTags}
-				{#each sortedTags as category}
-					<a href={`/tags/${category}`}>
+			{#if tags}
+				{#each tags as tag}
+					<a href={`/tags/${tag}`}>
 						<Badge variant="postTags">
-							{category}
+							{tag}
 						</Badge>
 					</a>
 				{/each}
