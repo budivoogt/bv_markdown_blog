@@ -2,9 +2,10 @@
 title: Lou her post
 description: A post about a beautiful woman
 date: "2023-4-15"
-categories:
+tags:
     - sveltekit
     - svelte
+    - philosophy
 published: true
 ---
 

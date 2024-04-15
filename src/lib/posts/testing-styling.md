@@ -2,10 +2,10 @@
 title: Styling Markdown
 description: I'm trying different ways to style my Markdown.
 date: "2024-4-6"
-categories:
+tags:
     - sveltekit
     - svelte
-    - Markdown
+    - markdown
 published: true
 ---
 

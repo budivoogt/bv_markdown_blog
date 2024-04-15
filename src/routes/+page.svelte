@@ -31,7 +31,7 @@
 		Welcome! I'm an entrepreneur from The Netherlands. I spent a decade running businesses in
 		the music industry. Now I code and want to build a tech business. I love exercise, art,
 		reading and am a recent father of one.
-		<a href="/about">This is my work.</a>
+		<a href="/about" class="hover:decoration-orange-500">This is my work.</a>
 	</p>
 	<div class="flex flex-row gap-x-3">
 		<a href="https://x.com/0x_brucey" target="_blank">

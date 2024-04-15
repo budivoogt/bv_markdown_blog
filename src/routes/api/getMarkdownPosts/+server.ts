@@ -1,4 +1,4 @@
-import { sortMarkdownPosts } from "$lib/client/mdPostHelpers"
+import { sortPosts } from "$lib/client/mdPostHelpers"
 import type { MarkdownPost } from "$lib/types/types"
 import { error, json, type RequestHandler } from "@sveltejs/kit"
 
@@ -19,7 +19,7 @@ async function getPosts() {
 		}
 	}
 
-	posts = sortMarkdownPosts(posts)
+	posts = sortPosts(posts)
 
 	return posts
 }

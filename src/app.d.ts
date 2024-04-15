@@ -3,7 +3,7 @@
 import type { FormType } from "$lib/components/posteditor/editor-form.svelte"
 import type { Post, Tag, TagToPost } from "$lib/schemas/drizzleSchema"
 import type { Database } from "$lib/types/supabase"
-import type { MarkdownPost } from "$lib/types/types"
+import type { MarkdownPost as mdPost, Tag as mdTag } from "$lib/types/types"
 import type { Session, SupabaseClient, User } from "@supabase/supabase-js"
 
 // for information about these interfaces
@@ -21,7 +21,8 @@ declare global {
 			}
 			post?: Post
 			posts?: Post[]
-			markdownPosts?: MarkdownPost[]
+			markdownPosts?: mdPost[]
+			markdownTags?: mdTag[]
 			tags?: Tag[]
 			message?: string
 			form?: FormType

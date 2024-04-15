@@ -27,7 +27,9 @@
 		That's why I'm going to build a new business. I'll bootstrap it and want it to be more scalable
 		than anything I've done before. I've learned to code to make this happen. I'm now working with
 		SvelteKit, a full-stack framework (which I built this blog with). This is my public declaration.
-		<a href="https://x.com/0x_brucey" target="_blank">Follow along?</a>
+		<a href="https://x.com/0x_brucey" target="_blank" class="hover:decoration-orange-500"
+			>Follow along?</a
+		>
 	</p>
 </hgroup>
 

@@ -10,8 +10,22 @@ export function getLastPosts(
 		.slice(0, limitNumber)
 }
 
-export function sortMarkdownPosts(markdownPosts: MarkdownPost[]) {
-	return markdownPosts.sort(
+export function sortPosts(posts: MarkdownPost[]) {
+	return posts.sort(
 		(first, second) => new Date(second.date).getTime() - new Date(first.date).getTime()
 	)
+}
+
+export function getCategories(posts: MarkdownPost[]) {
+	const uniqueTags: Set<string> | null = new Set(null)
+	for (const post of posts) {
+		for (const tag of post.tags) {
+			uniqueTags.add(tag)
+		}
+	}
+	if (uniqueTags.size > 0) {
+		return uniqueTags
+	} else {
+		console.error("Couldn't find any tags")
+	}
 }

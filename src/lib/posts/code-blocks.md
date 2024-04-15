@@ -2,7 +2,7 @@
 title: Code blocks
 description: Checking how the code blocks display using my MDsveX settings.
 date: "2023-4-14"
-categories:
+tags:
     - sveltekit
     - svelte
 published: true
@@ -48,7 +48,7 @@ Here's a Svelte code block:
 <script lang="ts">
 	import { capitalizer, formatDate } from "$lib/utils"
 
-	export let title, date, categories
+	export let title, date, tags
 </script>
 
 <article>
@@ -59,9 +59,9 @@ Here's a Svelte code block:
 		{/if}
 	</hgroup>
 	<div class="mt-1 flex gap-x-2 border-b-2 border-neutral-400/10">
-		{#if categories}
-			{#each categories as category}
-				<span class="rounded-sm">{category}</span>
+		{#if tags}
+			{#each tags as tag}
+				<span class="rounded-sm">{tag}</span>
 			{/each}
 		{/if}
 	</div>

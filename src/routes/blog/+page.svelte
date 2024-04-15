@@ -4,7 +4,7 @@
 	import TagList from "$lib/components/TagList.svelte"
 
 	export let data
-	$: ({ markdownPosts } = data)
+	$: ({ markdownPosts, markdownTags } = data)
 </script>
 
 <PageHeader text="Blog" />
@@ -16,4 +16,4 @@
 	class="mt-8"
 />
 
-<TagList class="mt-8" />
+<TagList tags={markdownTags} class="mt-8" />
