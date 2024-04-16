@@ -4,6 +4,7 @@
 	import PostList from "$lib/components/PostList.svelte"
 	import SeoComponent from "$lib/components/SEOComponent.svelte"
 	import * as Button from "$lib/components/ui/button"
+	import { Input } from "$lib/components/ui/input"
 	import { Github, Linkedin, Twitter } from "lucide-svelte"
 
 	export let data
@@ -12,7 +13,7 @@
 
 	const title = "Budi Voogt"
 	const description =
-		"From music industry founder to indie web developer. Follow my journey on this personal blog."
+		"From music industry founder to angel investor and indie web developer. Looking to bootstrap my next business. Follow my journey on this blog."
 </script>
 
 <SeoComponent data={{ title, description }} />
@@ -48,14 +49,18 @@
 <PostList header="Latest posts" {posts} readMore class="mt-10" />
 <div class="mt-8">
 	<h2 class="text-lg">Newsletter</h2>
-	<div class="flex flex-row items-baseline justify-start space-x-2">
-		<input
-			type="text"
-			placeholder="Subscribe"
-			class="rounded border-2 border-neutral-300 px-2"
-		/>
-		<Button.Root class="border-2 border-neutral-300" variant="outline">Submit</Button.Root>
-	</div>
+	<form
+		action="https://buttondown.email/api/emails/embed-subscribe/budi"
+		method="post"
+		target="popupwindow"
+		onsubmit="window.open('https://buttondown.email/budi', 'popupwindow')"
+		class="embeddable-buttondown-form my-4 flex w-full max-w-sm items-center space-x-2"
+	>
+		<Input type="email" placeholder="Email" name="email" id="bd-email" />
+		<Button.Root
+			class="border-2 border-neutral-400 hover:border-transparent hover:bg-orange-500 hover:text-white"
+			variant="outline"
+			type="submit">Subscribe</Button.Root
+		>
+	</form>
 </div>
-
-<b></b>

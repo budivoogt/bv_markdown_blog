@@ -4,8 +4,8 @@
 	import { decorate } from "$lib/utils"
 
 	type SeoData = {
-		title: string
-		description: string
+		title?: string
+		description?: string
 		canonical_origin?: string
 		tags?: string[]
 		ogType?: "website" | "article"
@@ -19,7 +19,7 @@
 	export let data: SeoData = {
 		title: "Budi Voogt",
 		description:
-			"From music industry founder to indie web developer. Follow my journey on this personal blog.",
+			"From music industry founder to angel investor and indie web developer. Looking to bootstrap my next business. Follow my journey on this blog.",
 		ogType: "website",
 		index: true,
 		follow: true,

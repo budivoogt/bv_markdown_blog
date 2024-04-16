@@ -3,6 +3,7 @@
 	import { page } from "$app/stores"
 	import Navbar from "$lib/components/Navbar.svelte"
 	import SeoComponent from "$lib/components/SEOComponent.svelte"
+	import SimpleAnalytics from "$lib/components/SimpleAnalytics.svelte"
 	import { onMount } from "svelte"
 	import { derived, writable } from "svelte/store"
 	import "../app.css"
@@ -44,3 +45,5 @@
 		<slot />
 	</div>
 </div>
+
+<SimpleAnalytics></SimpleAnalytics>
