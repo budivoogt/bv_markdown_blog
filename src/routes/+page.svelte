@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { getLastPosts } from "$lib/client/mdPostHelpers"
+	import Alert from "$lib/components/Alert.svelte"
 	import PageHeader from "$lib/components/PageHeader.svelte"
 	import PostList from "$lib/components/PostList.svelte"
 	import SeoComponent from "$lib/components/SEOComponent.svelte"
@@ -16,7 +17,9 @@
 		"From music industry founder to angel investor and indie web developer. Looking to bootstrap my next business. Follow my journey on this blog."
 
 	let email: string = ""
+	let showDialog: boolean = false
 	async function handleSubmit() {
+		showDialog = true
 		const encodedEmail = `email=${encodeURIComponent(email)}`
 		email = ""
 
@@ -32,9 +35,7 @@
 				}
 			)
 
-			if (response.ok) {
-				alert("You've been sent an email to confirm your address. Click it and you're in!")
-			} else {
+			if (!response.ok) {
 				console.error("Subscription failed")
 			}
 		} catch (error) {
@@ -88,3 +89,12 @@
 		>
 	</form>
 </div>
+
+<Alert
+	{showDialog}
+	showCancel={false}
+	proceedAction={() => (showDialog = false)}
+	title="Confirm your address"
+	description="Click the link in the email you were just sent. Then you're in!"
+	proceed="I confirmed 👌"
+></Alert>
