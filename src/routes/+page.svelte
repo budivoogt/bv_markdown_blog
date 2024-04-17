@@ -14,6 +14,33 @@
 	const title = "Budi Voogt"
 	const description =
 		"From music industry founder to angel investor and indie web developer. Looking to bootstrap my next business. Follow my journey on this blog."
+
+	let email: string = ""
+	async function handleSubmit() {
+		const encodedEmail = `email=${encodeURIComponent(email)}`
+		email = ""
+
+		try {
+			const response = await fetch(
+				"https://buttondown.email/api/emails/embed-subscribe/budi",
+				{
+					method: "POST",
+					headers: {
+						"Content-Type": "application/x-www-form-urlencoded"
+					},
+					body: encodedEmail
+				}
+			)
+
+			if (response.ok) {
+				alert("You've been sent an email to confirm your address. Click it and you're in!")
+			} else {
+				console.error("Subscription failed")
+			}
+		} catch (error) {
+			console.error("Error:", error)
+		}
+	}
 </script>
 
 <SeoComponent data={{ title, description }} />
@@ -50,13 +77,10 @@
 <div class="mt-8">
 	<h2 class="text-lg">Newsletter</h2>
 	<form
-		action="https://buttondown.email/api/emails/embed-subscribe/budi"
-		method="post"
-		target="popupwindow"
-		onsubmit="window.open('https://buttondown.email/budi', 'popupwindow')"
+		on:submit|preventDefault={handleSubmit}
 		class="embeddable-buttondown-form my-4 flex w-full max-w-sm items-center space-x-2"
 	>
-		<Input type="email" placeholder="Email" name="email" id="bd-email" />
+		<Input type="email" placeholder="Email" name="email" id="bd-email" bind:value={email} />
 		<Button.Root
 			class="border-2 border-neutral-400 hover:border-transparent hover:bg-orange-500 hover:text-white"
 			variant="outline"
