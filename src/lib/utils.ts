@@ -1,3 +1,6 @@
+import { dev } from "$app/environment"
+import { DEV_URL } from "$env/static/private"
+import { PUBLIC_CANONICAL_ORIGIN } from "$env/static/public"
 import { clsx, type ClassValue } from "clsx"
 import { cubicOut } from "svelte/easing"
 import type { TransitionConfig } from "svelte/transition"
@@ -79,4 +82,13 @@ export function formatDate(
 
 export function decorate(title: string) {
 	return `${title} - Budi Voogt`
+}
+
+export function getRootURL() {
+	return new URL(dev ? DEV_URL : PUBLIC_CANONICAL_ORIGIN).href
+}
+
+export function getSitemapURL(path: string, url?: string) {
+	if (!url) url = getRootURL()
+	return new URL(path, url).href
 }

@@ -1,5 +1,5 @@
-import { url } from "$lib/config"
 import type { MarkdownPost } from "$lib/types/types"
+import { getRootURL, getSitemapURL } from "$lib/utils"
 import type { RequestHandler } from "@sveltejs/kit"
 import { error } from "@sveltejs/kit"
 
@@ -10,6 +10,8 @@ export const GET: RequestHandler = async ({ fetch, setHeaders }) => {
 
 	// Update this with the public pages in the /src/routes folder
 	const pages = ["blog", "about"]
+
+	const url = getRootURL()
 
 	const response = await fetch("api/getMarkdownPosts")
 
@@ -33,26 +35,26 @@ export const GET: RequestHandler = async ({ fetch, setHeaders }) => {
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
     </url>
-    ${posts
-		.map((post) =>
-			post.published
-				? `
-                <url>
-                    <loc>${url}/blog/${post.slug}</loc>
-                    <changefreq>monthly</changefreq>
-                    <priority>0.7</priority>
-                    <lastmod>${post.date}</lastmod>
-                </url>
-                `
-				: null
-		)
-		.join("")}
+      ${posts
+			.map((post) =>
+				post.published
+					? `
+            <url>
+              <loc>${getSitemapURL(`blog/${post.slug}`, url)}</loc>
+              <changefreq>monthly</changefreq>
+              <priority>0.7</priority>
+              <lastmod>${post.date}</lastmod>
+            </url>
+            `
+					: null
+			)
+			.join("")}
     ${pages
 		.map(
 			(page) =>
 				`
                 <url>
-                    <loc>${url}/${page}</loc>
+                    <loc>${getSitemapURL(page, url)}</loc>
                     <changefreq>monthly</changefreq>
                     <priority>0.7</priority>
                 </url>
