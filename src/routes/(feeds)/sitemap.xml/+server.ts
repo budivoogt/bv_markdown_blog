@@ -1,5 +1,5 @@
 import type { MarkdownPost } from "$lib/types/types"
-import { getRootURL, getSitemapURL } from "$lib/utils"
+import { createSitemapEntry, getRootURL } from "$lib/utils"
 import type { RequestHandler } from "@sveltejs/kit"
 import { error } from "@sveltejs/kit"
 
@@ -32,35 +32,9 @@ export const GET: RequestHandler = async ({ fetch, setHeaders }) => {
     >
       <url>
         <loc>${url}</loc>
-        <changefreq>weekly</changefreq>
-        <priority>0.7</priority>
-    </url>
-      ${posts
-			.map((post) =>
-				post.published
-					? `
-            <url>
-              <loc>${getSitemapURL(`blog/${post.slug}`, url)}</loc>
-              <changefreq>monthly</changefreq>
-              <priority>0.7</priority>
-              <lastmod>${post.date}</lastmod>
-            </url>
-            `
-					: null
-			)
-			.join("")}
-    ${pages
-		.map(
-			(page) =>
-				`
-                <url>
-                    <loc>${getSitemapURL(page, url)}</loc>
-                    <changefreq>monthly</changefreq>
-                    <priority>0.7</priority>
-                </url>
-                `
-		)
-		.join("")}
+      </url>
+      ${pages.map((page) => createSitemapEntry({ page, url })).join("")}
+      ${posts.map((post) => (post.published ? createSitemapEntry({ post, url }) : null)).join("")}
     </urlset>`
 
 	return new Response(sitemap)

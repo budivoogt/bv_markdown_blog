@@ -5,6 +5,7 @@ import { clsx, type ClassValue } from "clsx"
 import { cubicOut } from "svelte/easing"
 import type { TransitionConfig } from "svelte/transition"
 import { twMerge } from "tailwind-merge"
+import type { MarkdownPost } from "./types/types"
 
 export function cn(...inputs: ClassValue[]) {
 	return twMerge(clsx(inputs))
@@ -91,4 +92,34 @@ export function getRootURL() {
 export function getSitemapURL(path: string, url?: string) {
 	if (!url) url = getRootURL()
 	return new URL(path, url).href
+}
+
+export function createSitemapEntry({
+	post,
+	page,
+	pageLastMod,
+	url
+}: {
+	post?: MarkdownPost
+	page?: string
+	pageLastMod?: string
+	url?: string
+}) {
+	if (!url) url = getRootURL()
+
+	if (page)
+		return `
+                <url>
+                    <loc>${getSitemapURL(page, url)}</loc>
+					${pageLastMod ? `<lastmod>${pageLastMod}</lastmod>` : ``}
+                </url>
+                `
+
+	if (post)
+		return `
+            <url>
+              <loc>${getSitemapURL(`blog/${post.slug}`, url)}</loc>
+              <lastmod>${post.lastmod || post.date}</lastmod>
+            </url>
+            `
 }

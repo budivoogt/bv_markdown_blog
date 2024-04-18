@@ -11,6 +11,7 @@ export type MarkdownPost = {
 	slug: string
 	description: string
 	date: string
+	lastmod?: string
 	tags: Tag[]
 	published: boolean
 }

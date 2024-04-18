@@ -2,6 +2,7 @@
 title: Styling Markdown
 description: I'm trying different ways to style my Markdown.
 date: "2024-4-6"
+lastmod: "2024-4-7"
 tags:
     - sveltekit
     - svelte

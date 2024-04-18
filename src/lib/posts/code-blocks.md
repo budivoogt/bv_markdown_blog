@@ -2,6 +2,7 @@
 title: Code blocks
 description: Checking how the code blocks display using my MDsveX settings.
 date: "2023-4-14"
+lastmod: "2023-4-15"
 tags:
     - sveltekit
     - svelte
