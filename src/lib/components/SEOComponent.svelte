@@ -4,8 +4,8 @@
 	import { decorate } from "$lib/utils"
 
 	type SeoData = {
-		title?: string
-		description?: string
+		title: string
+		description: string
 		canonical_origin?: string
 		tags?: string[]
 		ogType?: "website" | "article"

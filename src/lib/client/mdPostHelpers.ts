@@ -31,8 +31,6 @@ export function getCategories(posts: MarkdownPost[]) {
 	}
 }
 
-export function standardizeCategories (categories) {
-	
-
-	return 
+export function standardizeTags(tags: string[]) {
+	return tags.map((tag) => tag.toLowerCase()).sort()
 }

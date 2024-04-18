@@ -6,6 +6,7 @@ tags:
     - sveltekit
     - svelte
     - markdown
+    - bananas
 published: true
 ---
 

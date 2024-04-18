@@ -1,9 +1,11 @@
 <script lang="ts">
+	import { standardizeTags } from "$lib/client/mdPostHelpers"
 	import { Badge } from "$lib/components/ui/badge"
 	import { capitalizer, formatDate } from "$lib/utils"
 	import { Timer } from "lucide-svelte"
 
 	export let title, date, tags, readingTime
+	$: tags = standardizeTags(tags)
 </script>
 
 <article>
