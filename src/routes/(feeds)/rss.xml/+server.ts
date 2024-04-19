@@ -3,6 +3,8 @@ import { createRSSEntry, getRootURL, getURLhref } from "$lib/utils"
 import * as config from "$lib/utils/config"
 import type { RequestHandler } from "@sveltejs/kit"
 
+export const prerender = true
+
 export const GET: RequestHandler = async ({ fetch }) => {
 	const response = await fetch("api/getMarkdownPosts")
 	const posts: MarkdownPost[] = await response.json()
