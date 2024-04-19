@@ -89,7 +89,7 @@ export function getRootURL() {
 	return new URL(dev ? DEV_URL : PUBLIC_CANONICAL_ORIGIN).href
 }
 
-export function getSitemapURL(path: string, url?: string) {
+export function getURLhref(path: string, url?: string) {
 	if (!url) url = getRootURL()
 	return new URL(path, url).href
 }
@@ -110,7 +110,7 @@ export function createSitemapEntry({
 	if (page)
 		return `
                 <url>
-                    <loc>${getSitemapURL(page, url)}</loc>
+                    <loc>${getURLhref(page, url)}</loc>
 					${pageLastMod ? `<lastmod>${pageLastMod}</lastmod>` : ``}
                 </url>
                 `
@@ -118,8 +118,23 @@ export function createSitemapEntry({
 	if (post)
 		return `
             <url>
-              <loc>${getSitemapURL(`blog/${post.slug}`, url)}</loc>
+              <loc>${getURLhref(`blog/${post.slug}`, url)}</loc>
               <lastmod>${post.lastmod || post.date}</lastmod>
             </url>
             `
+}
+
+export function createRSSEntry(post: MarkdownPost, url?: string) {
+	if (!url) url = getRootURL()
+	const href = getURLhref(`blog/${post.slug}`, url)
+
+	return `
+						<item>
+							<title>${post.title}</title>
+							<description>${post.description}</description>
+							<link>${href}</link>
+							<guid isPermaLink="true">${href}</guid>
+							<pubDate>${new Date(post.date).toUTCString()}</pubDate>
+						</item>
+					`
 }

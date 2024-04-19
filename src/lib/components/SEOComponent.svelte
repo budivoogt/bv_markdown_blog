@@ -2,6 +2,7 @@
 	import { page } from "$app/stores"
 	import { PUBLIC_CANONICAL_ORIGIN } from "$env/static/public"
 	import { decorate } from "$lib/utils"
+	import { siteDescription, siteTitle } from "$lib/utils/config"
 
 	type SeoData = {
 		title: string
@@ -17,9 +18,8 @@
 	}
 
 	export let data: SeoData = {
-		title: "Budi Voogt",
-		description:
-			"From music industry founder to angel investor and indie web developer. Looking to bootstrap my next business. Follow my journey on this blog.",
+		title: siteTitle,
+		description: siteDescription,
 		ogType: "website",
 		index: true,
 		follow: true,
