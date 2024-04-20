@@ -1,5 +1,5 @@
 import type { Post } from "$lib/schemas/drizzleSchema"
-import { deleteAllTagsOfPost, deletePost } from "$lib/server/postStores"
+import { deleteAllTagsOfPost, deletePost } from "$lib/server/dbPostStores"
 import { error, fail, redirect } from "@sveltejs/kit"
 import type { Actions } from "./$types"
 

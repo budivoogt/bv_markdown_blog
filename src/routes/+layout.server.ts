@@ -1,5 +1,5 @@
-import { tagsPerPost as findTagsPerPost, sortPostsDesc } from "$lib/client/postHelpers"
-import { getAllPostTagPairs, getAllPosts, getAllTags } from "$lib/server/postDatabaseHelpers"
+import { tagsPerPost as findTagsPerPost, sortPostsDesc } from "$lib/client/dbPostHelpers"
+import { getAllPostTagPairs, getAllPosts, getAllTags } from "$lib/server/dbPostHelpers"
 import type { LayoutServerLoad } from "./$types"
 
 export const load: LayoutServerLoad = async ({ locals: { getSession, isBudiAuthenticated } }) => {

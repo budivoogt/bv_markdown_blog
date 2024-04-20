@@ -10,8 +10,8 @@ import {
 	insertTag,
 	insertTagToPostPair,
 	updatePost
-} from "$lib/server/postDatabaseHelpers"
-import { editPostStore, editPostTagPairStore } from "$lib/server/postStores"
+} from "$lib/server/dbPostHelpers"
+import { editPostStore, editPostTagPairStore } from "$lib/server/dbPostStores"
 import type { User } from "@supabase/supabase-js"
 import { fail, redirect } from "@sveltejs/kit"
 import { get } from "svelte/store"

@@ -1,4 +1,4 @@
-import { editPostStore, editPostTagPairStore } from "$lib/server/postStores"
+import { editPostStore, editPostTagPairStore } from "$lib/server/dbPostStores"
 import { error, json } from "@sveltejs/kit"
 import { get } from "svelte/store"
 import type { RequestHandler } from "./$types"

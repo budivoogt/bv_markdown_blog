@@ -3,7 +3,7 @@ import { get } from "svelte/store"
 import type { SuperForm } from "sveltekit-superforms"
 import { type Post } from "../schemas/drizzleSchema"
 import type { TagsPerPost } from "../types/types"
-import { postInEditFlag } from "./postStores"
+import { postInEditFlag } from "./dbPostStores"
 
 export function sortPostsDesc(posts: Post[]) {
 	return posts.sort((a, b) => b.id - a.id)

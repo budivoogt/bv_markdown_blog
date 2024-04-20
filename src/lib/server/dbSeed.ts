@@ -1,6 +1,6 @@
 import { posts, users } from "../schemas/drizzleSchema"
-import db from "./database"
-import { postSeeds, userSeeds } from "./seedData"
+import db from "./db"
+import { postSeeds, userSeeds } from "./dbSeedData"
 
 // Writing another senseless commentzzz
 

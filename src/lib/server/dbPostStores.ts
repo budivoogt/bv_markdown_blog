@@ -1,4 +1,4 @@
-import db from "$lib/server/database"
+import db from "$lib/server/db"
 import { eq } from "drizzle-orm"
 import { writable } from "svelte/store"
 import { posts, tagsToPosts, type Post, type TagToPost } from "../schemas/drizzleSchema"

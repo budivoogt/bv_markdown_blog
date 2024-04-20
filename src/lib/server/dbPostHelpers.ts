@@ -10,7 +10,7 @@ import {
 	type SchemaUser,
 	type Tag
 } from "../schemas/drizzleSchema"
-import db from "./database"
+import db from "./db"
 
 export async function getAllPosts() {
 	try {

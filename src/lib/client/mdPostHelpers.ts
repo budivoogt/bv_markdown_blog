@@ -16,7 +16,7 @@ export function sortPosts(posts: MarkdownPost[]) {
 	)
 }
 
-export function getCategories(posts: MarkdownPost[]) {
+export function getTags(posts: MarkdownPost[]) {
 	const uniqueTags: Set<string> | null = new Set(null)
 	for (const post of posts) {
 		for (const tag of post.tags) {
@@ -33,4 +33,17 @@ export function getCategories(posts: MarkdownPost[]) {
 
 export function standardizeTags(tags: string[]) {
 	return tags.map((tag) => tag.toLowerCase()).sort()
+}
+
+export function getSlugs(posts: MarkdownPost[]) {
+	const uniqueSlugs: Set<string> | null = new Set(null)
+	for (const post of posts) {
+		uniqueSlugs.add(post.slug)
+	}
+	if (uniqueSlugs.size > 0) {
+		const sortedSlugs = Array.from(uniqueSlugs).sort()
+		return new Set(sortedSlugs)
+	} else {
+		console.error("Couldn't find any slugs")
+	}
 }

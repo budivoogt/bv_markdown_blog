@@ -1,6 +1,6 @@
 import type { Post } from "$lib/schemas/drizzleSchema"
-import { getPostTagsStrings } from "$lib/server/postDatabaseHelpers"
-import { editPostStore, editPostTagPairStore } from "$lib/server/postStores"
+import { getPostTagsStrings } from "$lib/server/dbPostHelpers"
+import { editPostStore, editPostTagPairStore } from "$lib/server/dbPostStores"
 import { error, json } from "@sveltejs/kit"
 import { get } from "svelte/store"
 import type { RequestHandler } from "./$types"
