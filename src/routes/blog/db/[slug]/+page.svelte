@@ -11,10 +11,11 @@
 	export let data: PageData
 	let post: Post | undefined
 	let id: Post["id"]
+	let status: Post["status"]
 	let isBudiAuthenticated: boolean | null
 	$: ({ post, isBudiAuthenticated } = data)
 	$: if (post) {
-		;({ id } = post)
+		;({ id, status } = post)
 	}
 
 	export let form: ActionData
@@ -38,16 +39,22 @@
 			<Button.Root variant="outline" class="border-2 border-black" on:click={newPostHandler}
 				>Create new post</Button.Root
 			>
-			<Button.Root type="submit" on:click={() => editPostHandler(id)}>Edit post</Button.Root>
-			<form method="POST" action="?/changeStatus" use:enhance>
-				<input type="hidden" name="id" value={post?.id} />
-				<input type="hidden" name="status" value={post?.status} />
-				<Button.Root type="submit"
-					>{post?.status === "draft" ? "Make public" : "Set draft"}</Button.Root
+			{#if post}
+				<Button.Root type="submit" on:click={() => editPostHandler(id)}
+					>Edit post</Button.Root
 				>
-			</form>
-			<DeletePostForm id={post?.id} formAction="../../admin/posts?/deletePost"
-			></DeletePostForm>
+				{#if status}
+					<form method="POST" action="?/changeStatus" use:enhance>
+						<input type="hidden" name="id" value={post.id} />
+						<input type="hidden" name="status" value={post.status} />
+						<Button.Root type="submit"
+							>{post.status === "draft" ? "Make public" : "Set draft"}</Button.Root
+						>
+					</form>
+				{/if}
+				<DeletePostForm id={post?.id} formAction="../../admin/posts?/deletePost"
+				></DeletePostForm>
+			{/if}
 		</div>
 	{/if}
 	<p class="my-8">{capitalizer(post?.body ?? "")}</p>

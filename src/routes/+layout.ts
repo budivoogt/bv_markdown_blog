@@ -1,4 +1,4 @@
-import { PUBLIC_SUPABASE_ANON_KEY, PUBLIC_SUPABASE_URL } from "$env/static/public"
+import { SUPABASE_ANON_KEY, SUPABASE_URL } from "$lib/client/dbHelpers"
 import { getSlugs, getTags } from "$lib/client/mdPostHelpers"
 import { mdPostSlugs, mdPostTags, mdPosts } from "$lib/client/mdPostStores"
 import type { Database } from "$lib/types/supabase"
@@ -12,7 +12,7 @@ export const prerender = true
 export const load: LayoutLoad = async ({ fetch, data, depends }) => {
 	depends("supabase:auth")
 
-	const supabase = createBrowserClient<Database>(PUBLIC_SUPABASE_URL, PUBLIC_SUPABASE_ANON_KEY, {
+	const supabase = createBrowserClient<Database>(SUPABASE_URL, SUPABASE_ANON_KEY, {
 		global: {
 			fetch
 		},
