@@ -2,7 +2,7 @@
 import "dotenv/config"
 import type { Config } from "drizzle-kit"
 
-if (!process.env.DATABASE_URL) {
+if (!process.env.LOCAL_SUPABASE_DB_URL) {
 	console.error("Can't find db url")
 }
 
@@ -12,7 +12,7 @@ export default {
 	driver: "pg",
 	dbCredentials: {
 		// Local Supabase database for dev
-		connectionString: process.env.DATABASE_URL || ("" as string)
+		connectionString: process.env.LOCAL_SUPABASE_DB_URL || ("" as string)
 	},
 	// Print all statements
 	verbose: true,

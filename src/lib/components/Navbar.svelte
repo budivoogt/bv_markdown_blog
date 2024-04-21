@@ -27,8 +27,8 @@
 		{/each}
 	</div>
 	<div class="flex gap-x-3">
-		<a href="/admin" class="nav-inactive">Admin</a>
 		{#if $page.data.session}
+			<a href="/admin" class="nav-inactive">Admin</a>
 			{#each adminLinks as link}
 				<a href={link.href} class={pathname === link.href ? "nav-active" : "nav-inactive"}
 					>{link.label}</a

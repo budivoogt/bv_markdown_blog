@@ -9,6 +9,8 @@ import { eq } from "drizzle-orm"
 import type { PostgresJsDatabase } from "drizzle-orm/postgres-js"
 import type { PageServerLoad } from "./$types"
 
+export const prerender = false
+
 export const load: PageServerLoad = async ({ params }) => {
 	const { slug } = params
 

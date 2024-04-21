@@ -13,7 +13,7 @@ export const GET: RequestHandler = async ({ fetch, setHeaders }) => {
 
 	const url = getRootURL()
 
-	const response = await fetch("api/getMarkdownPosts")
+	const response = await fetch("/api/getMarkdownPosts")
 
 	if (!response.ok) {
 		error(500, "failed to fetch posts")

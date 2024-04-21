@@ -6,7 +6,7 @@ import type { RequestHandler } from "@sveltejs/kit"
 export const prerender = true
 
 export const GET: RequestHandler = async ({ fetch }) => {
-	const response = await fetch("api/getMarkdownPosts")
+	const response = await fetch("/api/getMarkdownPosts")
 	const posts: MarkdownPost[] = await response.json()
 
 	const headers = { "Content-Type": "application/xml" }
