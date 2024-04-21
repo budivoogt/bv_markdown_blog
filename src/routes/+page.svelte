@@ -66,7 +66,7 @@
 		<a href="https://x.com/0x_brucey" target="_blank">
 			<Twitter strokeWidth="1.5" class="h-5" /></a
 		>
-		<a href="https://github.com/brucey0x" target="_blank"
+		<a href="https://github.com/budivoogt" target="_blank"
 			><Github strokeWidth="1.5" class="h-5" /></a
 		>
 		<a href="https://www.linkedin.com/in/budivoogt/" target="_blank"

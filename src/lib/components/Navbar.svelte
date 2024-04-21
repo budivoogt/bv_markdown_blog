@@ -19,14 +19,14 @@
 </script>
 
 <div class="flex flex-wrap justify-between border-b border-neutral-100 pb-2">
-	<div class="flex gap-x-3">
+	<div class="flex gap-x-4">
 		{#each navLinks as link}
 			<a href={link.href} class={pathname === link.href ? "nav-active" : "nav-inactive"}
 				>{link.label}</a
 			>
 		{/each}
 	</div>
-	<div class="flex gap-x-3">
+	<div class="flex gap-x-4">
 		{#if $page.data.session}
 			<a href="/admin" class="nav-inactive">Admin</a>
 			{#each adminLinks as link}

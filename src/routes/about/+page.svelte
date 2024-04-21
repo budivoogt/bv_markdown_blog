@@ -14,28 +14,26 @@
 <hgroup class="space-y-4">
 	<PageHeader text="A long story, short" />
 	<p class="prose">
-		For the past decade, I was a music industry entrepreneur. It began with managing my friends
-		in university and evolved into record label, publishing and education businesses. We managed
-		artists who went from bedroom producers to international touring fame, performing at famous
-		festivals like Coachella and generating millions of streams. It was a marvelous journey,
-		teaching me how to lead, operate and sell. In 2022 we were acquired and I exited my music
-		ventures to do something new.
+		For the past decade, I was a music entrepreneur. I began managing my friends in university.
+		Then I built record label, publishing and education companies. We developed artists from
+		bedroom producers to performing globally at festivals like Coachella. We generated millions
+		of streams. It was a marvelous journey, teaching me how to lead, operate and sell. In 2022
+		we were acquired, allowing me to pursue my interests beyond music.
 		<br /><br />
-		I then built and sold a job board for the music industry and dove into the world of crypto and
-		venture capital. I founded a crypto DAO and angel investment syndicate for Media Tech and Future
-		of Work. After 10 investments I realized that while supporting founders is cool, it's not as
-		enjoyable to me as taking something from zero to one.
+		I then built and sold a music industry job board. And dove into the world of crypto and venture
+		capital. I founded a crypto DAO and angel investment syndicate for Media Tech and Future of Work.
+		After 10 investments I realized that while supporting founders is cool, it's not as enjoyable
+		to me as taking something from zero to one.
 		<br /><br />
-		That's why I want to build a new business. Bootstrapped and scalable. I'm learning to code to
-		be able to build MVPs. I expect it's going to take multiple tries to get traction, since I need
-		to match the complexity of the idea with my coding skills. I'm working with the SvelteKit full-stack
-		framework (with which I made this blog). I'm sharing what I learn along the way here and
+		That's why I want to build a new business. Something bootstrapped and scalable. I'm learning
+		to code to be better equipped to build it. I'm working with SvelteKit, a full-stack framework
+		I love. This blog is made with it. I'm sharing what I learn along the way here and
 		<a href="https://x.com/0x_brucey" target="_blank" class="hover:decoration-orange-500"
 			>on X</a
 		>.
 		<br /><br />
-		Reach me via mail (guess the address 🕵️‍♀️) or
-		<a href="https://dm.new/budi" target="_blank" class="hover:decoration-orange-500">X DM</a>.
+		Always happy to connect with other builders. Reach me via mail (guess the address 🕵️‍♀️) or
+		<a href="https://dm.new/budi" target="_blank" class="hover:decoration-orange-500">DM</a>.
 	</p>
 </hgroup>
 
