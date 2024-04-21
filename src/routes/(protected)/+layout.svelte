@@ -1,7 +1,7 @@
 <script lang="ts">
-    import SeoComponent from "$lib/components/SEOComponent.svelte";
+	import SeoComponent from "$lib/components/SEOComponent.svelte"
 </script>
 
-<SeoComponent
-    data={{index: false, follow: false}}
-></SeoComponent>
+<SeoComponent data={{ index: false, follow: false }} />
+
+<slot />
