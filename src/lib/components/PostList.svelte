@@ -7,7 +7,7 @@
 	export let hrefPath = "/blog"
 	export let readMore: boolean = false
 	export let DateTimeFormatOptions: Intl.DateTimeFormatOptions | undefined = {
-		month: "long",
+		month: "short",
 		year: "numeric"
 	}
 	let className: string | undefined = undefined

@@ -19,7 +19,7 @@
 <PostList
 	posts={markdownPosts}
 	header="All posts"
-	DateTimeFormatOptions={{ month: "long", year: "numeric" }}
+	DateTimeFormatOptions={{ month: "short", year: "numeric" }}
 	class="mt-8"
 />
 
