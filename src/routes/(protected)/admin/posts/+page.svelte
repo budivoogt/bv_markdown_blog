@@ -78,7 +78,7 @@
 					})}</Table.Cell
 				>
 				<Table.Cell class="flex-initial justify-center">
-					<a href={`/blog/${slug}`}>
+					<a href={`/blog/db/${slug}`}>
 						<Eye strokeWidth="1" />
 					</a>
 				</Table.Cell>

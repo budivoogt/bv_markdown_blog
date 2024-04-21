@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { enhance } from "$app/forms"
-	import { editPostHandler, newPostHandler } from "$lib/client/postHelpers.js"
+	import { editPostHandler, newPostHandler } from "$lib/client/dbPostHelpers"
 	import DeletePostForm from "$lib/components/DeletePostForm.svelte"
 	import * as Button from "$lib/components/ui/button"
 	import type { Post } from "$lib/schemas/drizzleSchema"
