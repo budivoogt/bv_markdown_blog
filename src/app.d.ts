@@ -21,10 +21,9 @@ declare global {
 			}
 			post?: Post
 			posts?: Post[]
-			markdownPosts?: mdPost[]
+			mdPosts?: mdPost[]
 			markdownTags?: mdTag[]
 			tags?: Tag[]
-			message?: string
 			form?: FormType
 			postTags?: TagToPost[]
 			props?: {

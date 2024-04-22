@@ -2,7 +2,6 @@ import { SUPABASE_ANON_KEY, SUPABASE_URL } from "$lib/client/dbHelpers"
 import { getSlugs, getTags } from "$lib/client/mdPostHelpers"
 import { mdPostSlugs, mdPostTags, mdPosts } from "$lib/client/mdPostStores"
 import type { Database } from "$lib/types/supabase"
-import type { MarkdownPost } from "$lib/types/types"
 import { createBrowserClient, isBrowser, parse } from "@supabase/ssr"
 import type { AuthError, Session } from "@supabase/supabase-js"
 import type { LayoutLoad } from "./$types"
@@ -36,15 +35,12 @@ export const load: LayoutLoad = async ({ fetch, data, depends }) => {
 		error: null | AuthError
 	}
 
-	const markdownResponse = await fetch("/api/getMarkdownPosts")
-	const markdownPosts: MarkdownPost[] = await markdownResponse.json()
-
 	let mdTags: Set<string> | undefined, mdSlugs: Set<string> | undefined
-	if (markdownPosts) {
-		mdPosts.set(markdownPosts)
-		mdTags = getTags(markdownPosts)
+	if (data.mdPosts) {
+		mdPosts.set(data.mdPosts)
+		mdTags = getTags(data.mdPosts)
 		if (mdTags) mdPostTags.set(mdTags)
-		mdSlugs = getSlugs(markdownPosts)
+		mdSlugs = getSlugs(data.mdPosts)
 		if (mdSlugs) mdPostSlugs.set(mdSlugs)
 	}
 
@@ -54,7 +50,7 @@ export const load: LayoutLoad = async ({ fetch, data, depends }) => {
 		session,
 		posts: data.posts,
 		tags: data.tags,
-		markdownPosts: markdownPosts,
+		markdownPosts: data.mdPosts,
 		markdownTags: mdTags,
 		postTags: data.postTags,
 		post: data.post,

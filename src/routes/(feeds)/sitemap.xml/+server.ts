@@ -1,9 +1,9 @@
-import type { MarkdownPost } from "$lib/types/types"
+import { getMDPosts } from "$lib/server/mdPostHelpers"
 import { createSitemapEntry, getRootURL } from "$lib/utils"
 import type { RequestHandler } from "@sveltejs/kit"
 import { error } from "@sveltejs/kit"
 
-export const GET: RequestHandler = async ({ fetch, setHeaders }) => {
+export const GET: RequestHandler = async ({ setHeaders }) => {
 	setHeaders({
 		"Content-Type": "application/xml"
 	})
@@ -13,14 +13,11 @@ export const GET: RequestHandler = async ({ fetch, setHeaders }) => {
 
 	const url = getRootURL()
 
-	const response = await fetch("/api/getMarkdownPosts")
-
-	if (!response.ok) {
+	const posts = await getMDPosts()
+	if (!posts) {
 		error(500, "failed to fetch posts")
 	}
-
-	const posts: MarkdownPost[] = await response.json()
-
+  
 	const sitemap = `<?xml version="1.0" encoding="UTF-8" ?>
     <urlset
       xmlns="https://www.sitemaps.org/schemas/sitemap/0.9"

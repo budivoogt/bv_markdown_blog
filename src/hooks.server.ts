@@ -35,8 +35,7 @@ export const handle: Handle = async ({ event, event: { locals, cookies, url }, r
 	}
 
 	if (
-		// (url.pathname.startsWith("/admin/") || url.pathname.startsWith("/api")) &&
-		url.pathname.startsWith("/admin/") &&
+		(url.pathname.startsWith("/admin/") || url.pathname.startsWith("/api")) &&
 		!locals.isBudiAuthenticated
 	) {
 		console.error("Path unauthorized")

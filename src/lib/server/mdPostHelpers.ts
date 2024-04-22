@@ -1,11 +1,13 @@
-import { sortPosts } from "$lib/client/mdPostHelpers"
 import type { MarkdownPost } from "$lib/types/types"
-import { error, json, type RequestHandler } from "@sveltejs/kit"
+import { sortPosts } from "$lib/client/mdPostHelpers"
 
-async function getPosts() {
+export async function getMDPosts() {
 	let posts: MarkdownPost[] = []
 
 	const paths = import.meta.glob("/src/lib/posts/*.md", { eager: true })
+
+    if (!paths) console.error("");
+    
 
 	for (const path in paths) {
 		const file = paths[path]
@@ -22,14 +24,4 @@ async function getPosts() {
 	posts = sortPosts(posts)
 
 	return posts
-}
-
-export const GET: RequestHandler = async () => {
-	try {
-		const posts = await getPosts()
-		return json(posts)
-	} catch (err) {
-		console.error(`couldn't get markdown posts. Error: ${err}`)
-		error(400, "couldn't return markdown posts")
-	}
 }

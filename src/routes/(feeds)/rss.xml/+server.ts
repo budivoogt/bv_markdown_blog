@@ -1,13 +1,16 @@
-import type { MarkdownPost } from "$lib/types/types"
+import { getMDPosts } from "$lib/server/mdPostHelpers"
 import { createRSSEntry, getRootURL, getURLhref } from "$lib/utils"
 import * as config from "$lib/utils/config"
 import type { RequestHandler } from "@sveltejs/kit"
+import { error } from "@sveltejs/kit"
 
 export const prerender = true
 
-export const GET: RequestHandler = async ({ fetch }) => {
-	const response = await fetch("/api/getMarkdownPosts")
-	const posts: MarkdownPost[] = await response.json()
+export const GET: RequestHandler = async () => {
+	const posts = await getMDPosts()
+	if (!posts) {
+		error(500, "failed to fetch posts")
+	}
 
 	const headers = { "Content-Type": "application/xml" }
 
