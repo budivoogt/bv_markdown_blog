@@ -1,14 +1,14 @@
 <script lang="ts">
 	export let name: string
 	export let description: string
-	export let link: string | null = null
+	export let link: { href: string, label: string} | null  = null
 	export let acquired: string | null = null
 </script>
 
 <div class="col-start-1 grid-rows-2">
 	<div class="flex">
 		{#if link}
-			<a href={link} target="_blank">
+			<a href={link.href} aria-label={link.label} target="_blank">
 				<p class="project-header font-semibold">{name}</p>
 			</a>
 		{:else}

@@ -63,14 +63,16 @@
 		<a href="/about" class="hover:decoration-orange-500">This is my work.</a>
 	</p>
 	<div class="flex flex-row gap-x-3">
-		<a href="https://x.com/0x_brucey" target="_blank">
+		<a href="https://x.com/0x_brucey" aria-label="Visit my X profile" target="_blank">
 			<Twitter strokeWidth="1.5" class="h-5" /></a
 		>
-		<a href="https://github.com/budivoogt" target="_blank"
+		<a href="https://github.com/budivoogt" aria-label="Visit my Github profile" target="_blank"
 			><Github strokeWidth="1.5" class="h-5" /></a
 		>
-		<a href="https://www.linkedin.com/in/budivoogt/" target="_blank"
-			><Linkedin strokeWidth="1.5" class="h-5" /></a
+		<a
+			href="https://www.linkedin.com/in/budivoogt/"
+			aria-label="Visit my LinkedIn profile"
+			target="_blank"><Linkedin strokeWidth="1.5" class="h-5" /></a
 		>
 	</div>
 </div>
