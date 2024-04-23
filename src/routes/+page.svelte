@@ -3,7 +3,6 @@
 	import Alert from "$lib/components/Alert.svelte"
 	import PageHeader from "$lib/components/PageHeader.svelte"
 	import PostList from "$lib/components/PostList.svelte"
-	import SeoComponent from "$lib/components/SEOComponent.svelte"
 	import * as Button from "$lib/components/ui/button"
 	import { Input } from "$lib/components/ui/input"
 	import { Github, Linkedin, Twitter } from "lucide-svelte"
@@ -11,10 +10,6 @@
 	export let data
 	$: ({ markdownPosts } = data)
 	$: posts = getLastPosts(markdownPosts, 5)
-
-	const title = "Budi Voogt"
-	const description =
-		"From music industry founder to angel investor and indie web developer. Looking to bootstrap my next business. Follow my journey on this blog."
 
 	let email: string = ""
 	let showDialog: boolean = false
@@ -43,8 +38,6 @@
 		}
 	}
 </script>
-
-<SeoComponent data={{ title, description }} />
 
 <div class="space-y-4">
 	<PageHeader text="Budi Voogt" />

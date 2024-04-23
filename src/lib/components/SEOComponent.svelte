@@ -17,7 +17,7 @@
 		twitterImage?: string
 	}
 
-	export let data: SeoData = {
+	const defaultData: SeoData = {
 		title: siteTitle,
 		description: siteDescription,
 		ogType: "website",
@@ -25,6 +25,10 @@
 		follow: true,
 		author: "Budi Voogt"
 	}
+
+	export let data: SeoData = defaultData
+
+	$: data = { ...defaultData, ...data }
 
 	$: ({
 		title,

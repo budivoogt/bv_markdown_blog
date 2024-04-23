@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { getLastPosts } from "$lib/client/mdPostHelpers"
 	import ButtonOutline from "$lib/components/ButtonOutline.svelte"
-	import SeoHeader from "$lib/components/MarkdownSEOHeader.svelte"
 	import PostList from "$lib/components/PostList.svelte"
+	import SeoComponent from "$lib/components/SEOComponent.svelte"
 	import type { MarkdownPost } from "$lib/types/types"
 	import { SvelteComponent, type ComponentType } from "svelte"
 	import type { PageData } from "./$types"
@@ -13,10 +13,10 @@
 	let markdownPosts: MarkdownPost[]
 	let content: ComponentType<SvelteComponent>
 	$: ({ content, meta, markdownPosts } = data)
-	$: ({ title } = meta)
+	$: ({ title, description, tags } = meta)
 </script>
 
-<SeoHeader {meta} />
+<SeoComponent data={{ title, description, tags }}></SeoComponent>
 
 <svelte:component this={content} />
 
