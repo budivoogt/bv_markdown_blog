@@ -1,6 +1,10 @@
 import type { PageLoad } from "./$types"
 
-export const load: PageLoad = async ({ params: { slug } }) => {
+export const load: PageLoad = async ({ params: { slug }, setHeaders }) => {
+	setHeaders ( {
+		'Cache-Control': `max-age=0, s-maxage=${60}`
+	})
+
 	try {
 		const post = await import(`../../../lib/posts/${slug}.md`)
 		return { content: post.default, meta: post.metadata }

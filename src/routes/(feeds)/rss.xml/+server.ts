@@ -6,13 +6,16 @@ import { error } from "@sveltejs/kit"
 
 export const prerender = true
 
-export const GET: RequestHandler = async () => {
+export const GET: RequestHandler = async ({ setHeaders }) => {
+	setHeaders({
+		"Content-Type": "application/xml",
+		"Cache-Control": `max-age=0, s-maxage=${60 * 60}`
+	})
+
 	const posts = await getMDPosts()
 	if (!posts) {
 		error(500, "failed to fetch posts")
 	}
-
-	const headers = { "Content-Type": "application/xml" }
 
 	const url = getRootURL()
 
@@ -28,5 +31,5 @@ export const GET: RequestHandler = async () => {
 		</rss>
 	`.trim()
 
-	return new Response(xml, { headers })
+	return new Response(xml)
 }

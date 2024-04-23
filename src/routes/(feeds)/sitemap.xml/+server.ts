@@ -5,7 +5,8 @@ import { error } from "@sveltejs/kit"
 
 export const GET: RequestHandler = async ({ setHeaders }) => {
 	setHeaders({
-		"Content-Type": "application/xml"
+		"Content-Type": "application/xml",
+		"Cache-Control": `max-age=0, s-maxage=${60 * 60}`
 	})
 
 	// Update this with the public pages in the /src/routes folder
@@ -17,7 +18,7 @@ export const GET: RequestHandler = async ({ setHeaders }) => {
 	if (!posts) {
 		error(500, "failed to fetch posts")
 	}
-  
+
 	const sitemap = `<?xml version="1.0" encoding="UTF-8" ?>
     <urlset
       xmlns="https://www.sitemaps.org/schemas/sitemap/0.9"

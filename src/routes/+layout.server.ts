@@ -15,7 +15,6 @@ export const load: LayoutServerLoad = async ({ locals: { getSession, isBudiAuthe
 
 	const mdPosts = await getMDPosts()
 
-	
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	const returnObj: { [key: string]: any } = {
 		posts,
