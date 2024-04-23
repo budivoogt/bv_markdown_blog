@@ -46,6 +46,7 @@
     "@bitmachina/highlighter": "^1.0.0-alpha.7",
     "@supabase/ssr": "^0.0.10",
     "@supabase/supabase-js": "^2.39.2",
+    "@sveltejs/adapter-cloudflare": "^4.4.0",
     "@sveltejs/enhanced-img": "^0.2.0",
     "bits-ui": "^0.19.7",
     "clsx": "^2.0.0",
