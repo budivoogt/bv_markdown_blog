@@ -3,7 +3,7 @@
 	import { PUBLIC_CANONICAL_ORIGIN } from "$env/static/public"
 	import { decorate } from "$lib/utils"
 	import { openGraphImage, siteDescription, siteTitle } from "$lib/utils/config"
-	import { CldOgImage, getCldOgImageUrl } from "svelte-cloudinary"
+	import { getCldOgImageUrl } from "svelte-cloudinary"
 
 	type SeoData = {
 		title: string
@@ -38,8 +38,18 @@
 		data.OgImage = OgImgObject
 	}
 
-	$: ({ title, description, canonical_origin, tags, ogType, index, follow, author, OgImage, xImage } =
-		data)
+	$: ({
+		title,
+		description,
+		canonical_origin,
+		tags,
+		ogType,
+		index,
+		follow,
+		author,
+		OgImage,
+		xImage
+	} = data)
 </script>
 
 <svelte:head>
@@ -92,5 +102,3 @@
 
 	<meta name="twitter:card" content="summary_large_image" />
 </svelte:head>
-
-<!-- <CldOgImage src="bv-blog/budi_headshot" height={1254} crop="auto" /> -->
