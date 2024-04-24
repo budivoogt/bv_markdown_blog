@@ -15,7 +15,7 @@ I understand this theory, and as I have some means should be able to employ it. 
 
 For example, I recently lost my wireless earbuds. Replacing them with the latest version of the product I like was a decision that I made in minutes. 
 
-But also recently, a neighbour parked his car against ours. It caused a scratch, but the annoying thing was that he left his car in that position. Perhaps as a provocation. I felt like I wanted to get an apology for the injustice, and any damages they would recover wouldn’t be meaningful. It would require a social confrontation, which adds emotional weight to the transactional component of getting the scratch repaired. In this situation, I found it much harder to decide it wasn’t rational to pursue this.
+But also recently, a neighbour parked his car against ours. It caused a scratch, but the annoying thing was that he left his car in that position. Perhaps as a provocation. I felt like I wanted to get an apology for the injustice, but any damages they would recover wouldn’t be meaningful. It would require a social confrontation, which adds emotional weight to the transactional component of getting the scratch repaired. In this situation, I found it much harder to decide it wasn’t rational to pursue this.
 
 These decisions compound throughout a life. The benefit of making them rationally isn’t just the saving of time, but more importantly of attention and equanimity.
 
