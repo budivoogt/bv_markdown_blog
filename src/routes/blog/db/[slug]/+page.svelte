@@ -6,9 +6,8 @@
 	import type { Post } from "$lib/schemas/drizzleSchema"
 	import { capitalizer } from "$lib/utils"
 	import { Toaster, toast } from "svelte-sonner"
-	import type { ActionData, PageData } from "./$types"
 
-	export let data: PageData
+	export let data
 	let post: Post | undefined
 	let id: Post["id"]
 	let status: Post["status"]
@@ -18,7 +17,7 @@
 		;({ id, status } = post)
 	}
 
-	export let form: ActionData
+	export let form
 	$: if (form?.status) {
 		toast.success(`Post status changed to ${form?.status}`)
 	}

@@ -4,11 +4,10 @@ import { mdPostSlugs, mdPostTags, mdPosts } from "$lib/client/mdPostStores"
 import type { Database } from "$lib/types/supabase"
 import { createBrowserClient, isBrowser, parse } from "@supabase/ssr"
 import type { AuthError, Session } from "@supabase/supabase-js"
-import type { LayoutLoad } from "./$types"
 
 export const prerender = true
 
-export const load: LayoutLoad = async ({ fetch, data, depends }) => {
+export async function load({ fetch, data, depends }) {
 	depends("supabase:auth")
 
 	const supabase = createBrowserClient<Database>(SUPABASE_URL, SUPABASE_ANON_KEY, {

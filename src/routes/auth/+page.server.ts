@@ -1,10 +1,9 @@
 import type { Provider } from "@supabase/supabase-js"
 import { fail, redirect } from "@sveltejs/kit"
-import type { Actions, PageServerLoad } from "./$types"
 
 export const prerender = false
 
-export const load: PageServerLoad = async ({ locals: { getSession } }) => {
+export async function load({ locals: { getSession } }) {
 	const session = await getSession()
 
 	if (session) {
@@ -45,4 +44,4 @@ export const actions = {
 			return fail(400, { error, message: "Signout failed" })
 		}
 	}
-} satisfies Actions
+}

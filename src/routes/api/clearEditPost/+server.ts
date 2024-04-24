@@ -1,9 +1,8 @@
 import { editPostStore, editPostTagPairStore } from "$lib/server/dbPostStores"
 import { error, json } from "@sveltejs/kit"
 import { get } from "svelte/store"
-import type { RequestHandler } from "./$types"
 
-export const GET: RequestHandler = async () => {
+export function GET() {
 	const postInEdit = get(editPostStore)
 	const PostInEditTags = get(editPostTagPairStore)
 	if (postInEdit) {

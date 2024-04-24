@@ -17,9 +17,8 @@ import { fail, redirect } from "@sveltejs/kit"
 import { get } from "svelte/store"
 import { superValidate } from "sveltekit-superforms"
 import { zod } from "sveltekit-superforms/adapters"
-import type { Actions, PageServerLoad } from "./$types"
 
-export const load: PageServerLoad = async ({ depends }) => {
+export async function load({ depends }) {
 	depends("editingPost")
 
 	let postToEdit: (Post & { tags?: string[] }) | null = null
@@ -40,7 +39,7 @@ export const load: PageServerLoad = async ({ depends }) => {
 	}
 }
 
-export const actions: Actions = {
+export async function actions () {
 	createPost: async (event) => {
 		const form = await superValidate(event, zod(formSchema))
 		const { data } = form

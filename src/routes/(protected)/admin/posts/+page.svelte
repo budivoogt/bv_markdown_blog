@@ -10,9 +10,8 @@
 	import { capitalizer } from "$lib/utils"
 	import { Eye, Pencil, Trash2 } from "lucide-svelte"
 	import { Toaster, toast } from "svelte-sonner"
-	import type { PageData } from "./$types"
 
-	export let data: PageData
+	export let data
 	let postTags: TagsPerPost
 	let posts: Post[]
 	$: ({ posts, postTags } = data)

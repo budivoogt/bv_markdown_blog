@@ -7,11 +7,10 @@ import { editPostStore, editPostTagPairStore } from "$lib/server/dbPostStores"
 import { error, redirect, type Actions } from "@sveltejs/kit"
 import { eq } from "drizzle-orm"
 import type { PostgresJsDatabase } from "drizzle-orm/postgres-js"
-import type { PageServerLoad } from "./$types"
 
 export const prerender = false
 
-export const load: PageServerLoad = async ({ params }) => {
+export async function load({ params }) {
 	const { slug } = params
 
 	const database: PostgresJsDatabase<typeof schema> = db()

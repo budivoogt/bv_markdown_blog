@@ -1,8 +1,6 @@
-import type { PageLoad } from "./$types"
-
-export const load: PageLoad = async ({ params: { slug }, setHeaders }) => {
-	setHeaders ( {
-		'Cache-Control': `max-age=0, s-maxage=${60}`
+export async function load({ params: { slug }, setHeaders }) {
+	setHeaders({
+		"Cache-Control": `max-age=0, s-maxage=${60}`
 	})
 
 	try {

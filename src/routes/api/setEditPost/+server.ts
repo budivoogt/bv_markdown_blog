@@ -3,9 +3,8 @@ import { getPostTagsStrings } from "$lib/server/dbPostHelpers"
 import { editPostStore, editPostTagPairStore } from "$lib/server/dbPostStores"
 import { error, json } from "@sveltejs/kit"
 import { get } from "svelte/store"
-import type { RequestHandler } from "./$types"
 
-export const POST: RequestHandler = async ({ request }) => {
+export async function POST({ request }) {
 	const post: Post = await request.json()
 	const currentEditPostStore = get(editPostStore)
 	const currentPostTags = await getPostTagsStrings(post.id)

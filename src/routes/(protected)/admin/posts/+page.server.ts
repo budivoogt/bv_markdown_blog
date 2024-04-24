@@ -1,9 +1,8 @@
 import type { Post } from "$lib/schemas/drizzleSchema"
 import { deleteAllTagsOfPost, deletePost } from "$lib/server/dbPostStores"
 import { error, fail, redirect } from "@sveltejs/kit"
-import type { Actions } from "./$types"
 
-export const actions: Actions = {
+export async function actions() {
 	deletePost: async ({ locals: { isBudiAuthenticated }, request, url }) => {
 		if (!isBudiAuthenticated) {
 			error(403, "Not authorized")

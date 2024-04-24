@@ -1,9 +1,8 @@
 import { tagsPerPost as findTagsPerPost, sortPostsDesc } from "$lib/client/dbPostHelpers"
 import { getAllPostTagPairs, getAllPosts, getAllTags } from "$lib/server/dbPostHelpers"
 import { getMDPosts } from "$lib/server/mdPostHelpers"
-import type { LayoutServerLoad } from "./$types"
 
-export const load: LayoutServerLoad = async ({ locals: { getSession, isBudiAuthenticated } }) => {
+export async function load({ locals: { getSession, isBudiAuthenticated } }) {
 	const postRows = await getAllPosts()
 	const posts = sortPostsDesc(postRows)
 
