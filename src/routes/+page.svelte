@@ -6,6 +6,7 @@
 	import * as Button from "$lib/components/ui/button"
 	import { Input } from "$lib/components/ui/input"
 	import { Github, Linkedin, Twitter } from "lucide-svelte"
+	import { CldImage } from "svelte-cloudinary"
 
 	export let data
 	$: ({ markdownPosts } = data)
@@ -41,14 +42,20 @@
 
 <div class="space-y-4">
 	<PageHeader text="Budi Voogt" />
-	<enhanced:img
-		src="$lib/images/budi_2@2x.png"
-		alt="A headshot photo of Budi Voogt"
-		sizes="min(4008px, 100vw)"
-		class="my-4 w-1/2 rounded-sm lg:w-1/3"
-		fetchpriority="high"
-		loading="eager"
-	/>
+	<div class="my-4 w-1/2 lg:w-1/3">
+		<CldImage
+			src="bv-blog/bsrwfkvu9jxm2t4eumef"
+			alt="A headshot photo of Budi Voogt"
+			width={2004}
+			height={2672}
+			layout="constrained"
+			loading="eager"
+			decoding="async"
+			fetchpriority="high"
+			sizes="(max-width: 1024px) 50vw, 33.33vw"
+			class="rounded-sm"
+		/>
+	</div>
 	<p class="prose">
 		Welcome! I'm an entrepreneur from The Netherlands. I spent a decade running businesses in
 		the music industry. Now I code and want to build a tech business. I love exercise, art,
@@ -93,3 +100,9 @@
 	description="Click the link in the email you were just sent. Then you're in!"
 	proceed="I confirmed 👌"
 ></Alert>
+
+<style>
+	.image-card {
+		@apply my-4 w-1/2 rounded-sm lg:w-1/3;
+	}
+</style>
