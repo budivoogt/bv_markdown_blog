@@ -39,7 +39,7 @@ export async function load({ depends }) {
 	}
 }
 
-export async function actions () {
+export const actions = {
 	createPost: async (event) => {
 		const form = await superValidate(event, zod(formSchema))
 		const { data } = form
