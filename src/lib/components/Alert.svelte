@@ -10,7 +10,6 @@
 	export let showProceed: boolean = true
 	export let proceed: string = "Continue"
 	export let proceedAction: (() => void) | null = null
-	export let proceedVariant: string | null = null
 	export let showDialog: boolean | null = null
 </script>
 
