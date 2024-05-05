@@ -45,12 +45,12 @@
 	<div class="my-4 w-1/2 lg:w-1/3">
 		<picture>
 			<CldImage
+				loading="eager"
 				src="bv-blog/budi_headshot"
 				alt="Headshot of Budi Voogt"
 				width={2004}
 				height={2672}
 				layout="constrained"
-				loading="eager"
 				decoding="async"
 				fetchpriority="high"
 				sizes="(max-width: 1024px) 50vw, 33.33vw"
